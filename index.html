@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Niko Surya Adi Prananta - Portfolio</title>
+    <title>Portofolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -13,221 +14,56 @@
             theme: {
                 extend: {
                     colors: {
-                        'dark-primary': '#0a0a0a',
-                        'dark-secondary': '#1a1a1a',
-                        'dark-tertiary': '#2a2a2a',
+                        'dark-primary': '#121212',
+                        'dark-secondary': '#1E1E1E',
                         'dark-accent': '#BB86FC',
                         'dark-text': '#E0E0E0',
-                        'cyber-green': '#03DAC6',
-                        'cyber-blue': '#4F46E5',
-                        'cyber-pink': '#EC4899'
+                        'cyber-green': '#03DAC6'
                     },
                     boxShadow: {
-                        'neon': '0 0 20px rgba(187, 134, 252, 0.5)',
-                        'cyber': '0 0 25px rgba(3, 218, 198, 0.4)',
-                        'glow': '0 0 30px rgba(79, 70, 229, 0.3)'
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'glow': 'glow 2s ease-in-out infinite alternate',
-                        'slideUp': 'slideUp 0.8s ease-out',
-                        'fadeIn': 'fadeIn 1s ease-out',
-                        'bounce-slow': 'bounce 3s infinite',
-                        'pulse-soft': 'pulse-soft 3s ease-in-out infinite'
+                        'neon': '0 0 15px rgba(187, 134, 252, 0.5)',
+                        'cyber': '0 0 20px rgba(3, 218, 198, 0.3)'
                     }
                 }
             }
         }
     </script>
     <style>
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
-        
-        @keyframes glow {
-            from { box-shadow: 0 0 20px rgba(187, 134, 252, 0.5); }
-            to { box-shadow: 0 0 30px rgba(187, 134, 252, 0.8); }
+        .animate-pulse-soft {
+            animation: pulse 3s infinite;
         }
-        
-        @keyframes slideUp {
-            from { transform: translateY(100px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @keyframes pulse-soft {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.05); opacity: 0.8; }
-        }
-
-        .glass-effect {
-            background: rgba(26, 26, 26, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
         .skill-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
         .skill-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-        
-        .project-card {
-            transition: all 0.5s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(187, 134, 252, 0.1), transparent);
-            transition: left 0.5s;
-        }
-        
-        .project-card:hover::before {
-            left: 100%;
-        }
-        
-        .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(187, 134, 252, 0.2);
-        }
-        
-        .typing-animation {
-            border-right: 2px solid #BB86FC;
-            animation: blink 1s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 50% { border-color: transparent; }
-            51%, 100% { border-color: #BB86FC; }
-        }
-        
-        .nav-link {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: -100%;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, #BB86FC, #03DAC6);
-            transition: left 0.3s ease;
-        }
-        
-        .nav-link:hover::after {
-            left: 0;
-        }
-        
-        .parallax-bg {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-        
-        .progress-bar {
-            width: 0%;
-            transition: width 2s ease-in-out;
-        }
-        
-        .observer-element {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease-out;
-        }
-        
-        .observer-element.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        @media (max-width: 768px) {
-            .parallax-bg {
-                background-attachment: scroll;
-            }
-        }
-        
-        .text-gradient {
-            background: linear-gradient(135deg, #BB86FC, #03DAC6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .btn-glow {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn-glow::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .btn-glow:hover::before {
-            left: 100%;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
     </style>
 </head>
-<body class="bg-dark-primary text-dark-text font-sans selection:bg-dark-accent selection:text-black overflow-x-hidden">
-    <!-- Loading Screen -->
-    <div id="loading-screen" class="fixed inset-0 z-[100] bg-dark-primary flex items-center justify-center">
-        <div class="text-center">
-            <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-dark-accent mx-auto mb-4"></div>
-            <p class="text-dark-accent animate-pulse">Loading Portfolio...</p>
-        </div>
-    </div>
-
-    <!-- Progress Bar -->
-    <div class="fixed top-0 left-0 w-full h-1 bg-dark-secondary z-50">
-        <div id="progress-bar" class="h-full bg-gradient-to-r from-dark-accent to-cyber-green transition-all duration-300"></div>
-    </div>
-
+<body class="bg-dark-primary text-dark-text font-sans selection:bg-dark-accent selection:text-black">
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-40 glass-effect transition-all duration-300" id="navbar">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-dark-secondary/80 backdrop-blur-md">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-4">
-                <div class="w-10 h-10 bg-gradient-to-r from-dark-accent to-cyber-green rounded-full flex items-center justify-center animate-pulse-soft">
-                    <span class="text-white font-bold">N</span>
-                </div>
-                <h1 class="text-2xl font-bold text-gradient">Portfolio</h1>
+                <h1 class="text-2xl font-bold text-dark-accent">Portfolio</h1>
             </div>
-            <div class="hidden md:flex space-x-8">
-                <a href="#home" class="nav-link text-dark-text hover:text-dark-accent transition-all duration-300 px-2 py-1">Home</a>
-                <a href="#about" class="nav-link text-dark-text hover:text-dark-accent transition-all duration-300 px-2 py-1">About</a>
-                <a href="#skills" class="nav-link text-dark-text hover:text-dark-accent transition-all duration-300 px-2 py-1">Skills</a>
-                <a href="#projects" class="nav-link text-dark-text hover:text-dark-accent transition-all duration-300 px-2 py-1">Projects</a>
-                <a href="#certifications" class="nav-link text-dark-text hover:text-dark-accent transition-all duration-300 px-2 py-1">Certifications</a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#home" class="nav-link text-dark-text hover:text-dark-accent transition-colors">Home</a>
+                <a href="#about" class="nav-link text-dark-text hover:text-dark-accent transition-colors">About</a>
+                <a href="#skills" class="nav-link text-dark-text hover:text-dark-accent transition-colors">Skills</a>
+                <a href="#projects" class="nav-link text-dark-text hover:text-dark-accent transition-colors">Projects</a>
+                <a href="#certifications" class="nav-link text-dark-text hover:text-dark-accent transition-colors">Certifications</a>
             </div>
             <div class="flex items-center space-x-4">
-                <a href="https://t.me/KisanakOfficial" class="btn-glow px-6 py-2 bg-gradient-to-r from-dark-accent to-cyber-green text-white font-semibold rounded-full hover:scale-105 transition-all duration-300 shadow-neon">
+                <a href="https://t.me/KisanakOfficial" class="px-4 py-2 bg-dark-accent text-black rounded-full hover:bg-opacity-80 transition-all text-white">
                     Contact
                 </a>
-                <button id="mobileMenuToggle" class="md:hidden p-2 rounded-lg hover:bg-dark-secondary transition-colors">
+                <button id="mobileMenuToggle" class="md:hidden">
                     <i data-feather="menu" class="text-dark-text"></i>
                 </button>
             </div>
@@ -235,112 +71,60 @@
     </nav>
 
     <!-- Hero Section -->
-    <header id="home" class="min-h-screen flex items-center relative overflow-hidden pt-20 parallax-bg">
-        <div class="absolute inset-0 bg-gradient-to-br from-dark-primary via-dark-secondary to-dark-primary opacity-90"></div>
-        <div class="absolute inset-0">
-            <div class="floating-particles absolute inset-0">
-                <div class="particle absolute w-2 h-2 bg-dark-accent rounded-full animate-float" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
-                <div class="particle absolute w-1 h-1 bg-cyber-green rounded-full animate-float" style="top: 60%; left: 80%; animation-delay: 1s;"></div>
-                <div class="particle absolute w-3 h-3 bg-cyber-blue rounded-full animate-float" style="top: 30%; left: 70%; animation-delay: 2s;"></div>
-                <div class="particle absolute w-1 h-1 bg-cyber-pink rounded-full animate-float" style="top: 80%; left: 20%; animation-delay: 3s;"></div>
-                <div class="particle absolute w-2 h-2 bg-dark-accent rounded-full animate-float" style="top: 15%; left: 90%; animation-delay: 4s;"></div>
-            </div>
-        </div>
-        
-        <div class="container mx-auto px-4 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
-            <div class="observer-element">
-                <div class="space-y-6"  style="margin-bottom: 20px;">
-                    <span class="text-cyber-green text-lg font-mono animate-fadeIn" style="position: relative; top: 20px;">Hello, I'm</span>
-                    <h1 class="text-4xl md:text-6xl font-bold">
-                        <span class="text-gradient">Niko Surya</span><br>
-                        <span class="text-white">Adi Prananta</span>
+    <header id="home" class="min-h-screen flex items-center relative overflow-hidden pt-20">
+        <div class="absolute inset-0 bg-gradient-to-br from-dark-primary to-dark-secondary opacity-75"></div>
+        <div class="container mx-auto px-4 relative z-10 grid md:grid-cols-2 items-center">
+            <div>
+                <div class="space-y-4">
+                    <span class="text-cyber-green text-lg font-mono">Hello, I'm Niko Surya Adi Prananta</span>
+                    <h1 class="text-5xl font-bold text-dark-accent animate-pulse-soft">
+                    Backend Developer & 
+                    <br>Junior Cyber Security
+
                     </h1>
-                    <div class="text-2xl md:text-3xl font-semibold text-dark-accent">
-                        <span id="typing-text" class="typing-animation"></span>
-                    </div>
-                    <p class="text-dark-text max-w-xl leading-relaxed text-lg">
-                        Passionate about creating secure, scalable backend solutions and uncovering vulnerabilities to protect digital ecosystems. Transforming complex challenges into elegant, secure solutions.
+                    <p class="text-dark-text max-w-xl leading-relaxed">
+                        Passionate about creating secure, scalable backend solutions and uncovering vulnerabilities to protect digital ecosystems.
                     </p>
-                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-6">
-                        <a href="#projects" class="btn-glow px-8 py-3 bg-gradient-to-r from-dark-accent to-cyber-green text-white rounded-full hover:scale-105 transition-all duration-300 text-center font-semibold shadow-neon">
+                    <div class="flex space-x-4 pt-6">
+                        <a href="#projects" class="px-6 py-3 bg-dark-accent text-black rounded-full hover:scale-105 transition-transform">
                             View Projects
                         </a>
-                        <a href="https://t.me/KisanakOfficial" class="px-8 py-3 border-2 border-dark-accent text-dark-accent rounded-full hover:bg-dark-accent hover:text-black transition-all duration-300 text-center font-semibold">
+                        <a href="https://t.me/KisanakOfficial" class="px-6 py-3 border border-dark-accent text-dark-accent rounded-full hover:bg-dark-accent hover:text-black transition-all">
                             Hire Me
                         </a>
                     </div>
-                    <div class="flex space-x-6 pt-4">
-                        <a href="https://github.com/infinity-dream-code" class="text-dark-text hover:text-dark-accent transition-all duration-300 hover:scale-110">
-                            <i data-feather="github" width="28" height="28"></i>
-                        </a>
-                        <a href="https://linkedin.com/in/niko-surya-adi-prananta-b4a263251" class="text-dark-text hover:text-dark-accent transition-all duration-300 hover:scale-110">
-                            <i data-feather="linkedin" width="28" height="28"></i>
-                        </a>
-                        <a href="https://t.me/KisanakOfficial" class="text-dark-text hover:text-dark-accent transition-all duration-300 hover:scale-110">
-                            <i class="fa-brands fa-telegram" style="font-size: 28px;"></i>
-                        </a>
-                    </div>
                 </div>
             </div>
-            <div class="flex justify-center lg:justify-end observer-element" style="margin-bottom: 40px;">
-                <div class="relative">
-                    <div class="absolute inset-0 bg-gradient-to-r from-dark-accent to-cyber-green rounded-full blur-lg opacity-30 animate-pulse-soft"></div>
-                    <img src="https://i.pinimg.com/736x/cc/e8/2f/cce82fa23accfa5a040a205d163b9f3d.jpg" 
-                         alt="Profile" 
-                         class="relative rounded-full border-4 border-dark-accent shadow-neon hover:shadow-glow transition-all duration-500 animate-float" 
-                         style="max-width: 350px; max-height: 350px; object-fit: cover; ">
-                </div>
-            </div>
-        </div>
-        
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <div class="w-6 h-10 border-2 border-dark-accent rounded-full flex justify-center">
-                <div class="w-1 h-3 bg-dark-accent rounded-full animate-pulse mt-2"></div>
+            <div class="hidden md:flex justify-center">
+                <img src="https://i.pinimg.com/736x/cc/e8/2f/cce82fa23accfa5a040a205d163b9f3d.jpg" alt="Profile" class="rounded-full border-4 border-dark-accent shadow-neon" style="max-width: 320px; max-height: 320px; object-fit: cover;">
             </div>
         </div>
     </header>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-gradient-to-b from-dark-secondary to-dark-primary">
+    <section id="about" class="py-20 bg-dark-secondary">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-16 observer-element">
-                <h2 class="text-5xl font-bold text-gradient mb-6">About Me</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-dark-accent to-cyber-green mx-auto mb-8"></div>
-                <p class="text-dark-text max-w-3xl mx-auto text-lg leading-relaxed">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-dark-accent mb-4">About Me</h2>
+                <p class="text-dark-text max-w-2xl mx-auto">
                     A dedicated backend developer with a laser focus on cybersecurity. With years of experience in building robust web applications and identifying security vulnerabilities, I transform complex challenges into elegant, secure solutions.
                 </p>
             </div>
-            
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="glass-effect p-8 rounded-2xl text-center skill-card observer-element group">
-                    <div class="mb-6 relative">
-                        <div class="w-20 h-20 bg-gradient-to-r from-dark-accent to-cyber-green rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-all duration-300 shadow-neon">
-                            <i data-feather="code" class="text-white" stroke-width="1.5" width="40" height="40"></i>
-                        </div>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-dark-accent mb-4">Backend Development</h3>
-                    <p class="text-dark-text leading-relaxed">Expertise in creating scalable and efficient server-side applications using modern technologies like Laravel, PHP, and robust database management systems.</p>
+                <div class="bg-dark-primary p-6 rounded-lg text-center skill-card">
+                    <i data-feather="code" class="mx-auto mb-4 text-dark-accent" stroke-width="1.5" width="48" height="48"></i>
+                    <h3 class="text-xl font-semibold text-dark-accent mb-2">Backend Development</h3>
+                    <p>Expertise in creating scalable and efficient server-side applications using modern technologies.</p>
                 </div>
-                
-                <div class="glass-effect p-8 rounded-2xl text-center skill-card observer-element group">
-                    <div class="mb-6 relative">
-                        <div class="w-20 h-20 bg-gradient-to-r from-cyber-green to-cyber-blue rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-all duration-300 shadow-cyber">
-                            <i data-feather="shield" class="text-white" stroke-width="1.5" width="40" height="40"></i>
-                        </div>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-cyber-green mb-4">Cyber Security</h3>
-                    <p class="text-dark-text leading-relaxed">Specialized in penetration testing, vulnerability assessment, IDOR detection, and developing secure system architectures to protect digital assets.</p>
+                <div class="bg-dark-primary p-6 rounded-lg text-center skill-card">
+                    <i data-feather="shield" class="mx-auto mb-4 text-dark-accent" stroke-width="1.5" width="48" height="48"></i>
+                    <h3 class="text-xl font-semibold text-dark-accent mb-2">Cyber Security</h3>
+                    <p>Specialized in penetration testing, vulnerability assessment, and developing secure system architectures.</p>
                 </div>
-                
-                <div class="glass-effect p-8 rounded-2xl text-center skill-card observer-element group">
-                    <div class="mb-6 relative">
-                        <div class="w-20 h-20 bg-gradient-to-r from-cyber-blue to-cyber-pink rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-all duration-300 shadow-glow">
-                            <i data-feather="database" class="text-white" stroke-width="1.5" width="40" height="40"></i>
-                        </div>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-cyber-blue mb-4">Database Management</h3>
-                    <p class="text-dark-text leading-relaxed">Proficient in designing and optimizing database structures for performance and security using MySQL, PostgreSQL, and advanced query optimization.</p>
+                <div class="bg-dark-primary p-6 rounded-lg text-center skill-card">
+                    <i data-feather="database" class="mx-auto mb-4 text-dark-accent" stroke-width="1.5" width="48" height="48"></i>
+                    <h3 class="text-xl font-semibold text-dark-accent mb-2">Database Management</h3>
+                    <p>Proficient in designing and optimizing database structures for performance and security.</p>
                 </div>
             </div>
         </div>
@@ -349,800 +133,279 @@
     <!-- Skills Section -->
     <section id="skills" class="py-20 bg-dark-primary">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-16 observer-element">
-                <h2 class="text-5xl font-bold text-gradient mb-6">Technical Skills</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-dark-accent to-cyber-green mx-auto"></div>
-            </div>
-            
-            <div class="grid lg:grid-cols-3 gap-8">
-                <div class="glass-effect p-8 rounded-2xl observer-element">
-                    <h3 class="text-3xl font-semibold text-cyber-green mb-6 flex items-center">
-                        <i data-feather="server" class="mr-3" width="32" height="32"></i>
-                        Backend Technologies
-                    </h3>
-                    <div class="space-y-4">
-                        <div class="skill-item">
-                            <div class="flex justify-between mb-2">
-                                <span class="flex items-center"><i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>PHP (Laravel)</span>
-                                <span class="text-dark-accent font-semibold">95%</span>
-                            </div>
-                            <div class="w-full bg-dark-secondary rounded-full h-2">
-                                <div class="progress-bar bg-gradient-to-r from-dark-accent to-cyber-green h-2 rounded-full" data-width="95"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="flex justify-between mb-2">
-                                <span class="flex items-center"><i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>MySQL & PostgreSQL</span>
-                                <span class="text-dark-accent font-semibold">90%</span>
-                            </div>
-                            <div class="w-full bg-dark-secondary rounded-full h-2">
-                                <div class="progress-bar bg-gradient-to-r from-dark-accent to-cyber-green h-2 rounded-full" data-width="90"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="flex justify-between mb-2">
-                                <span class="flex items-center"><i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>API Development</span>
-                                <span class="text-dark-accent font-semibold">88%</span>
-                            </div>
-                            <div class="w-full bg-dark-secondary rounded-full h-2">
-                                <div class="progress-bar bg-gradient-to-r from-dark-accent to-cyber-green h-2 rounded-full" data-width="88"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="flex justify-between mb-2">
-                                <span class="flex items-center"><i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>Payment Gateway</span>
-                                <span class="text-dark-accent font-semibold">85%</span>
-                            </div>
-                            <div class="w-full bg-dark-secondary rounded-full h-2">
-                                <div class="progress-bar bg-gradient-to-r from-dark-accent to-cyber-green h-2 rounded-full" data-width="85"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <h2 class="text-4xl font-bold text-center text-dark-accent mb-12">Technical Skills</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-dark-secondary p-6 rounded-lg">
+    <h3 class="text-2xl font-semibold text-cyber-green mb-4">Backend Technologies</h3>
+    <ul class="space-y-2">
+        <li class="flex items-center">
+            <i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>
+            PHP (Laravel)
+        </li>
+        <li class="flex items-center">
+            <i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>
+            MySQL & PostgreSQL
+        </li>
+        <li class="flex items-center">
+            <i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>
+            API Development (Laravel & Postman)
+        </li>
+        <li class="flex items-center">
+            <i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>
+            Payment Gateway Integration (Xendit,Midtrans)
+        </li>
+    </ul>
+</div>
 
-                <div class="glass-effect p-8 rounded-2xl observer-element">
-                    <h3 class="text-3xl font-semibold text-cyber-green mb-6 flex items-center">
-                        <i data-feather="shield-check" class="mr-3" width="32" height="32"></i>
-                        Security Tools
-                    </h3>
-                    <div class="space-y-4">
-                        <div class="skill-item">
-                            <div class="flex justify-between mb-2">
-                                <span class="flex items-center"><i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>Nmap</span>
-                                <span class="text-dark-accent font-semibold">92%</span>
-                            </div>
-                            <div class="w-full bg-dark-secondary rounded-full h-2">
-                                <div class="progress-bar bg-gradient-to-r from-cyber-green to-cyber-blue h-2 rounded-full" data-width="92"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="flex justify-between mb-2">
-                                <span class="flex items-center"><i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>Burp Suite</span>
-                                <span class="text-dark-accent font-semibold">90%</span>
-                            </div>
-                            <div class="w-full bg-dark-secondary rounded-full h-2">
-                                <div class="progress-bar bg-gradient-to-r from-cyber-green to-cyber-blue h-2 rounded-full" data-width="90"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="flex justify-between mb-2">
-                                <span class="flex items-center"><i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>Metasploit</span>
-                                <span class="text-dark-accent font-semibold">85%</span>
-                            </div>
-                            <div class="w-full bg-dark-secondary rounded-full h-2">
-                                <div class="progress-bar bg-gradient-to-r from-cyber-green to-cyber-blue h-2 rounded-full" data-width="85"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="flex justify-between mb-2">
-                                <span class="flex items-center"><i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>SQLMap</span>
-                                <span class="text-dark-accent font-semibold">88%</span>
-                            </div>
-                            <div class="w-full bg-dark-secondary rounded-full h-2">
-                                <div class="progress-bar bg-gradient-to-r from-cyber-green to-cyber-blue h-2 rounded-full" data-width="88"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="bg-dark-secondary p-6 rounded-lg">
+    <h3 class="text-2xl font-semibold text-cyber-green mb-4">Security Tools</h3>
+    <ul class="space-y-2">
+        <li class="flex items-center">
+            <i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>
+            Nmap
+        </li>
+        <li class="flex items-center">
+            <i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>
+            Burp Suite
+        </li>
+        <li class="flex items-center">
+            <i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>
+            Metasploit
+        </li>
+        <li class="flex items-center">
+            <i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>
+            Wireshark
+        </li>
+        <li class="flex items-center">
+            <i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>
+            SQLMap
+        </li>
+        
+    </ul>
+</div>
 
-                <div class="glass-effect p-8 rounded-2xl observer-element">
-                    <h3 class="text-3xl font-semibold text-cyber-green mb-6 flex items-center">
-                        <i data-feather="database" class="mr-3" width="32" height="32"></i>
-                        Databases & More
-                    </h3>
-                    <div class="space-y-4">
-                        <div class="skill-item">
-                            <div class="flex justify-between mb-2">
-                                <span class="flex items-center"><i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>MySQL</span>
-                                <span class="text-dark-accent font-semibold">93%</span>
-                            </div>
-                            <div class="w-full bg-dark-secondary rounded-full h-2">
-                                <div class="progress-bar bg-gradient-to-r from-cyber-blue to-cyber-pink h-2 rounded-full" data-width="93"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="flex justify-between mb-2">
-                                <span class="flex items-center"><i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>PostgreSQL</span>
-                                <span class="text-dark-accent font-semibold">87%</span>
-                            </div>
-                            <div class="w-full bg-dark-secondary rounded-full h-2">
-                                <div class="progress-bar bg-gradient-to-r from-cyber-blue to-cyber-pink h-2 rounded-full" data-width="87"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="flex justify-between mb-2">
-                                <span class="flex items-center"><i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>Git Version Control</span>
-                                <span class="text-dark-accent font-semibold">91%</span>
-                            </div>
-                            <div class="w-full bg-dark-secondary rounded-full h-2">
-                                <div class="progress-bar bg-gradient-to-r from-cyber-blue to-cyber-pink h-2 rounded-full" data-width="91"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="flex justify-between mb-2">
-                                <span class="flex items-center"><i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>Linux/Unix</span>
-                                <span class="text-dark-accent font-semibold">89%</span>
-                            </div>
-                            <div class="w-full bg-dark-secondary rounded-full h-2">
-                                <div class="progress-bar bg-gradient-to-r from-cyber-blue to-cyber-pink h-2 rounded-full" data-width="89"></div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="bg-dark-secondary p-6 rounded-lg">
+                    <h3 class="text-2xl font-semibold text-cyber-green mb-4">Databases</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>
+                            MySQL
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>
+                            PostgreSQL
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-gradient-to-b from-dark-secondary to-dark-primary">
+    <section id="projects" class="py-20 bg-dark-secondary">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-16 observer-element">
-                <h2 class="text-5xl font-bold text-gradient mb-6">Notable Projects</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-dark-accent to-cyber-green mx-auto mb-8"></div>
-                <p class="text-dark-text max-w-2xl mx-auto text-lg">Explore my featured projects showcasing expertise in backend development and cybersecurity</p>
-            </div>
-            
-            <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-                <div class="project-card glass-effect rounded-2xl overflow-hidden observer-element group">
-                    <div class="relative overflow-hidden">
-                        <img src="https://g.top4top.io/p_33510pszs1.jpg" alt="POS Cashier Web App" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110" style="height: 250px;">
-                        <div class="absolute inset-0 bg-gradient-to-t from-dark-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-semibold text-cyber-green mb-3 group-hover:text-dark-accent transition-colors">POS Cashier Web App</h3>
-                        <p class="text-dark-text mb-4 leading-relaxed">Comprehensive web-based cashier application with CRUD features, salary management, sales reports, profit and loss analytics, and attendance tracking system.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm font-medium">Laravel</span>
-                            <span class="px-3 py-1 bg-cyber-green/20 text-cyber-green rounded-full text-sm font-medium">MySQL</span>
-                            <span class="px-3 py-1 bg-cyber-blue/20 text-cyber-blue rounded-full text-sm font-medium">API</span>
-                        </div>
-                        
-                    </div>
-                </div>
+            <h2 class="text-4xl font-bold text-center text-dark-accent mb-12">Notable Projects</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-dark-primary p-6 rounded-lg skill-card">
+    <img src="https://g.top4top.io/p_33510pszs1.jpg" alt="Project 1" class="rounded-lg mb-4">
+    <h3 class="text-xl font-semibold text-cyber-green mb-2">POS Cashier Web App</h3>
+    <p class="mb-4">Developed a comprehensive web-based cashier application with CRUD features, salary management, sales reports, profit and loss reports, and attendance tracking.</p>
+    <div class="flex space-x-2">
+        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Laravel</span>
+        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">MySQL</span>
+        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">API</span>
+    </div>
+</div>
 
-                <div class="project-card glass-effect rounded-2xl overflow-hidden observer-element group" onclick="window.open('https://Satrianovel.com/', '_blank')">
-                    <div class="relative overflow-hidden">
-                        <img src="https://h.top4top.io/p_33527d3841.jpg" alt="Satrianovel.com" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110" style="height: 250px;">
-                        <div class="absolute inset-0 bg-gradient-to-t from-dark-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-semibold text-cyber-green mb-3 group-hover:text-dark-accent transition-colors">Satrianovel.com</h3>
-                        <p class="text-dark-text mb-4 leading-relaxed">Online platform for reading and writing novels with comprehensive CRUD features, limited like system, writer community, and integrated donation functionality.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm font-medium">Laravel</span>
-                            <span class="px-3 py-1 bg-cyber-green/20 text-cyber-green rounded-full text-sm font-medium">Web Dev</span>
-                            <span class="px-3 py-1 bg-cyber-blue/20 text-cyber-blue rounded-full text-sm font-medium">UI/UX</span>
-                        </div>
-                        <div class="flex space-x-3">
-                            <button class="flex-1 py-2 bg-dark-accent hover:bg-dark-accent/80 text-white rounded-lg transition-all duration-300 text-center font-medium">
-                                <i data-feather="external-link" class="inline mr-2" width="16" height="16"></i>Visit Live
-                            </button>
-                        </div>
-                    </div>
-                </div>
+<div class="bg-dark-primary p-6 rounded-lg skill-card">
+    <img src="https://h.top4top.io/p_33527d3841.jpg" alt="Project 3" class="rounded-lg mb-4" style="height:240px;">
+    <h3 class="text-xl font-semibold text-cyber-green mb-2">Satrianovel.com</h3>
+    <p class="mb-4">Developed Satrianovel.com, an online platform for reading and writing novels with features like novel CRUD, limited like system, writer community, and donation page.</p>
+    <div class="flex space-x-2">
+        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Laravel</span>
+        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Web Development</span>
+        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">UI/UX</span>
+    </div>
+</div>
 
-                <div class="project-card glass-effect rounded-2xl overflow-hidden observer-element group">
-                    <div class="relative overflow-hidden">
-                        <img src="https://j.top4top.io/p_3404he9701.jpg" alt="TokoIkan" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110" style="height: 250px;">
-                        <div class="absolute inset-0 bg-gradient-to-t from-dark-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-semibold text-cyber-green mb-3 group-hover:text-dark-accent transition-colors">Toko Ikan</h3>
-                        <p class="text-dark-text mb-4 leading-relaxed">Complete online fish store platform with product management, real-time payment gateway integration, delivery system with courier assignment, and order tracking.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm font-medium">Laravel</span>
-                            <span class="px-3 py-1 bg-cyber-green/20 text-cyber-green rounded-full text-sm font-medium">Midtrans</span>
-                            <span class="px-3 py-1 bg-cyber-blue/20 text-cyber-blue rounded-full text-sm font-medium">E-commerce</span>
-                        </div>
+<div class="bg-dark-primary p-6 rounded-lg skill-card">
+    <img src="https://j.top4top.io/p_3404he9701.jpg" alt="Project Penjualan Ikan" class="rounded-lg mb-4" style="height:240px; ">
+    <h3 class="text-xl font-semibold text-cyber-green mb-2">TokoIkan</h3>
+    <p class="mb-4">Developed Toko Ikan, a complete online fish store platform with integrated features like product management, real-time transactions via payment gateway, delivery system with courier assignment, order status tracking, and customer profile management for a seamless buying experience.</p>
+    <div class="flex space-x-2">
+        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Laravel</span>
+        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Midtrans Integration</span>
+        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Web Dev</span>
+    </div>
+</div>
 
-                    </div>
-                </div>
+<div class="bg-dark-primary p-6 rounded-lg skill-card cursor-pointer" onclick="window.location.href='https://stg-gisbolali.simda.net/'">
+    <img src="https://g.top4top.io/p_34975jhzi1.jpg" alt="SIDes Application" class="rounded-lg mb-4" style="height:240px; width: 350px;">
+    <h3 class="text-xl font-semibold text-cyber-green mb-2">SIDes Application</h3>
+    <p class="mb-4">SIDes (Village Service System) is a digital platform that enables citizens to request official documents and submit reports online. The process is handled in stages from local RT to the Village Head, with real-time status tracking through the app.</p>
+    <div class="flex space-x-2">
+        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Mobile & Web App</span>
+        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">e-Government</span>
+        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Online Services</span>
+    </div>
+</div>
 
-                <div class="project-card glass-effect rounded-2xl overflow-hidden observer-element group cursor-pointer" onclick="window.open('https://stg-gisbolali.simda.net/', '_blank')">
-                    <div class="relative overflow-hidden">
-                        <img src="https://g.top4top.io/p_34975jhzi1.jpg" alt="Aplikasi SIDes" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110" style="height: 250px;">
-                        <div class="absolute inset-0 bg-gradient-to-t from-dark-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <i data-feather="external-link" class="text-white" width="32" height="32"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-semibold text-cyber-green mb-3 group-hover:text-dark-accent transition-colors">Aplikasi SIDes</h3>
-                        <p class="text-dark-text mb-4 leading-relaxed">Digital village service platform enabling citizens to request official documents and submit reports online with multi-stage approval workflow and real-time tracking.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm font-medium">Mobile & Web</span>
-                            <span class="px-3 py-1 bg-cyber-green/20 text-cyber-green rounded-full text-sm font-medium">e-Government</span>
-                            <span class="px-3 py-1 bg-cyber-blue/20 text-cyber-blue rounded-full text-sm font-medium">Public Service</span>
-                        </div>
-                        <div class="flex space-x-3">
-                            <button class="flex-1 py-2 bg-dark-accent hover:bg-dark-accent/80 text-white rounded-lg transition-all duration-300 text-center font-medium">
-                                <i data-feather="external-link" class="inline mr-2" width="16" height="16"></i>Visit Live
-                            </button>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="project-card glass-effect rounded-2xl overflow-hidden observer-element group">
-                    <div class="relative overflow-hidden">
-                        <img src="https://a.top4top.io/p_3351ivple1.jpg" alt="Sejahtera Security Assessment" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110" style="height: 250px;">
-                        <div class="absolute inset-0 bg-gradient-to-t from-dark-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <div class="absolute top-4 right-4 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold">SECURITY</div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-semibold text-cyber-green mb-3 group-hover:text-dark-accent transition-colors">Sejahtera.co.id Security Assessment</h3>
-                        <p class="text-dark-text mb-4 leading-relaxed">Comprehensive security testing revealing IDOR vulnerability in transaction details endpoint, allowing unauthorized access to sensitive financial information.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm font-medium">IDOR</span>
-                            <span class="px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-sm font-medium">Pentesting</span>
-                            <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm font-medium">Bug Bounty</span>
-                        </div>
-                        <div class="flex space-x-3">
-                            <button class="flex-1 py-2 bg-red-500/10 hover:bg-red-500 hover:text-white text-red-400 rounded-lg transition-all duration-300 text-center font-medium">
-                                <i data-feather="shield-off" class="inline mr-2" width="16" height="16"></i>Report
-                            </button>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="project-card glass-effect rounded-2xl overflow-hidden observer-element group">
-                    <div class="relative overflow-hidden">
-                        <img src="https://k.top4top.io/p_335166xg91.jpg" alt="Preloved Security Assessment" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110" style="height: 250px;">
-                        <div class="absolute inset-0 bg-gradient-to-t from-dark-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <div class="absolute top-4 right-4 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold">SECURITY</div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-semibold text-cyber-green mb-3 group-hover:text-dark-accent transition-colors">Preloved.co.id Security Assessment</h3>
-                        <p class="text-dark-text mb-4 leading-relaxed">Advanced penetration testing discovering IDOR vulnerability and business logic flaws enabling unauthorized data access and shipping price manipulation.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm font-medium">IDOR</span>
-                            <span class="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm font-medium">Business Logic</span>
-                            <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm font-medium">Bug Bounty</span>
-                        </div>
-                        <div class="flex space-x-3">
-                            <button class="flex-1 py-2 bg-red-500/10 hover:bg-red-500 hover:text-white text-red-400 rounded-lg transition-all duration-300 text-center font-medium">
-                                <i data-feather="shield-off" class="inline mr-2" width="16" height="16"></i>Report
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="bg-dark-primary p-6 rounded-lg skill-card">
+    <img src="https://a.top4top.io/p_3351ivple1.jpg" alt="Project 3" class="rounded-lg mb-4" style="height:240px;">
+    <h3 class="text-xl font-semibold text-cyber-green mb-2">Sejahtera.co.id Security Assessment</h3>
+    <p class="mb-4">Performed security testing on Sejahtera.co.id, uncovering IDOR vulnerability in transaction details endpoint, allowing unauthorized access to sensitive transaction information.</p>
+    <div class="flex space-x-2">
+        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">IDOR</span>
+        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Pentesting</span>
+        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Bug Bounty</span>
+    </div>
+</div>
 
-    <!-- Certifications Section -->
-    <section id="certifications" class="py-20 bg-dark-primary">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16 observer-element">
-                <h2 class="text-5xl font-bold text-gradient mb-6">My Certifications</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-dark-accent to-cyber-green mx-auto mb-8"></div>
-                <p class="text-dark-text max-w-2xl mx-auto text-lg">Professional certifications validating my expertise in software development and cybersecurity</p>
-            </div>
-            
-            <div class="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-                <div class="project-card glass-effect rounded-2xl overflow-hidden observer-element group">
-                    <div class="relative overflow-hidden">
-                        <img src="https://f.top4top.io/p_33511ctg91.jpg" alt="LKS IT Software Certification" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105">
-                        <div class="absolute inset-0 bg-gradient-to-t from-dark-primary/90 to-transparent"></div>
-                        <div class="absolute top-4 right-4 bg-gradient-to-r from-dark-accent to-cyber-green text-white px-3 py-1 rounded-full text-sm font-bold">
-                            CERTIFIED
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-3xl font-semibold text-cyber-green mb-4 group-hover:text-dark-accent transition-colors">LKS IT Software Certification</h3>
-                        <p class="text-dark-text mb-6 leading-relaxed text-lg">Developed innovative digital solutions including mobile Esports management application and desktop sales management system with comprehensive CRUD features and robust Laravel-powered API backend.</p>
-                        <div class="flex flex-wrap gap-3 mb-6">
-                            <span class="px-4 py-2 bg-dark-accent/20 text-dark-accent rounded-full text-sm font-medium">Laravel</span>
-                            <span class="px-4 py-2 bg-cyber-green/20 text-cyber-green rounded-full text-sm font-medium">SQL</span>
-                            <span class="px-4 py-2 bg-cyber-blue/20 text-cyber-blue rounded-full text-sm font-medium">Kotlin</span>
-                            <span class="px-4 py-2 bg-cyber-pink/20 text-cyber-pink rounded-full text-sm font-medium">C#</span>
-                            <span class="px-4 py-2 bg-yellow-500/20 text-yellow-400 rounded-full text-sm font-medium">API</span>
-                        </div>
-                        <div class="flex items-center text-sm text-dark-text/70 mb-4">
-                            <i data-feather="calendar" class="mr-2" width="16" height="16"></i>
-                            <span>Competitive Programming Certification</span>
-                        </div>
-                        
-                    </div>
-                </div>
+<div class="bg-dark-primary p-6 rounded-lg skill-card">
+    <img src="https://k.top4top.io/p_335166xg91.jpg" alt="Project 2" class="rounded-lg mb-4" style="height:240px;">
+    <h3 class="text-xl font-semibold text-cyber-green mb-2">Preloved.co.id Security Assessment</h3>
+    <p class="mb-4">Conducted penetration testing on Preloved.co.id, discovering IDOR vulnerability allowing unauthorized access to user data and business logic flaws enabling shipping price manipulation.</p>
+    <div class="flex space-x-2">
+        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">IDOR</span>
+        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Business Logic</span>
+        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Bug Bounty</span>
+    </div>
+</div>
 
-                <div class="project-card glass-effect rounded-2xl overflow-hidden observer-element group">
-                    <div class="relative overflow-hidden">
-                        <img src="https://k.top4top.io/p_3351smcwh1.jpg" alt="Web Security Professional Certification" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105" style="height: 250px;">
-                        <div class="absolute inset-0 bg-gradient-to-t from-dark-primary/90 to-transparent"></div>
-                        <div class="absolute top-4 right-4 bg-gradient-to-r from-red-500 to-orange-500 text-white px-3 py-1 rounded-full text-sm font-bold">
-                            SECURITY
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-3xl font-semibold text-cyber-green mb-4 group-hover:text-dark-accent transition-colors">Web Security Professional</h3>
-                        <p class="text-dark-text mb-6 leading-relaxed text-lg">Advanced certification from Build with Angga specializing in sophisticated penetration testing techniques and comprehensive vulnerability identification strategies for digital systems security.</p>
-                        <div class="flex flex-wrap gap-3 mb-6">
-                            <span class="px-4 py-2 bg-red-500/20 text-red-400 rounded-full text-sm font-medium">Penetration Testing</span>
-                            <span class="px-4 py-2 bg-orange-500/20 text-orange-400 rounded-full text-sm font-medium">Bug Bounty</span>
-                            <span class="px-4 py-2 bg-green-500/20 text-green-400 rounded-full text-sm font-medium">Web Security</span>
-                        </div>
-                        <div class="flex items-center text-sm text-dark-text/70 mb-4">
-                            <i data-feather="calendar" class="mr-2" width="16" height="16"></i>
-                            <span>Build with Angga - Security Specialist</span>
-                        </div>
-                       
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gradient-to-b from-dark-secondary to-dark-primary">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16 observer-element">
-                <h2 class="text-5xl font-bold text-gradient mb-6">Get In Touch</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-dark-accent to-cyber-green mx-auto mb-8"></div>
-                <p class="text-dark-text max-w-2xl mx-auto text-lg">Ready to collaborate on your next project? Let's create something amazing together.</p>
-            </div>
-            
-            <div class="grid lg gap-12 max-w-6xl mx-auto">
-                <div class="observer-element">
-                    <div class="glass-effect p-8 rounded-2xl">
-                        <h3 class="text-3xl font-semibold text-cyber-green mb-6">Let's Connect</h3>
-                        <div class="space-y-6">
-                            <div class="flex items-center space-x-4 p-4 bg-dark-primary/50 rounded-lg hover:bg-dark-primary transition-colors">
-                                <div class="w-12 h-12 bg-gradient-to-r from-dark-accent to-cyber-green rounded-full flex items-center justify-center">
-                                    <i class="fa-brands fa-telegram text-white" style="font-size: 20px;"></i>
-                                </div>
-                                <div>
-                                    <p class="text-dark-accent font-semibold">Telegram</p>
-                                    <p class="text-dark-text">@KisanakOfficial</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center space-x-4 p-4 bg-dark-primary/50 rounded-lg hover:bg-dark-primary transition-colors">
-                                <div class="w-12 h-12 bg-gradient-to-r from-cyber-blue to-cyber-green rounded-full flex items-center justify-center">
-                                    <i data-feather="linkedin" class="text-white" width="20" height="20"></i>
-                                </div>
-                                <div>
-                                    <p class="text-dark-accent font-semibold">LinkedIn</p>
-                                    <p class="text-dark-text">Niko Surya Adi Prananta</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center space-x-4 p-4 bg-dark-primary/50 rounded-lg hover:bg-dark-primary transition-colors">
-                                <div class="w-12 h-12 bg-gradient-to-r from-cyber-pink to-dark-accent rounded-full flex items-center justify-center">
-                                    <i data-feather="github" class="text-white" width="20" height="20"></i>
-                                </div>
-                                <div>
-                                    <p class="text-dark-accent font-semibold">GitHub</p>
-                                    <p class="text-dark-text">infinity-dream-code</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-8 pt-8 border-t border-dark-text/20">
-                            <p class="text-dark-text/70 text-center">Available for freelance projects and full-time opportunities</p>
-                        </div>
-                    </div>
-                </div>
                 
-            
+
             </div>
         </div>
     </section>
+
+
+    <section id="certifications" class="py-20 bg-dark-secondary">
+    <div class="container mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center text-dark-accent mb-12">My Certifications</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-dark-primary p-6 rounded-lg skill-card">
+                <img src="https://f.top4top.io/p_33511ctg91.jpg" alt="Project 1" class="rounded-lg mb-4">
+                <h3 class="text-xl font-semibold text-cyber-green mb-2">LKS IT Software Certification</h3>
+                <p class="mb-4">Developed innovative digital solutions, creating a mobile Esports management application and a desktop sales management system. Implemented comprehensive CRUD features with a robust Laravel-powered API backend.</p>
+                <div class="flex space-x-2">
+                    <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Laravel</span>
+                    <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">SQL</span>
+                    <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Kotlin</span>
+                    <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">C#</span>
+                    <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">API</span>
+                </div>
+            </div>
+            <div class="bg-dark-primary p-6 rounded-lg skill-card">
+                <img src="https://k.top4top.io/p_3351smcwh1.jpg" alt="Project 1" class="rounded-lg mb-4">
+                <h3 class="text-xl font-semibold text-cyber-green mb-2">Web Security Professional Certification</h3>
+                <p class="mb-4">certification from Build with Angga in web security, specializing in sophisticated penetration testing techniques and comprehensive vulnerability identification strategies for digital systems.</p>
+                <div class="flex space-x-2">
+                    <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Penetration Testing</span>
+                    <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Bug Bounty</span>
+                    <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Web Security</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
     <!-- Footer -->
-    <footer class="bg-dark-secondary py-12 border-t border-dark-text/10">
-        <div class="container mx-auto px-4">
-            <div class="text-center">
-                <div class="flex justify-center space-x-8 mb-8">
-                    <a href="https://github.com/infinity-dream-code" class="text-dark-text hover:text-dark-accent transition-all duration-300 hover:scale-110 p-2">
-                        <i data-feather="github" width="28" height="28"></i>
-                    </a>
-                    <a href="https://linkedin.com/in/niko-surya-adi-prananta-b4a263251" class="text-dark-text hover:text-dark-accent transition-all duration-300 hover:scale-110 p-2">
-                        <i data-feather="linkedin" width="28" height="28"></i>
-                    </a>
-                    <a href="https://t.me/KisanakOfficial" class="text-dark-text hover:text-dark-accent transition-all duration-300 hover:scale-110 p-2">
-                        <i class="fa-brands fa-telegram" style="font-size: 28px;"></i>
-                    </a>
-                </div>
-                <div class="w-24 h-1 bg-gradient-to-r from-dark-accent to-cyber-green mx-auto mb-6"></div>
-                <p class="text-dark-text/70 text-lg">&copy; 2025 Niko Surya Adi Prananta. All Rights Reserved.</p>
-                <p class="text-dark-text/50 mt-2">Built with passion for secure and scalable solutions</p>
+    <footer class="bg-dark-secondary py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="https://github.com/infinity-dream-code" class="text-dark-text hover:text-dark-accent transition-colors">
+                    <i data-feather="github" width="24" height="24"></i>
+                </a>
+                <a href="https://linkedin.com/in/niko-surya-adi-prananta-b4a263251" class="text-dark-text hover:text-dark-accent transition-colors">
+                    <i data-feather="linkedin" width="24" height="24"></i>
+                </a>
+                <a href="https://t.me/KisanakOfficial" class="text-dark-text hover:text-dark-accent transition-colors">
+                <i class="fa-brands fa-telegram" style="font-size: 24px;"></i>
+                </a>
             </div>
+            <p class="text-dark-text">&copy; 2025 All Rights Reserved.</p>
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
-    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-r from-dark-accent to-cyber-green text-white rounded-full shadow-neon opacity-0 invisible transition-all duration-300 hover:scale-110 z-30">
-        <i data-feather="arrow-up" width="20" height="20" class="mx-auto"></i>
-    </button>
 
-    <script>
+<script>
         // Initialize Feather Icons
         feather.replace();
 
-        // Loading Screen
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loading-screen').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('loading-screen').style.display = 'none';
-                }, 500);
-            }, 1500);
-        });
-
-        // Progress Bar
-        window.addEventListener('scroll', () => {
-            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-            document.getElementById('progress-bar').style.width = scrollPercent + '%';
-        });
-
-        // Navbar Background
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(26, 26, 26, 0.95)';
-                navbar.style.backdropFilter = 'blur(15px)';
-            } else {
-                navbar.style.background = 'rgba(26, 26, 26, 0.7)';
-                navbar.style.backdropFilter = 'blur(10px)';
-            }
-        });
-
-        // Typing Animation
-        const texts = [
-            'Backend Developer',
-            'Cyber Security Expert',
-            'Penetration Tester',
-            'Full Stack Developer',
-            'Security Researcher'
-        ];
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const typingElement = document.getElementById('typing-text');
-
-        function typeText() {
-            const currentText = texts[textIndex];
-            
-            if (isDeleting) {
-                typingElement.textContent = currentText.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typingElement.textContent = currentText.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            let typeSpeed = isDeleting ? 50 : 100;
-
-            if (!isDeleting && charIndex === currentText.length) {
-                typeSpeed = 2000;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                textIndex = (textIndex + 1) % texts.length;
-            }
-
-            setTimeout(typeText, typeSpeed);
-        }
-
-        typeText();
-
         // Mobile Menu Toggle
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-        let mobileMenuOpen = false;
+        const mobileMenu = document.createElement('div');
+        mobileMenu.innerHTML = `
+            <div class="fixed inset-0 bg-dark-primary z-50 md:hidden">
+                <div class="flex flex-col items-center justify-center h-full space-y-6">
+                    <a href="#home" class="text-2xl text-dark-text hover:text-dark-accent">Home</a>
+                    <a href="#about" class="text-2xl text-dark-text hover:text-dark-accent">About</a>
+                    <a href="#skills" class="text-2xl text-dark-text hover:text-dark-accent">Skills</a>
+                    <a href="#projects" class="text-2xl text-dark-text hover:text-dark-accent">Projects</a>
+                    <a href="#certifications" class="text-2xl text-dark-text hover:text-dark-accent">Certifications</a>
+                    <a href="#contact" class="text-2xl text-dark-accent font-bold">Contact Me</a>
+                    <button id="closeMobileMenu" class="absolute top-10 right-10 text-dark-text">
+                        <i data-feather="x" width="32" height="32"></i>
+                    </button>
+                </div>
+            </div>
+        `;
 
         mobileMenuToggle.addEventListener('click', () => {
-            if (!mobileMenuOpen) {
-                const mobileMenu = document.createElement('div');
-                mobileMenu.id = 'mobile-menu';
-                mobileMenu.innerHTML = `
-                    <div class="fixed inset-0 bg-dark-primary/95 backdrop-blur-md z-50 md:hidden">
-                        <div class="flex flex-col items-center justify-center h-full space-y-8 animate-fadeIn">
-                            <a href="#home" class="text-3xl text-dark-text hover:text-dark-accent transition-all duration-300 transform hover:scale-110">Home</a>
-                            <a href="#about" class="text-3xl text-dark-text hover:text-dark-accent transition-all duration-300 transform hover:scale-110">About</a>
-                            <a href="#skills" class="text-3xl text-dark-text hover:text-dark-accent transition-all duration-300 transform hover:scale-110">Skills</a>
-                            <a href="#projects" class="text-3xl text-dark-text hover:text-dark-accent transition-all duration-300 transform hover:scale-110">Projects</a>
-                            <a href="#certifications" class="text-3xl text-dark-text hover:text-dark-accent transition-all duration-300 transform hover:scale-110">Certifications</a>
-                            <a href="#contact" class="text-3xl text-dark-accent font-bold hover:text-cyber-green transition-all duration-300 transform hover:scale-110">Contact</a>
-                            <button id="closeMobileMenu" class="absolute top-10 right-10 text-dark-text hover:text-dark-accent p-2 transition-all duration-300 hover:scale-110">
-                                <i data-feather="x" width="32" height="32"></i>
-                            </button>
-                        </div>
-                    </div>
-                `;
-                document.body.appendChild(mobileMenu.firstElementChild);
-                feather.replace();
-                mobileMenuOpen = true;
-                document.body.style.overflow = 'hidden';
-            }
+            document.body.appendChild(mobileMenu.firstElementChild);
+            feather.replace();
         });
 
         document.addEventListener('click', (event) => {
-            const mobileMenuElement = document.getElementById('mobile-menu');
+            const mobileMenuElement = document.querySelector('.fixed.inset-0.bg-dark-primary');
             const closeMobileMenuButton = document.getElementById('closeMobileMenu');
 
-            if (closeMobileMenuButton && event.target === closeMobileMenuButton) {
+            if (event.target === closeMobileMenuButton || 
+                (mobileMenuElement && !mobileMenuElement.contains(event.target) && event.target !== mobileMenuToggle)) {
                 if (mobileMenuElement) {
                     mobileMenuElement.remove();
-                    mobileMenuOpen = false;
-                    document.body.style.overflow = 'auto';
                 }
             }
         });
 
-        // Smooth Scroll with offset for navbar
+        // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
+                const targetElement = document.querySelector(this.getAttribute('href'));
                 if (targetElement) {
-                    const offsetTop = targetElement.offsetTop - 80;
-                    window.scrollTo({
-                        top: offsetTop,
+                    targetElement.scrollIntoView({
                         behavior: 'smooth'
                     });
                 }
-                
-                // Close mobile menu if open
-                const mobileMenuElement = document.getElementById('mobile-menu');
+                // Automatically close mobile menu after selecting a section
+                const mobileMenuElement = document.querySelector('.fixed.inset-0.bg-dark-primary');
                 if (mobileMenuElement) {
                     mobileMenuElement.remove();
-                    mobileMenuOpen = false;
-                    document.body.style.overflow = 'auto';
                 }
             });
         });
 
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        // Optional: Simple form validation
+        const contactForm = document.querySelector('form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const nameInput = this.querySelector('input[type="text"]');
+                const emailInput = this.querySelector('input[type="email"]');
+                const messageInput = this.querySelector('textarea');
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    
-                    // Trigger progress bars animation
-                    const progressBars = entry.target.querySelectorAll('.progress-bar');
-                    progressBars.forEach(bar => {
-                        const width = bar.getAttribute('data-width');
-                        setTimeout(() => {
-                            bar.style.width = width + '%';
-                        }, 300);
-                    });
+                if (!nameInput.value || !emailInput.value || !messageInput.value) {
+                    alert('Please fill in all fields');
+                    return;
                 }
-            });
-        }, observerOptions);
 
-        // Observe all elements with observer-element class
-        document.querySelectorAll('.observer-element').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Back to Top Button
-        const backToTopButton = document.getElementById('back-to-top');
-        
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTopButton.classList.remove('opacity-0', 'invisible');
-                backToTopButton.classList.add('opacity-100', 'visible');
-            } else {
-                backToTopButton.classList.remove('opacity-100', 'visible');
-                backToTopButton.classList.add('opacity-0', 'invisible');
-            }
-        });
-
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Contact Form
-        const contactForm = document.getElementById('contact-form');
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const submitButton = this.querySelector('button[type="submit"]');
-            const originalText = submitButton.innerHTML;
-            
-            // Show loading state
-            submitButton.innerHTML = '<i data-feather="loader" class="inline mr-2 animate-spin" width="20" height="20"></i>Sending...';
-            submitButton.disabled = true;
-            feather.replace();
-            
-            // Simulate form submission
-            setTimeout(() => {
-                submitButton.innerHTML = '<i data-feather="check" class="inline mr-2" width="20" height="20"></i>Message Sent!';
-                submitButton.classList.remove('from-dark-accent', 'to-cyber-green');
-                submitButton.classList.add('from-green-500', 'to-green-600');
-                feather.replace();
-                
-                // Reset form
+                // Here you would typically send the form data to a server
+                alert('Message sent successfully!');
                 this.reset();
-                
-                // Reset button after delay
-                setTimeout(() => {
-                    submitButton.innerHTML = originalText;
-                    submitButton.disabled = false;
-                    submitButton.classList.remove('from-green-500', 'to-green-600');
-                    submitButton.classList.add('from-dark-accent', 'to-cyber-green');
-                    feather.replace();
-                }, 2000);
-            }, 2000);
-        });
-
-        // Enhanced particle animation
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'fixed w-1 h-1 bg-dark-accent rounded-full pointer-events-none z-0';
-            particle.style.left = Math.random() * window.innerWidth + 'px';
-            particle.style.top = window.innerHeight + 'px';
-            particle.style.opacity = Math.random() * 0.5 + 0.2;
-            
-            document.body.appendChild(particle);
-            
-            const animation = particle.animate([
-                { transform: 'translateY(0px)', opacity: particle.style.opacity },
-                { transform: `translateY(-${window.innerHeight + 100}px)`, opacity: 0 }
-            ], {
-                duration: Math.random() * 3000 + 2000,
-                easing: 'linear'
             });
-            
-            animation.onfinish = () => {
-                particle.remove();
-            };
-        }
-
-        // Create particles periodically
-        setInterval(createParticle, 300);
-
-        // Enhanced skill cards hover effects
-        document.querySelectorAll('.skill-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-15px) scale(1.02)';
-                card.style.boxShadow = '0 20px 40px rgba(187, 134, 252, 0.3)';
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0) scale(1)';
-                card.style.boxShadow = 'none';
-            });
-        });
-
-        // Parallax effect for hero section
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.parallax-bg');
-            
-            parallaxElements.forEach(element => {
-                const speed = 0.5;
-                element.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-        });
-
-        // Enhanced project card interactions
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                const img = card.querySelector('img');
-                if (img) {
-                    img.style.transform = 'scale(1.1)';
-                    img.style.filter = 'brightness(1.1) contrast(1.1)';
-                }
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                const img = card.querySelector('img');
-                if (img) {
-                    img.style.transform = 'scale(1)';
-                    img.style.filter = 'brightness(1) contrast(1)';
-                }
-            });
-        });
-
-        // Add smooth reveal animation for sections
-        const sections = document.querySelectorAll('section');
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1 });
-
-        sections.forEach(section => {
-            section.style.opacity = '0';
-            section.style.transform = 'translateY(30px)';
-            section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-            sectionObserver.observe(section);
-        });
-
-        // Enhanced button animations
-        document.querySelectorAll('.btn-glow').forEach(button => {
-            button.addEventListener('click', function(e) {
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.width = ripple.style.height = size + 'px';
-                ripple.style.left = x + 'px';
-                ripple.style.top = y + 'px';
-                ripple.classList.add('absolute', 'bg-white', 'bg-opacity-30', 'rounded-full', 'animate-ping');
-                
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            });
-        });
-
-        // Initialize all animations on page load
-        window.addEventListener('load', () => {
-            // Trigger initial animations
-            document.querySelector('#home .observer-element').classList.add('visible');
-            
-            // Stagger animation for hero elements
-            const heroElements = document.querySelectorAll('#home .observer-element > div > *');
-            heroElements.forEach((element, index) => {
-                element.style.opacity = '0';
-                element.style.transform = 'translateY(30px)';
-                setTimeout(() => {
-                    element.style.opacity = '1';
-                    element.style.transform = 'translateY(0)';
-                    element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                }, index * 200);
-            });
-        });
-
-        // Add custom cursor effect
-        const cursor = document.createElement('div');
-        cursor.className = 'fixed w-4 h-4 bg-dark-accent rounded-full pointer-events-none z-50 mix-blend-difference transition-transform duration-150';
-        document.body.appendChild(cursor);
-
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX - 8 + 'px';
-            cursor.style.top = e.clientY - 8 + 'px';
-        });
-
-        document.addEventListener('mousedown', () => {
-            cursor.style.transform = 'scale(0.8)';
-        });
-
-        document.addEventListener('mouseup', () => {
-            cursor.style.transform = 'scale(1)';
-        });
-
-        // Hide cursor on mobile
-        if (window.innerWidth <= 768) {
-            cursor.style.display = 'none';
         }
     </script>
 </body>
