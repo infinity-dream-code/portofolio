@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio</title>
+    <title>Niko Prananta - Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -14,186 +13,317 @@
             theme: {
                 extend: {
                     colors: {
-                        'dark-primary': '#121212',
-                        'dark-secondary': '#1E1E1E',
-                        'dark-accent': '#BB86FC',
-                        'dark-text': '#E0E0E0',
-                        'cyber-green': '#03DAC6'
+                        'dark-primary': '#0a0a0a',
+                        'dark-secondary': '#1a1a1a',
+                        'dark-accent': '#6366f1',
+                        'dark-text': '#e5e7eb',
+                        'cyber-green': '#10b981'
                     },
-                    boxShadow: {
-                        'neon': '0 0 15px rgba(187, 134, 252, 0.5)',
-                        'cyber': '0 0 20px rgba(3, 218, 198, 0.3)'
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'float': 'float 3s ease-in-out infinite'
                     }
                 }
             }
         }
     </script>
     <style>
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .animate-pulse-soft {
-            animation: pulse 3s infinite;
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .skill-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
-        .skill-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #6366f1;
+            transform: scaleX(1);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #6366f1;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #e5e7eb;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(9px, 9px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(to right, #6366f1, #10b981);
+            z-index: 100;
+            transition: width 0.3s ease;
+        }
+
+        .section-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .section-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
-<body class="bg-dark-primary text-dark-text font-sans selection:bg-dark-accent selection:text-black">
+<body class="bg-dark-primary text-dark-text font-sans selection:bg-dark-accent selection:text-white">
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-dark-secondary/80 backdrop-blur-md">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-dark-secondary/90 backdrop-blur-lg border-b border-gray-800">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-4">
-                <h1 class="text-2xl font-bold text-dark-accent">Portfolio</h1>
+                <h1 class="text-xl font-bold text-dark-accent">Niko Prananta</h1>
             </div>
-            <div class="hidden md:flex space-x-6">
-                <a href="#home" class="nav-link text-dark-text hover:text-dark-accent transition-colors">Home</a>
-                <a href="#about" class="nav-link text-dark-text hover:text-dark-accent transition-colors">About</a>
-                <a href="#skills" class="nav-link text-dark-text hover:text-dark-accent transition-colors">Skills</a>
-                <a href="#projects" class="nav-link text-dark-text hover:text-dark-accent transition-colors">Projects</a>
-                <a href="#certifications" class="nav-link text-dark-text hover:text-dark-accent transition-colors">Certifications</a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden lg:flex space-x-8">
+                <a href="#home" class="nav-link text-dark-text hover:text-dark-accent">Home</a>
+                <a href="#about" class="nav-link text-dark-text hover:text-dark-accent">About</a>
+                <a href="#skills" class="nav-link text-dark-text hover:text-dark-accent">Skills</a>
+                <a href="#projects" class="nav-link text-dark-text hover:text-dark-accent">Projects</a>
+                <a href="#certifications" class="nav-link text-dark-text hover:text-dark-accent">Certifications</a>
             </div>
+
             <div class="flex items-center space-x-4">
-                <a href="https://t.me/KisanakOfficial" class="px-4 py-2 bg-dark-accent text-black rounded-full hover:bg-opacity-80 transition-all text-white">
+                <a href="https://t.me/KisanakOfficial" class="hidden sm:block px-4 py-2 bg-dark-accent text-white rounded-lg hover:bg-indigo-600 transition-colors">
                     Contact
                 </a>
-                <button id="mobileMenuToggle" class="md:hidden">
-                    <i data-feather="menu" class="text-dark-text"></i>
-                </button>
+                
+                <!-- Hamburger Menu -->
+                <div class="hamburger lg:hidden" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu fixed top-0 left-0 w-full h-screen bg-dark-secondary z-40 lg:hidden" id="mobileMenu">
+            <div class="flex flex-col items-center justify-center h-full space-y-8">
+                <a href="#home" class="mobile-nav-link text-2xl text-dark-text hover:text-dark-accent transition-colors">Home</a>
+                <a href="#about" class="mobile-nav-link text-2xl text-dark-text hover:text-dark-accent transition-colors">About</a>
+                <a href="#skills" class="mobile-nav-link text-2xl text-dark-text hover:text-dark-accent transition-colors">Skills</a>
+                <a href="#projects" class="mobile-nav-link text-2xl text-dark-text hover:text-dark-accent transition-colors">Projects</a>
+                <a href="#certifications" class="mobile-nav-link text-2xl text-dark-text hover:text-dark-accent transition-colors">Certifications</a>
+                <a href="https://t.me/KisanakOfficial" class="px-6 py-3 bg-dark-accent text-white rounded-lg hover:bg-indigo-600 transition-colors">Contact Me</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <header id="home" class="min-h-screen flex items-center relative overflow-hidden pt-20">
-        <div class="absolute inset-0 bg-gradient-to-br from-dark-primary to-dark-secondary opacity-75"></div>
-        <div class="container mx-auto px-4 relative z-10 grid md:grid-cols-2 items-center">
-            <div>
-                <div class="space-y-4">
-                    <span class="text-cyber-green text-lg font-mono">Hello, I'm Niko Surya Adi Prananta</span>
-                    <h1 class="text-5xl font-bold text-dark-accent animate-pulse-soft">
-                    Backend Developer & 
-                    <br>Junior Cyber Security
-
+        <div class="absolute inset-0 bg-gradient-to-br from-dark-primary via-dark-secondary to-dark-primary"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 animate-fade-in">
+                    <span class="text-cyber-green text-lg font-mono">Hello, I'm</span>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-dark-accent leading-tight">
+                        Niko Surya Adi Prananta
                     </h1>
-                    <p class="text-dark-text max-w-xl leading-relaxed">
+                    <h2 class="text-2xl md:text-3xl text-gray-300 font-light">
+                        Backend Developer & Junior Cyber Security
+                    </h2>
+                    <p class="text-dark-text max-w-xl leading-relaxed text-lg">
                         Passionate about creating secure, scalable backend solutions and uncovering vulnerabilities to protect digital ecosystems.
                     </p>
-                    <div class="flex space-x-4 pt-6">
-                        <a href="#projects" class="px-6 py-3 bg-dark-accent text-black rounded-full hover:scale-105 transition-transform">
+                    <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                        <a href="#projects" class="px-8 py-3 bg-dark-accent text-white rounded-lg hover:bg-indigo-600 transition-all duration-300 text-center">
                             View Projects
                         </a>
-                        <a href="https://t.me/KisanakOfficial" class="px-6 py-3 border border-dark-accent text-dark-accent rounded-full hover:bg-dark-accent hover:text-black transition-all">
+                        <a href="https://t.me/KisanakOfficial" class="px-8 py-3 border-2 border-dark-accent text-dark-accent rounded-lg hover:bg-dark-accent hover:text-white transition-all duration-300 text-center">
                             Hire Me
                         </a>
                     </div>
                 </div>
-            </div>
-            <div class="hidden md:flex justify-center">
-                <img src="https://i.pinimg.com/736x/cc/e8/2f/cce82fa23accfa5a040a205d163b9f3d.jpg" alt="Profile" class="rounded-full border-4 border-dark-accent shadow-neon" style="max-width: 320px; max-height: 320px; object-fit: cover;">
+                <div class="flex justify-center lg:justify-end">
+                    <div class="relative">
+                        <img src="https://i.pinimg.com/736x/cc/e8/2f/cce82fa23accfa5a040a205d163b9f3d.jpg" 
+                             alt="Profile" 
+                             class="w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-dark-accent shadow-2xl animate-float object-cover">
+                       
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-dark-secondary">
+    <section id="about" class="py-20 bg-dark-secondary section-animate">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-dark-accent mb-4">About Me</h2>
-                <p class="text-dark-text max-w-2xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark-accent mb-6">About Me</h2>
+                <p class="text-dark-text max-w-3xl mx-auto text-lg leading-relaxed">
                     A dedicated backend developer with a laser focus on cybersecurity. With years of experience in building robust web applications and identifying security vulnerabilities, I transform complex challenges into elegant, secure solutions.
                 </p>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-dark-primary p-6 rounded-lg text-center skill-card">
-                    <i data-feather="code" class="mx-auto mb-4 text-dark-accent" stroke-width="1.5" width="48" height="48"></i>
-                    <h3 class="text-xl font-semibold text-dark-accent mb-2">Backend Development</h3>
-                    <p>Expertise in creating scalable and efficient server-side applications using modern technologies.</p>
+                <div class="bg-dark-primary p-8 rounded-xl text-center card-hover">
+                    <div class="w-16 h-16 bg-dark-accent/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-feather="code" class="text-dark-accent" stroke-width="2" width="32" height="32"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-dark-accent mb-4">Backend Development</h3>
+                    <p class="text-gray-400">Expertise in creating scalable and efficient server-side applications using modern technologies.</p>
                 </div>
-                <div class="bg-dark-primary p-6 rounded-lg text-center skill-card">
-                    <i data-feather="shield" class="mx-auto mb-4 text-dark-accent" stroke-width="1.5" width="48" height="48"></i>
-                    <h3 class="text-xl font-semibold text-dark-accent mb-2">Cyber Security</h3>
-                    <p>Specialized in penetration testing, vulnerability assessment, and developing secure system architectures.</p>
+                <div class="bg-dark-primary p-8 rounded-xl text-center card-hover">
+                    <div class="w-16 h-16 bg-dark-accent/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-feather="shield" class="text-dark-accent" stroke-width="2" width="32" height="32"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-dark-accent mb-4">Cyber Security</h3>
+                    <p class="text-gray-400">Specialized in penetration testing, vulnerability assessment, and developing secure system architectures.</p>
                 </div>
-                <div class="bg-dark-primary p-6 rounded-lg text-center skill-card">
-                    <i data-feather="database" class="mx-auto mb-4 text-dark-accent" stroke-width="1.5" width="48" height="48"></i>
-                    <h3 class="text-xl font-semibold text-dark-accent mb-2">Database Management</h3>
-                    <p>Proficient in designing and optimizing database structures for performance and security.</p>
+                <div class="bg-dark-primary p-8 rounded-xl text-center card-hover">
+                    <div class="w-16 h-16 bg-dark-accent/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-feather="database" class="text-dark-accent" stroke-width="2" width="32" height="32"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-dark-accent mb-4">Database Management</h3>
+                    <p class="text-gray-400">Proficient in designing and optimizing database structures for performance and security.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-20 bg-dark-primary">
+    <section id="skills" class="py-20 bg-dark-primary section-animate">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center text-dark-accent mb-12">Technical Skills</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-dark-accent mb-16">Technical Skills</h2>
             <div class="grid md:grid-cols-3 gap-8">
-            <div class="bg-dark-secondary p-6 rounded-lg">
-    <h3 class="text-2xl font-semibold text-cyber-green mb-4">Backend Technologies</h3>
-    <ul class="space-y-2">
-        <li class="flex items-center">
-            <i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>
-            PHP (Laravel)
-        </li>
-        <li class="flex items-center">
-            <i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>
-            MySQL & PostgreSQL
-        </li>
-        <li class="flex items-center">
-            <i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>
-            API Development (Laravel & Postman)
-        </li>
-        <li class="flex items-center">
-            <i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>
-            Payment Gateway Integration (Xendit,Midtrans)
-        </li>
-    </ul>
-</div>
-
-<div class="bg-dark-secondary p-6 rounded-lg">
-    <h3 class="text-2xl font-semibold text-cyber-green mb-4">Security Tools</h3>
-    <ul class="space-y-2">
-        <li class="flex items-center">
-            <i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>
-            Nmap
-        </li>
-        <li class="flex items-center">
-            <i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>
-            Burp Suite
-        </li>
-        <li class="flex items-center">
-            <i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>
-            Metasploit
-        </li>
-        <li class="flex items-center">
-            <i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>
-            Wireshark
-        </li>
-        <li class="flex items-center">
-            <i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>
-            SQLMap
-        </li>
-        
-    </ul>
-</div>
-
-                <div class="bg-dark-secondary p-6 rounded-lg">
-                    <h3 class="text-2xl font-semibold text-cyber-green mb-4">Databases</h3>
-                    <ul class="space-y-2">
+                <div class="bg-dark-secondary p-8 rounded-xl card-hover">
+                    <h3 class="text-2xl font-semibold text-cyber-green mb-6">Backend Technologies</h3>
+                    <ul class="space-y-4">
                         <li class="flex items-center">
-                            <i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>
-                            MySQL
+                            <i data-feather="check-circle" class="mr-3 text-dark-accent" width="20" height="20"></i>
+                            <span>PHP (Laravel)</span>
                         </li>
                         <li class="flex items-center">
-                            <i data-feather="check-circle" class="mr-2 text-dark-accent" width="20" height="20"></i>
-                            PostgreSQL
+                            <i data-feather="check-circle" class="mr-3 text-dark-accent" width="20" height="20"></i>
+                            <span>MySQL & PostgreSQL</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="mr-3 text-dark-accent" width="20" height="20"></i>
+                            <span>API Development</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="mr-3 text-dark-accent" width="20" height="20"></i>
+                            <span>Payment Gateway (Xendit, Midtrans)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-dark-secondary p-8 rounded-xl card-hover">
+                    <h3 class="text-2xl font-semibold text-cyber-green mb-6">Security Tools</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="mr-3 text-dark-accent" width="20" height="20"></i>
+                            <span>Nmap</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="mr-3 text-dark-accent" width="20" height="20"></i>
+                            <span>Burp Suite</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="mr-3 text-dark-accent" width="20" height="20"></i>
+                            <span>Metasploit</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="mr-3 text-dark-accent" width="20" height="20"></i>
+                            <span>Wireshark</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="mr-3 text-dark-accent" width="20" height="20"></i>
+                            <span>SQLMap</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-dark-secondary p-8 rounded-xl card-hover">
+                    <h3 class="text-2xl font-semibold text-cyber-green mb-6">Databases</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="mr-3 text-dark-accent" width="20" height="20"></i>
+                            <span>MySQL</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="mr-3 text-dark-accent" width="20" height="20"></i>
+                            <span>PostgreSQL</span>
                         </li>
                     </ul>
                 </div>
@@ -202,211 +332,262 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-dark-secondary">
+    <section id="projects" class="py-20 bg-dark-secondary section-animate">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center text-dark-accent mb-12">Notable Projects</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-            <div class="bg-dark-primary p-6 rounded-lg skill-card">
-    <img src="https://g.top4top.io/p_33510pszs1.jpg" alt="Project 1" class="rounded-lg mb-4">
-    <h3 class="text-xl font-semibold text-cyber-green mb-2">POS Cashier Web App</h3>
-    <p class="mb-4">Developed a comprehensive web-based cashier application with CRUD features, salary management, sales reports, profit and loss reports, and attendance tracking.</p>
-    <div class="flex space-x-2">
-        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Laravel</span>
-        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">MySQL</span>
-        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">API</span>
-    </div>
-</div>
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-dark-accent mb-16">Notable Projects</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-dark-primary rounded-xl overflow-hidden card-hover">
+                    <img src="https://g.top4top.io/p_33510pszs1.jpg" alt="POS Cashier" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-cyan-400 mb-3">POS Cashier Web App</h3>
+                        <p class="text-gray-400 mb-4">Comprehensive web-based cashier application with CRUD features, salary management, sales reports, and attendance tracking.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Laravel</span>
+                            <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">MySQL</span>
+                            <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">API</span>
+                        </div>
+                    </div>
+                </div>
 
-<div class="bg-dark-primary p-6 rounded-lg skill-card">
-    <img src="https://h.top4top.io/p_33527d3841.jpg" alt="Project 3" class="rounded-lg mb-4" style="height:240px;">
-    <h3 class="text-xl font-semibold text-cyber-green mb-2">Satrianovel.com</h3>
-    <p class="mb-4">Developed Satrianovel.com, an online platform for reading and writing novels with features like novel CRUD, limited like system, writer community, and donation page.</p>
-    <div class="flex space-x-2">
-        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Laravel</span>
-        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Web Development</span>
-        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">UI/UX</span>
-    </div>
-</div>
+                <div class="bg-dark-primary rounded-xl overflow-hidden card-hover">
+                    <img src="https://h.top4top.io/p_33527d3841.jpg" alt="Satrianovel" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-cyan-400 mb-3">Satrianovel.com</h3>
+                        <p class="text-gray-400 mb-4">Online platform for reading and writing novels with CRUD features, like system, writer community, and donation page.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Laravel</span>
+                            <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Web Dev</span>
+                            <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">UI/UX</span>
+                        </div>
+                    </div>
+                </div>
 
-<div class="bg-dark-primary p-6 rounded-lg skill-card">
-    <img src="https://j.top4top.io/p_3404he9701.jpg" alt="Project Penjualan Ikan" class="rounded-lg mb-4" style="height:240px; ">
-    <h3 class="text-xl font-semibold text-cyber-green mb-2">TokoIkan</h3>
-    <p class="mb-4">Developed Toko Ikan, a complete online fish store platform with integrated features like product management, real-time transactions via payment gateway, delivery system with courier assignment, order status tracking, and customer profile management for a seamless buying experience.</p>
-    <div class="flex space-x-2">
-        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Laravel</span>
-        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Midtrans Integration</span>
-        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Web Dev</span>
-    </div>
-</div>
+                <div class="bg-dark-primary rounded-xl overflow-hidden card-hover">
+                    <img src="https://j.top4top.io/p_3404he9701.jpg" alt="TokoIkan" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-cyan-400 mb-3">TokoIkan</h3>
+                        <p class="text-gray-400 mb-4">Complete online fish store with payment gateway integration, delivery system, and order tracking.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Laravel</span>
+                            <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Midtrans</span>
+                            <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">E-commerce</span>
+                        </div>
+                    </div>
+                </div>
 
-<div class="bg-dark-primary p-6 rounded-lg skill-card cursor-pointer" onclick="window.location.href='https://stg-gisbolali.simda.net/'">
-    <img src="https://g.top4top.io/p_34975jhzi1.jpg" alt="SIDes Application" class="rounded-lg mb-4" style="height:240px; width: 350px;">
-    <h3 class="text-xl font-semibold text-cyber-green mb-2">SIDes Application</h3>
-    <p class="mb-4">SIDes (Village Service System) is a digital platform that enables citizens to request official documents and submit reports online. The process is handled in stages from local RT to the Village Head, with real-time status tracking through the app.</p>
-    <div class="flex space-x-2">
-        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Mobile & Web App</span>
-        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">e-Government</span>
-        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Online Services</span>
-    </div>
-</div>
+                <div class="bg-dark-primary rounded-xl overflow-hidden card-hover cursor-pointer" onclick="window.open('https://stg-gisbolali.simda.net/', '_blank')">
+                    <img src="https://g.top4top.io/p_34975jhzi1.jpg" alt="SIDes" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-cyan-400 mb-3">SIDes Application</h3>
+                        <p class="text-gray-400 mb-4">Digital village service platform for official document requests and reports with real-time status tracking.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Mobile & Web</span>
+                            <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">e-Government</span>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="bg-dark-primary rounded-xl overflow-hidden card-hover">
+                    <img src="https://a.top4top.io/p_3351ivple1.jpg" alt="Security Assessment" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-cyan-400 mb-3">Sejahtera.co.id Security Assessment</h3>
+                        <p class="text-gray-400 mb-4">Security testing revealing IDOR vulnerability in transaction details endpoint.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm">IDOR</span>
+                            <span class="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm">Penetration Testing</span>
+                            <span class="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm">Bug Bounty</span>
+                        </div>
+                    </div>
+                </div>
 
-
-<div class="bg-dark-primary p-6 rounded-lg skill-card">
-    <img src="https://a.top4top.io/p_3351ivple1.jpg" alt="Project 3" class="rounded-lg mb-4" style="height:240px;">
-    <h3 class="text-xl font-semibold text-cyber-green mb-2">Sejahtera.co.id Security Assessment</h3>
-    <p class="mb-4">Performed security testing on Sejahtera.co.id, uncovering IDOR vulnerability in transaction details endpoint, allowing unauthorized access to sensitive transaction information.</p>
-    <div class="flex space-x-2">
-        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">IDOR</span>
-        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Pentesting</span>
-        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Bug Bounty</span>
-    </div>
-</div>
-
-<div class="bg-dark-primary p-6 rounded-lg skill-card">
-    <img src="https://k.top4top.io/p_335166xg91.jpg" alt="Project 2" class="rounded-lg mb-4" style="height:240px;">
-    <h3 class="text-xl font-semibold text-cyber-green mb-2">Preloved.co.id Security Assessment</h3>
-    <p class="mb-4">Conducted penetration testing on Preloved.co.id, discovering IDOR vulnerability allowing unauthorized access to user data and business logic flaws enabling shipping price manipulation.</p>
-    <div class="flex space-x-2">
-        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">IDOR</span>
-        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Business Logic</span>
-        <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Bug Bounty</span>
-    </div>
-</div>
-
-                
-
+                <div class="bg-dark-primary rounded-xl overflow-hidden card-hover">
+                    <img src="https://k.top4top.io/p_335166xg91.jpg" alt="Preloved Security" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-cyan-400 mb-3">Preloved.co.id Security Assessment</h3>
+                        <p class="text-gray-400 mb-4">Penetration testing discovering IDOR vulnerability and business logic flaws.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm">IDOR</span>
+                            <span class="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm">Business Logic</span>
+                            <span class="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm">Bug Bounty</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-
-    <section id="certifications" class="py-20 bg-dark-secondary">
-    <div class="container mx-auto px-6">
-        <h2 class="text-4xl font-bold text-center text-dark-accent mb-12">My Certifications</h2>
-        <div class="grid md:grid-cols-2 gap-8">
-            <div class="bg-dark-primary p-6 rounded-lg skill-card">
-                <img src="https://f.top4top.io/p_33511ctg91.jpg" alt="Project 1" class="rounded-lg mb-4">
-                <h3 class="text-xl font-semibold text-cyber-green mb-2">LKS IT Software Certification</h3>
-                <p class="mb-4">Developed innovative digital solutions, creating a mobile Esports management application and a desktop sales management system. Implemented comprehensive CRUD features with a robust Laravel-powered API backend.</p>
-                <div class="flex space-x-2">
-                    <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Laravel</span>
-                    <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">SQL</span>
-                    <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Kotlin</span>
-                    <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">C#</span>
-                    <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">API</span>
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-20 bg-dark-primary section-animate">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-dark-accent mb-16">My Certifications</h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-dark-secondary rounded-xl overflow-hidden card-hover">
+                    <img src="https://f.top4top.io/p_33511ctg91.jpg" alt="LKS Certification" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-cyan-400 mb-3">LKS IT Software Certification</h3>
+                        <p class="text-gray-400 mb-4">Developed innovative digital solutions including mobile Esports management app and desktop sales system with Laravel API backend.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Laravel</span>
+                            <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Kotlin</span>
+                            <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">C#</span>
+                            <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">API</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="bg-dark-primary p-6 rounded-lg skill-card">
-                <img src="https://k.top4top.io/p_3351smcwh1.jpg" alt="Project 1" class="rounded-lg mb-4">
-                <h3 class="text-xl font-semibold text-cyber-green mb-2">Web Security Professional Certification</h3>
-                <p class="mb-4">certification from Build with Angga in web security, specializing in sophisticated penetration testing techniques and comprehensive vulnerability identification strategies for digital systems.</p>
-                <div class="flex space-x-2">
-                    <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Penetration Testing</span>
-                    <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Bug Bounty</span>
-                    <span class="px-3 py-1 bg-dark-accent/20 text-dark-accent rounded-full text-sm">Web Security</span>
+
+                <div class="bg-dark-secondary rounded-xl overflow-hidden card-hover">
+                    <img src="https://k.top4top.io/p_3351smcwh1.jpg" alt="Security Certification" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-cyan-400 mb-3">Web Security Professional</h3>
+                        <p class="text-gray-400 mb-4">Certification from Build with Angga specializing in penetration testing techniques and vulnerability identification strategies.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm">Penetration Testing</span>
+                            <span class="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm">Bug Bounty</span>
+                            <span class="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm">Web Security</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- Footer -->
-    <footer class="bg-dark-secondary py-12">
+    <footer class="bg-dark-secondary py-16 border-t border-gray-800">
         <div class="container mx-auto px-4 text-center">
-            <div class="flex justify-center space-x-6 mb-8">
-                <a href="https://github.com/infinity-dream-code" class="text-dark-text hover:text-dark-accent transition-colors">
-                    <i data-feather="github" width="24" height="24"></i>
+            <div class="flex justify-center space-x-8 mb-8">
+                <a href="https://github.com/infinity-dream-code" class="text-dark-text hover:text-dark-accent transition-colors duration-300 transform hover:scale-110">
+                    <i data-feather="github" width="28" height="28"></i>
                 </a>
-                <a href="https://linkedin.com/in/niko-surya-adi-prananta-b4a263251" class="text-dark-text hover:text-dark-accent transition-colors">
-                    <i data-feather="linkedin" width="24" height="24"></i>
+                <a href="https://linkedin.com/in/niko-surya-adi-prananta-b4a263251" class="text-dark-text hover:text-dark-accent transition-colors duration-300 transform hover:scale-110">
+                    <i data-feather="linkedin" width="28" height="28"></i>
                 </a>
-                <a href="https://t.me/KisanakOfficial" class="text-dark-text hover:text-dark-accent transition-colors">
-                <i class="fa-brands fa-telegram" style="font-size: 24px;"></i>
+                <a href="https://t.me/KisanakOfficial" class="text-dark-text hover:text-dark-accent transition-colors duration-300 transform hover:scale-110">
+                    <i class="fa-brands fa-telegram" style="font-size: 28px;"></i>
                 </a>
             </div>
-            <p class="text-dark-text">&copy; 2025 All Rights Reserved.</p>
+            <p class="text-gray-400 text-lg">&copy; 2025 Niko Surya Adi Prananta. All Rights Reserved.</p>
         </div>
     </footer>
 
-
-<script>
+    <script>
         // Initialize Feather Icons
         feather.replace();
 
-        // Mobile Menu Toggle
-        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-        const mobileMenu = document.createElement('div');
-        mobileMenu.innerHTML = `
-            <div class="fixed inset-0 bg-dark-primary z-50 md:hidden">
-                <div class="flex flex-col items-center justify-center h-full space-y-6">
-                    <a href="#home" class="text-2xl text-dark-text hover:text-dark-accent">Home</a>
-                    <a href="#about" class="text-2xl text-dark-text hover:text-dark-accent">About</a>
-                    <a href="#skills" class="text-2xl text-dark-text hover:text-dark-accent">Skills</a>
-                    <a href="#projects" class="text-2xl text-dark-text hover:text-dark-accent">Projects</a>
-                    <a href="#certifications" class="text-2xl text-dark-text hover:text-dark-accent">Certifications</a>
-                    <a href="#contact" class="text-2xl text-dark-accent font-bold">Contact Me</a>
-                    <button id="closeMobileMenu" class="absolute top-10 right-10 text-dark-text">
-                        <i data-feather="x" width="32" height="32"></i>
-                    </button>
-                </div>
-            </div>
-        `;
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        let isMenuOpen = false;
 
-        mobileMenuToggle.addEventListener('click', () => {
-            document.body.appendChild(mobileMenu.firstElementChild);
-            feather.replace();
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
+            document.body.style.overflow = isMenuOpen ? 'hidden' : 'auto';
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+
+        // Close mobile menu when clicking on menu links
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (isMenuOpen) {
+                    toggleMenu();
+                }
+            });
         });
 
-        document.addEventListener('click', (event) => {
-            const mobileMenuElement = document.querySelector('.fixed.inset-0.bg-dark-primary');
-            const closeMobileMenuButton = document.getElementById('closeMobileMenu');
-
-            if (event.target === closeMobileMenuButton || 
-                (mobileMenuElement && !mobileMenuElement.contains(event.target) && event.target !== mobileMenuToggle)) {
-                if (mobileMenuElement) {
-                    mobileMenuElement.remove();
-                }
+        // Close mobile menu when clicking outside
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu && isMenuOpen) {
+                toggleMenu();
             }
         });
 
-        // Smooth Scroll
+        // Smooth Scroll for Navigation Links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const targetElement = document.querySelector(this.getAttribute('href'));
-                if (targetElement) {
-                    targetElement.scrollIntoView({
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
                         behavior: 'smooth'
                     });
-                }
-                // Automatically close mobile menu after selecting a section
-                const mobileMenuElement = document.querySelector('.fixed.inset-0.bg-dark-primary');
-                if (mobileMenuElement) {
-                    mobileMenuElement.remove();
                 }
             });
         });
 
-        // Optional: Simple form validation
-        const contactForm = document.querySelector('form');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const nameInput = this.querySelector('input[type="text"]');
-                const emailInput = this.querySelector('input[type="email"]');
-                const messageInput = this.querySelector('textarea');
+        // Scroll Progress Indicator
+        function updateScrollIndicator() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('scrollIndicator').style.width = scrollPercent + '%';
+        }
 
-                if (!nameInput.value || !emailInput.value || !messageInput.value) {
-                    alert('Please fill in all fields');
-                    return;
+        window.addEventListener('scroll', updateScrollIndicator);
+
+        // Intersection Observer for Section Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
                 }
+            });
+        }, observerOptions);
 
-                // Here you would typically send the form data to a server
-                alert('Message sent successfully!');
-                this.reset();
+        // Observe all sections with animation class
+        document.querySelectorAll('.section-animate').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Active Navigation Link
+        function updateActiveNavLink() {
+            const sections = document.querySelectorAll('section, header');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-dark-accent');
+                link.classList.add('text-dark-text');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.remove('text-dark-text');
+                    link.classList.add('text-dark-accent');
+                }
             });
         }
+
+        window.addEventListener('scroll', updateActiveNavLink);
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+
+        // Keyboard navigation for accessibility
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && isMenuOpen) {
+                toggleMenu();
+            }
+        });
+
+        // Initialize on page load
+        updateScrollIndicator();
+        updateActiveNavLink();
     </script>
 </body>
 </html>
