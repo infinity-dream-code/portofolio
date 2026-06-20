@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Niko - Portfolio</title>
+    <title>Niko — Fullstack Developer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         *,
         *::before,
@@ -18,49 +18,90 @@
         }
 
         :root {
-            --bg: #0a0a0a;
-            --bg2: #141414;
-            --bg3: #1e1e1e;
-            --accent: #6366f1;
-            --accent2: #10b981;
-            --text: #e5e7eb;
-            --text2: #9ca3af;
-            --border: rgba(255, 255, 255, 0.08);
-            --shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+            --void: #050508;
+            --deep: #0D0D1A;
+            --card: #111128;
+            --card2: #16162A;
+            --violet: #7C3AED;
+            --violet2: #9D5CF6;
+            --mint: #06FFA5;
+            --orange: #FF6B35;
+            --text: #F0EEFF;
+            --text2: #8B8BAA;
+            --text3: #5A5A7A;
+            --border: rgba(124, 58, 237, .18);
+            --border2: rgba(255, 255, 255, .06);
+            --glow: 0 0 60px rgba(124, 58, 237, .3);
+            --glow2: 0 0 40px rgba(6, 255, 165, .2);
         }
 
         html {
-            scroll-behavior: smooth
+            scroll-behavior: smooth;
+            overflow-x: hidden
         }
 
         body {
-            background: var(--bg);
+            background: var(--void);
             color: var(--text);
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased
         }
 
         ::selection {
-            background: var(--accent);
+            background: var(--violet);
             color: #fff
         }
 
         img {
-            loading: lazy;
             display: block;
             max-width: 100%
         }
 
-        .scroll-bar {
+        a {
+            text-decoration: none;
+            color: inherit
+        }
+
+        .cursor-dot {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--mint);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform .1s;
+            mix-blend-mode: screen
+        }
+
+        .cursor-ring {
+            position: fixed;
+            width: 36px;
+            height: 36px;
+            border: 1.5px solid rgba(124, 58, 237, .6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: transform .12s ease, width .2s, height .2s, opacity .2s
+        }
+
+        body:hover .cursor-dot,
+        body:hover .cursor-ring {
+            opacity: 1
+        }
+
+        .progress-bar {
             position: fixed;
             top: 0;
             left: 0;
-            width: 0%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            height: 2px;
+            background: linear-gradient(90deg, var(--violet), var(--mint), var(--orange));
             z-index: 999;
-            transition: width .2s
+            transition: width .15s;
+            width: 0%
         }
 
         nav {
@@ -68,92 +109,129 @@
             top: 0;
             left: 0;
             right: 0;
-            z-index: 500;
-            background: rgba(10, 10, 10, 0.92);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border)
+            z-index: 800;
+            transition: background .3s, backdrop-filter .3s
+        }
+
+        nav.scrolled {
+            background: rgba(5, 5, 8, .88);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border2)
         }
 
         .nav-inner {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 20px;
-            height: 64px;
+            padding: 0 24px;
+            height: 68px;
             display: flex;
             align-items: center;
             justify-content: space-between
         }
 
         .nav-logo {
-            font-family: 'Space Mono', monospace;
-            font-size: 1.2rem;
-            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
             font-weight: 700;
-            text-decoration: none
+            color: var(--mint);
+            letter-spacing: -.02em;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .nav-logo-bracket {
+            color: var(--violet);
+            opacity: .7
         }
 
         .nav-links {
             display: flex;
-            gap: 32px;
+            gap: 8px;
             list-style: none
         }
 
         .nav-links a {
             color: var(--text2);
-            text-decoration: none;
-            font-size: .9rem;
+            font-size: .85rem;
             font-weight: 500;
-            transition: color .2s;
-            position: relative
+            padding: 6px 14px;
+            border-radius: 20px;
+            transition: all .2s;
+            letter-spacing: .01em
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width .2s
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text);
+            background: rgba(124, 58, 237, .15)
         }
 
-        .nav-links a:hover {
-            color: var(--text)
+        .lang-toggle {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid var(--border2);
+            border-radius: 24px;
+            padding: 4px;
+            cursor: pointer
         }
 
-        .nav-links a:hover::after {
-            width: 100%
+        .lang-btn {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 18px;
+            border: none;
+            cursor: pointer;
+            transition: all .2s;
+            background: transparent;
+            color: var(--text3)
         }
 
-        .nav-cta {
+        .lang-btn.active {
+            background: var(--violet);
+            color: #fff;
+            box-shadow: 0 0 16px rgba(124, 58, 237, .5)
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .nav-hire {
+            font-size: .8rem;
+            font-weight: 600;
             padding: 8px 20px;
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--violet), #5B21B6);
             color: #fff;
             border-radius: 8px;
-            text-decoration: none;
-            font-size: .875rem;
-            font-weight: 600;
-            transition: background .2s
+            transition: all .2s;
+            border: 1px solid rgba(157, 92, 246, .3)
         }
 
-        .nav-cta:hover {
-            background: #4f46e5
+        .nav-hire:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--glow)
         }
 
         .hamburger {
             display: none;
             flex-direction: column;
             gap: 5px;
-            cursor: pointer;
-            padding: 4px;
             background: none;
-            border: none
+            border: none;
+            cursor: pointer;
+            padding: 4px
         }
 
         .hamburger span {
-            width: 24px;
-            height: 2px;
+            width: 22px;
+            height: 1.5px;
             background: var(--text);
             border-radius: 2px;
             transition: .3s;
@@ -161,113 +239,165 @@
         }
 
         .hamburger.open span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px)
+            transform: rotate(45deg) translate(4.5px, 4.5px)
         }
 
         .hamburger.open span:nth-child(2) {
-            opacity: 0
+            opacity: 0;
+            transform: scaleX(0)
         }
 
         .hamburger.open span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px)
+            transform: rotate(-45deg) translate(4.5px, -4.5px)
         }
 
-        .mobile-nav {
+        .mobile-menu {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: var(--bg2);
-            z-index: 400;
+            inset: 0;
+            background: rgba(5, 5, 8, .97);
+            backdrop-filter: blur(32px);
+            z-index: 700;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 32px;
-            transform: translateX(-100%);
-            transition: transform .35s cubic-bezier(.4, 0, .2, 1)
+            gap: 24px;
+            transform: translateY(-100%);
+            transition: transform .4s cubic-bezier(.77, 0, .175, 1)
         }
 
-        .mobile-nav.open {
-            transform: translateX(0)
+        .mobile-menu.open {
+            transform: translateY(0)
         }
 
-        .mobile-nav a {
-            color: var(--text);
-            text-decoration: none;
-            font-size: 1.5rem;
-            font-weight: 600;
+        .mobile-menu a {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text2);
             transition: color .2s
         }
 
-        .mobile-nav a:hover {
-            color: var(--accent)
+        .mobile-menu a:hover {
+            color: var(--mint)
         }
 
-        .mobile-nav .m-cta {
-            padding: 12px 28px;
-            background: var(--accent);
+        .mobile-menu .m-hire {
+            font-size: 1rem;
+            padding: 14px 36px;
+            background: var(--violet);
+            color: #fff;
             border-radius: 10px;
-            font-size: 1rem
+            margin-top: 8px
         }
 
-        #home {
+        #hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding-top: 64px;
+            padding-top: 68px;
             position: relative;
             overflow: hidden
         }
 
-        .hero-bg {
+        .hero-canvas {
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(99, 102, 241, .1), transparent)
+            z-index: 0
         }
 
         .hero-inner {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 80px 24px;
             display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 60px;
+            grid-template-columns: 1fr 400px;
+            gap: 80px;
             align-items: center;
-            width: 100%;
             position: relative;
-            z-index: 1
+            z-index: 1;
+            width: 100%
         }
 
-        .hero-tag {
-            font-family: 'Space Mono', monospace;
-            color: var(--accent2);
-            font-size: .9rem;
-            margin-bottom: 16px
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(6, 255, 165, .08);
+            border: 1px solid rgba(6, 255, 165, .2);
+            border-radius: 24px;
+            padding: 6px 16px;
+            margin-bottom: 24px
+        }
+
+        .hero-eyebrow-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--mint);
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(6, 255, 165, .4)
+            }
+
+            50% {
+                box-shadow: 0 0 0 6px rgba(6, 255, 165, 0)
+            }
+        }
+
+        .hero-eyebrow span {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .75rem;
+            color: var(--mint);
+            font-weight: 500
         }
 
         .hero-name {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 700;
-            color: var(--accent);
-            line-height: 1.15;
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -.03em;
             margin-bottom: 12px
         }
 
-        .hero-title {
-            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+        .hero-name .line1 {
+            color: var(--text)
+        }
+
+        .hero-name .line2 {
+            background: linear-gradient(135deg, var(--violet2), var(--mint));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        .hero-role {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .95rem;
             color: var(--text2);
-            font-weight: 300;
-            margin-bottom: 20px
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .hero-role-sep {
+            color: var(--violet);
+            opacity: .5
         }
 
         .hero-desc {
             color: var(--text2);
-            line-height: 1.8;
-            max-width: 500px;
+            line-height: 1.85;
             font-size: .975rem;
-            margin-bottom: 32px
+            max-width: 520px;
+            margin-bottom: 36px;
+            font-weight: 400
         }
 
         .hero-btns {
@@ -276,189 +406,497 @@
             flex-wrap: wrap
         }
 
-        .btn-primary {
-            padding: 12px 28px;
-            background: var(--accent);
+        .btn-v {
+            padding: 13px 30px;
+            background: linear-gradient(135deg, var(--violet), #5B21B6);
             color: #fff;
             border-radius: 10px;
-            text-decoration: none;
             font-weight: 600;
-            font-size: .9rem;
-            transition: background .2s, transform .2s
+            font-size: .875rem;
+            transition: all .25s;
+            border: 1px solid rgba(157, 92, 246, .3);
+            position: relative;
+            overflow: hidden
         }
 
-        .btn-primary:hover {
-            background: #4f46e5;
-            transform: translateY(-2px)
+        .btn-v::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, .1));
+            opacity: 0;
+            transition: opacity .2s
         }
 
-        .btn-outline {
-            padding: 12px 28px;
-            border: 2px solid var(--accent);
-            color: var(--accent);
+        .btn-v:hover::before {
+            opacity: 1
+        }
+
+        .btn-v:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(124, 58, 237, .4)
+        }
+
+        .btn-g {
+            padding: 13px 30px;
+            border: 1px solid rgba(6, 255, 165, .3);
+            color: var(--mint);
             border-radius: 10px;
-            text-decoration: none;
             font-weight: 600;
-            font-size: .9rem;
-            transition: all .2s
+            font-size: .875rem;
+            transition: all .25s;
+            background: rgba(6, 255, 165, .05)
         }
 
-        .btn-outline:hover {
-            background: var(--accent);
-            color: #fff;
-            transform: translateY(-2px)
+        .btn-g:hover {
+            background: rgba(6, 255, 165, .12);
+            border-color: rgba(6, 255, 165, .6);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(6, 255, 165, .15)
         }
 
-        .hero-img {
-            width: 260px;
-            height: 260px;
+        .hero-stats {
+            display: flex;
+            gap: 32px;
+            margin-top: 44px
+        }
+
+        .hero-stat-num {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text);
+            line-height: 1
+        }
+
+        .hero-stat-num span {
+            color: var(--violet2)
+        }
+
+        .hero-stat-label {
+            font-size: .78rem;
+            color: var(--text3);
+            margin-top: 4px;
+            font-weight: 500;
+            letter-spacing: .04em;
+            text-transform: uppercase
+        }
+
+        .hero-stat-divider {
+            width: 1px;
+            background: var(--border2)
+        }
+
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px
+        }
+
+        .hero-photo-wrap {
+            position: relative;
+            width: 300px;
+            height: 300px
+        }
+
+        .hero-photo-ring {
+            position: absolute;
+            inset: -12px;
             border-radius: 50%;
-            border: 4px solid var(--accent);
-            object-fit: cover;
-            box-shadow: 0 0 60px rgba(99, 102, 241, .3);
-            animation: float 4s ease-in-out infinite
+            border: 2px solid transparent;
+            background: linear-gradient(135deg, var(--violet), var(--mint)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            animation: spin-ring 8s linear infinite
         }
 
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0)
+        @keyframes spin-ring {
+            from {
+                transform: rotate(0deg)
             }
 
-            50% {
-                transform: translateY(-12px)
+            to {
+                transform: rotate(360deg)
             }
+        }
+
+        .hero-photo {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--card)
+        }
+
+        .hero-photo-glow {
+            position: absolute;
+            inset: -30px;
+            background: radial-gradient(circle, rgba(124, 58, 237, .2) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center
+        }
+
+        .hero-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--card);
+            border: 1px solid var(--border2);
+            border-radius: 8px;
+            padding: 7px 14px;
+            font-size: .78rem;
+            color: var(--text2);
+            font-weight: 500
+        }
+
+        .hero-badge svg {
+            width: 14px;
+            height: 14px;
+            opacity: .6
         }
 
         section {
-            padding: 80px 0
+            padding: 100px 0
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 20px
+            padding: 0 24px
         }
 
-        .section-title {
-            text-align: center;
-            font-size: clamp(1.8rem, 3vw, 2.4rem);
+        .sec-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .72rem;
+            color: var(--violet2);
             font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 48px
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            margin-bottom: 14px
         }
 
-        .fade-in {
+        .sec-label::before {
+            content: '';
+            width: 24px;
+            height: 1px;
+            background: var(--violet2);
+            opacity: .5
+        }
+
+        .sec-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -.03em;
+            line-height: 1.1;
+            margin-bottom: 16px
+        }
+
+        .sec-sub {
+            color: var(--text2);
+            font-size: .975rem;
+            line-height: 1.75;
+            max-width: 560px
+        }
+
+        .reveal {
             opacity: 0;
-            transform: translateY(24px);
-            transition: opacity .6s ease, transform .6s ease
+            transform: translateY(32px);
+            transition: opacity .7s cubic-bezier(.25, .1, .25, 1), transform .7s cubic-bezier(.25, .1, .25, 1)
         }
 
-        .fade-in.visible {
+        .reveal.visible {
             opacity: 1;
             transform: none
         }
 
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-32px);
+            transition: opacity .7s, transform .7s cubic-bezier(.25, .1, .25, 1)
+        }
+
+        .reveal-left.visible {
+            opacity: 1;
+            transform: none
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(32px);
+            transition: opacity .7s, transform .7s cubic-bezier(.25, .1, .25, 1)
+        }
+
+        .reveal-right.visible {
+            opacity: 1;
+            transform: none
+        }
+
+        [data-delay="1"] {
+            transition-delay: .1s
+        }
+
+        [data-delay="2"] {
+            transition-delay: .2s
+        }
+
+        [data-delay="3"] {
+            transition-delay: .3s
+        }
+
+        [data-delay="4"] {
+            transition-delay: .4s
+        }
+
+        [data-delay="5"] {
+            transition-delay: .5s
+        }
+
         #about {
-            background: var(--bg2)
+            background: var(--deep)
         }
 
-        .about-text {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 48px;
-            color: var(--text2);
-            line-height: 1.8;
-            font-size: 1rem
-        }
-
-        .about-cards {
+        .about-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: end
+        }
+
+        .about-cards-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 32px
         }
 
         .about-card {
-            background: var(--bg);
-            border: 1px solid var(--border);
+            background: var(--card);
+            border: 1px solid var(--border2);
             border-radius: 16px;
-            padding: 32px 24px;
-            text-align: center;
-            transition: transform .3s, box-shadow .3s, border-color .3s
+            padding: 28px;
+            transition: all .3s;
+            position: relative;
+            overflow: hidden
+        }
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--violet), var(--mint));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .3s
+        }
+
+        .about-card:hover::before {
+            transform: scaleX(1)
         }
 
         .about-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow);
-            border-color: rgba(99, 102, 241, .4)
+            border-color: rgba(124, 58, 237, .3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 48px rgba(0, 0, 0, .4)
         }
 
-        .about-icon {
-            width: 56px;
-            height: 56px;
-            background: rgba(99, 102, 241, .15);
-            border-radius: 14px;
+        .about-icon-wrap {
+            width: 44px;
+            height: 44px;
+            background: rgba(124, 58, 237, .12);
+            border: 1px solid rgba(124, 58, 237, .2);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 16px
+            margin-bottom: 16px
         }
 
-        .about-icon svg {
-            width: 28px;
-            height: 28px;
-            stroke: var(--accent);
+        .about-icon-wrap svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--violet2);
             fill: none;
-            stroke-width: 2;
+            stroke-width: 1.8;
             stroke-linecap: round;
             stroke-linejoin: round
         }
 
         .about-card h3 {
-            color: var(--accent);
-            font-size: 1.05rem;
-            font-weight: 600;
-            margin-bottom: 10px
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px
         }
 
         .about-card p {
             color: var(--text2);
-            font-size: .875rem;
+            font-size: .84rem;
             line-height: 1.7
         }
 
-        #experience {
-            background: var(--bg)
+        .about-img-wrap {
+            position: relative
         }
 
-        .exp-list {
+        .about-code-block {
+            background: var(--card);
+            border: 1px solid var(--border2);
+            border-radius: 16px;
+            padding: 28px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .8rem;
+            line-height: 2
+        }
+
+        .code-line {
+            display: flex;
+            gap: 16px
+        }
+
+        .code-num {
+            color: var(--text3);
+            user-select: none;
+            min-width: 20px
+        }
+
+        .code-key {
+            color: var(--violet2)
+        }
+
+        .code-str {
+            color: var(--mint)
+        }
+
+        .code-val {
+            color: #FF6B35
+        }
+
+        .code-punc {
+            color: var(--text3)
+        }
+
+        .code-comm {
+            color: var(--text3);
+            font-style: italic
+        }
+
+        .about-code-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border2)
+        }
+
+        .code-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%
+        }
+
+        #experience {
+            background: var(--void)
+        }
+
+        .exp-timeline {
             max-width: 800px;
-            margin: 0 auto;
+            margin: 64px auto 0;
+            position: relative
+        }
+
+        .exp-timeline::before {
+            content: '';
+            position: absolute;
+            left: 28px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, var(--violet), rgba(124, 58, 237, .1));
+            z-index: 0
+        }
+
+        .exp-item {
+            display: flex;
+            gap: 32px;
+            margin-bottom: 48px;
+            position: relative
+        }
+
+        .exp-dot-wrap {
+            flex-shrink: 0;
+            width: 56px;
             display: flex;
             flex-direction: column;
-            gap: 24px
+            align-items: center;
+            gap: 0
+        }
+
+        .exp-dot {
+            width: 16px;
+            height: 16px;
+            background: var(--void);
+            border: 2px solid var(--violet);
+            border-radius: 50%;
+            position: relative;
+            z-index: 1;
+            margin-top: 8px;
+            transition: all .3s;
+            flex-shrink: 0
+        }
+
+        .exp-dot::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: rgba(124, 58, 237, .15);
+            opacity: 0;
+            transition: opacity .3s
+        }
+
+        .exp-item:hover .exp-dot {
+            background: var(--violet);
+            box-shadow: 0 0 20px rgba(124, 58, 237, .6)
+        }
+
+        .exp-item:hover .exp-dot::before {
+            opacity: 1
         }
 
         .exp-card {
-            background: var(--bg2);
-            border: 1px solid var(--border);
-            border-left: 4px solid var(--accent);
-            border-radius: 16px;
+            background: var(--card);
+            border: 1px solid var(--border2);
+            border-radius: 18px;
             padding: 32px;
-            transition: transform .3s, box-shadow .3s
+            flex: 1;
+            transition: all .3s
         }
 
-        .exp-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow)
+        .exp-item:hover .exp-card {
+            border-color: rgba(124, 58, 237, .25);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .5)
         }
 
-        .exp-card.cyan {
-            border-left-color: #06b6d4
-        }
-
-        .exp-header {
+        .exp-top {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
@@ -467,31 +905,34 @@
             margin-bottom: 20px
         }
 
-        .exp-title {
-            font-size: 1.3rem;
+        .exp-role {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
             font-weight: 700;
-            color: #67e8f9;
+            color: var(--text);
             margin-bottom: 4px
         }
 
         .exp-company {
-            color: var(--text);
-            font-size: 1rem
+            font-size: .875rem;
+            color: var(--text2)
         }
 
-        .exp-badge {
-            padding: 6px 16px;
-            background: rgba(99, 102, 241, .15);
-            color: var(--accent);
+        .exp-period {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .72rem;
+            padding: 5px 14px;
+            background: rgba(124, 58, 237, .1);
+            border: 1px solid rgba(124, 58, 237, .2);
+            color: var(--violet2);
             border-radius: 20px;
-            font-size: .8rem;
-            font-weight: 600;
             white-space: nowrap
         }
 
-        .exp-badge.cyan {
-            background: rgba(6, 182, 212, .15);
-            color: #67e8f9
+        .exp-period.mint {
+            background: rgba(6, 255, 165, .08);
+            border-color: rgba(6, 255, 165, .2);
+            color: var(--mint)
         }
 
         .exp-points {
@@ -503,94 +944,135 @@
         }
 
         .exp-points li {
-            color: var(--text2);
-            font-size: .9rem;
-            line-height: 1.6;
             display: flex;
-            gap: 10px
+            gap: 10px;
+            color: var(--text2);
+            font-size: .875rem;
+            line-height: 1.65
         }
 
         .exp-points li::before {
-            content: "▹";
-            color: var(--accent2);
+            content: '▹';
+            color: var(--mint);
             flex-shrink: 0;
-            margin-top: 2px
+            margin-top: 2px;
+            font-size: .8rem
         }
 
-        .tags {
+        .tag-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px
+            gap: 6px
         }
 
         .tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .7rem;
             padding: 4px 12px;
-            background: rgba(99, 102, 241, .12);
-            color: var(--accent);
-            border-radius: 20px;
-            font-size: .8rem;
-            font-weight: 500;
-            transition: background .2s
+            background: rgba(124, 58, 237, .1);
+            color: var(--violet2);
+            border: 1px solid rgba(124, 58, 237, .15);
+            border-radius: 16px;
+            transition: all .2s;
+            cursor: default
         }
 
         .tag:hover {
-            background: rgba(99, 102, 241, .25)
+            background: rgba(124, 58, 237, .2);
+            border-color: rgba(124, 58, 237, .4)
         }
 
-        .tag.cyan {
-            background: rgba(6, 182, 212, .12);
-            color: #67e8f9
+        .tag.mint {
+            background: rgba(6, 255, 165, .08);
+            color: var(--mint);
+            border-color: rgba(6, 255, 165, .15)
         }
 
-        .tag.cyan:hover {
-            background: rgba(6, 182, 212, .25)
+        .tag.mint:hover {
+            background: rgba(6, 255, 165, .16);
+            border-color: rgba(6, 255, 165, .4)
+        }
+
+        .tag.red {
+            background: rgba(255, 107, 53, .08);
+            color: var(--orange);
+            border-color: rgba(255, 107, 53, .15)
+        }
+
+        .tag.red:hover {
+            background: rgba(255, 107, 53, .16)
         }
 
         #skills {
-            background: var(--bg2)
+            background: var(--deep)
         }
 
-        .skills-title-wrap {
+        .skills-intro {
             text-align: center;
-            margin-bottom: 48px
+            max-width: 600px;
+            margin: 0 auto 64px
         }
 
-        .skills-title-wrap h2 {
-            font-size: clamp(1.8rem, 3vw, 2.4rem);
-            font-weight: 700;
-            background: linear-gradient(135deg, #fff, #00ffff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent
+        .skills-intro .sec-label,
+        .skills-intro .sec-title,
+        .skills-intro .sec-sub {
+            text-align: center
+        }
+
+        .skills-intro .sec-label {
+            justify-content: center
+        }
+
+        .skills-intro .sec-label::before {
+            display: none
+        }
+
+        .skills-intro .sec-sub {
+            margin: 0 auto
         }
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 16px;
-            max-width: 900px;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 14px;
+            max-width: 1000px;
             margin: 0 auto
         }
 
-        .skill-card {
-            background: rgba(30, 41, 59, .8);
-            border: 1px solid rgba(0, 255, 255, .15);
-            border-radius: 16px;
-            padding: 20px 12px;
+        .skill-item {
+            background: var(--card);
+            border: 1px solid var(--border2);
+            border-radius: 14px;
+            padding: 22px 12px;
             text-align: center;
-            cursor: pointer;
-            transition: transform .3s, border-color .3s, box-shadow .3s
+            transition: all .3s;
+            cursor: default;
+            position: relative;
+            overflow: hidden
         }
 
-        .skill-card:hover {
-            transform: translateY(-8px) scale(1.04);
-            border-color: #00ffff;
-            box-shadow: 0 16px 32px rgba(0, 255, 255, .15)
+        .skill-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 110%, rgba(124, 58, 237, .12), transparent 70%);
+            opacity: 0;
+            transition: opacity .3s
         }
 
-        .skill-icon {
-            width: 52px;
-            height: 52px;
+        .skill-item:hover::after {
+            opacity: 1
+        }
+
+        .skill-item:hover {
+            border-color: rgba(124, 58, 237, .35);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, .5)
+        }
+
+        .skill-icon-box {
+            width: 48px;
+            height: 48px;
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -599,244 +1081,336 @@
             overflow: hidden
         }
 
-        .skill-icon img {
+        .skill-icon-box img,
+        .skill-icon-box svg {
             width: 28px;
             height: 28px
         }
 
-        .skill-icon svg {
-            width: 28px;
-            height: 28px
-        }
-
-        .skill-name {
-            font-size: .8rem;
-            font-weight: 600;
-            color: #e2e8f0
+        .skill-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .7rem;
+            color: var(--text2);
+            font-weight: 500
         }
 
         #projects {
-            background: var(--bg)
+            background: var(--void)
         }
 
         .projects-header {
-            text-align: center;
-            margin-bottom: 48px
+            margin-bottom: 64px
         }
 
-        .projects-badge {
-            display: inline-block;
-            padding: 8px 24px;
-            background: linear-gradient(135deg, rgba(99, 102, 241, .15), rgba(16, 185, 129, .15));
-            border: 1px solid rgba(99, 102, 241, .3);
-            border-radius: 24px;
-            color: var(--accent2);
-            font-size: .9rem;
-            font-weight: 600;
-            margin-bottom: 16px
-        }
-
-        .projects-header h2 {
-            font-size: clamp(1.8rem, 3vw, 2.4rem);
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 10px
-        }
-
-        .projects-header p {
-            color: var(--text2);
-            font-size: .95rem;
-            max-width: 500px;
-            margin: 0 auto
+        .projects-counter {
+            font-family: 'Outfit', sans-serif;
+            font-size: 5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--violet), var(--mint));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 8px
         }
 
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 24px
+            gap: 20px
         }
 
-        .project-card {
-            background: var(--bg2);
-            border: 1px solid var(--border);
-            border-radius: 16px;
+        .proj-card {
+            background: var(--card);
+            border: 1px solid var(--border2);
+            border-radius: 18px;
             overflow: hidden;
-            transition: transform .3s, box-shadow .3s, border-color .3s;
-            cursor: pointer
+            transition: all .3s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column
         }
 
-        .project-card:hover {
+        .proj-card:hover {
+            border-color: rgba(124, 58, 237, .35);
             transform: translateY(-8px);
-            box-shadow: var(--shadow);
-            border-color: rgba(99, 102, 241, .4)
+            box-shadow: 0 24px 64px rgba(0, 0, 0, .6)
         }
 
-        .project-img {
+        .proj-thumb {
+            height: 170px;
+            overflow: hidden;
+            position: relative
+        }
+
+        .proj-thumb img {
             width: 100%;
-            height: 180px;
+            height: 100%;
             object-fit: cover;
-            transition: transform .3s
+            transition: transform .4s
         }
 
-        .project-card:hover .project-img {
-            transform: scale(1.04)
+        .proj-card:hover .proj-thumb img {
+            transform: scale(1.06)
         }
 
-        .project-img-placeholder {
+        .proj-thumb-placeholder {
             width: 100%;
-            height: 180px;
+            height: 100%;
+            background: linear-gradient(135deg, #0D0D1A, #1A1A2E);
             display: flex;
             align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #0e2a4a, #0a1628)
+            justify-content: center
         }
 
-        .project-img-placeholder svg {
-            width: 56px;
-            height: 56px;
-            stroke: #67e8f9;
+        .proj-thumb-placeholder svg {
+            width: 48px;
+            height: 48px;
+            stroke: var(--violet);
+            opacity: .4;
             fill: none;
             stroke-width: 1.5
         }
 
-        .project-body {
-            padding: 20px
+        .proj-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(17, 17, 40, .9), transparent);
+            opacity: 0;
+            transition: opacity .3s;
+            display: flex;
+            align-items: flex-end;
+            padding: 16px
         }
 
-        .project-title {
-            color: #67e8f9;
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 8px
+        .proj-card:hover .proj-overlay {
+            opacity: 1
         }
 
-        .project-desc {
+        .proj-overlay-text {
+            font-size: .75rem;
+            color: var(--mint);
+            font-family: 'JetBrains Mono', monospace
+        }
+
+        .proj-body {
+            padding: 18px;
+            flex: 1;
+            display: flex;
+            flex-direction: column
+        }
+
+        .proj-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: .95rem;
+            color: var(--text);
+            margin-bottom: 8px;
+            line-height: 1.3
+        }
+
+        .proj-desc {
             color: var(--text2);
-            font-size: .85rem;
-            line-height: 1.6;
-            margin-bottom: 14px
+            font-size: .8rem;
+            line-height: 1.65;
+            margin-bottom: 14px;
+            flex: 1
         }
 
-        .tag.red {
-            background: rgba(239, 68, 68, .12);
-            color: #f87171
-        }
-
-        .tag.red:hover {
-            background: rgba(239, 68, 68, .25)
+        .proj-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px
         }
 
         #certifications {
-            background: var(--bg2)
+            background: var(--deep)
         }
 
         .certs-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 24px;
-            max-width: 800px;
-            margin: 0 auto
+            max-width: 900px;
+            margin: 64px auto 0
         }
 
         .cert-card {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
+            background: var(--card);
+            border: 1px solid var(--border2);
+            border-radius: 18px;
             overflow: hidden;
-            transition: transform .3s, box-shadow .3s
+            transition: all .3s
         }
 
         .cert-card:hover {
+            border-color: rgba(124, 58, 237, .3);
             transform: translateY(-6px);
-            box-shadow: var(--shadow)
+            box-shadow: 0 20px 56px rgba(0, 0, 0, .5)
         }
 
-        .cert-img {
-            width: 100%;
+        .cert-thumb {
             height: 180px;
-            object-fit: cover
+            overflow: hidden
+        }
+
+        .cert-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .4s
+        }
+
+        .cert-card:hover .cert-thumb img {
+            transform: scale(1.04)
         }
 
         .cert-body {
-            padding: 20px
+            padding: 22px
         }
 
         .cert-title {
-            color: #67e8f9;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
             font-size: 1rem;
-            font-weight: 600;
+            color: var(--mint);
             margin-bottom: 8px
         }
 
         .cert-desc {
             color: var(--text2);
-            font-size: .85rem;
-            line-height: 1.6;
+            font-size: .84rem;
+            line-height: 1.65;
             margin-bottom: 14px
         }
 
         footer {
-            background: var(--bg2);
-            border-top: 1px solid var(--border);
-            padding: 48px 20px;
-            text-align: center
+            background: var(--void);
+            border-top: 1px solid var(--border2);
+            padding: 60px 24px
+        }
+
+        .footer-inner {
+            max-width: 1280px;
+            margin: 0 auto
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 24px
+        }
+
+        .footer-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--mint)
+        }
+
+        .footer-tagline {
+            color: var(--text3);
+            font-size: .85rem
         }
 
         .footer-socials {
             display: flex;
-            justify-content: center;
-            gap: 24px;
-            margin-bottom: 20px
+            gap: 12px
         }
 
-        .footer-socials a {
-            color: var(--text2);
-            text-decoration: none;
+        .social-btn {
+            width: 42px;
+            height: 42px;
+            background: var(--card);
+            border: 1px solid var(--border2);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 44px;
-            height: 44px;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            transition: color .2s, border-color .2s, transform .2s
+            color: var(--text2);
+            transition: all .2s
         }
 
-        .footer-socials a:hover {
-            color: var(--accent);
-            border-color: var(--accent);
-            transform: translateY(-3px)
+        .social-btn:hover {
+            border-color: var(--violet);
+            color: var(--violet);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(124, 58, 237, .3)
         }
 
-        .footer-socials a svg {
-            width: 20px;
-            height: 20px;
+        .social-btn svg {
+            width: 18px;
+            height: 18px;
             fill: currentColor
         }
 
-        footer p {
-            color: var(--text2);
-            font-size: .875rem
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 24px;
+            border-top: 1px solid var(--border2);
+            flex-wrap: wrap;
+            gap: 12px
         }
 
-        @media(max-width:1024px) {
+        .footer-copy {
+            color: var(--text3);
+            font-size: .82rem
+        }
+
+        .footer-made {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .72rem;
+            color: var(--text3)
+        }
+
+        .footer-made span {
+            color: var(--violet2)
+        }
+
+        @media(max-width:1100px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: 48px
+            }
+
+            .hero-inner>.hero-right {
+                order: -1;
+                align-items: center
+            }
+
+            .hero-name,
+            .hero-desc,
+            .hero-eyebrow {
+                text-align: center
+            }
+
+            .hero-btns {
+                justify-content: center
+            }
+
+            .hero-stats {
+                justify-content: center
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr
+            }
+
             .projects-grid {
                 grid-template-columns: repeat(2, 1fr)
-            }
-
-            .about-cards {
-                grid-template-columns: repeat(2, 1fr) !important
-            }
-
-            .about-cards .about-card:last-child {
-                grid-column: span 2 !important
             }
         }
 
         @media(max-width:768px) {
 
             .nav-links,
-            .nav-cta {
+            .nav-hire,
+            .lang-toggle {
                 display: none
             }
 
@@ -844,69 +1418,127 @@
                 display: flex
             }
 
-            .hero-inner {
-                grid-template-columns: 1fr;
-                text-align: center;
-                padding: 40px 20px;
-                gap: 40px
+            .hero-photo-wrap,
+            .hero-photo {
+                width: 220px;
+                height: 220px
             }
 
-            .hero-inner>div:last-child {
-                display: flex;
-                justify-content: center;
-                order: -1
-            }
-
-            .hero-img {
-                width: 180px;
-                height: 180px
-            }
-
-            .hero-btns {
-                justify-content: center
-            }
-
-            .hero-desc {
-                margin: 0 auto 32px
-            }
-
-            .about-cards {
-                grid-template-columns: 1fr !important
-            }
-
-            .about-cards .about-card:last-child {
-                grid-column: auto !important
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr !important
-            }
-
-            .certs-grid {
-                grid-template-columns: 1fr !important
-            }
-
-            .exp-header {
-                flex-direction: column
-            }
-
-            .skills-grid {
-                grid-template-columns: repeat(3, 1fr)
-            }
-        }
-
-        @media(max-width:480px) {
-            .skills-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 10px
-            }
-
-            .skill-card {
-                padding: 14px 8px
+            .about-cards-row {
+                grid-template-columns: 1fr
             }
 
             .projects-grid {
                 grid-template-columns: 1fr
+            }
+
+            .certs-grid {
+                grid-template-columns: 1fr
+            }
+
+            .exp-timeline::before {
+                left: 20px
+            }
+
+            .exp-dot-wrap {
+                width: 40px
+            }
+
+            .footer-top {
+                flex-direction: column;
+                text-align: center
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center
+            }
+
+            section {
+                padding: 72px 0
+            }
+
+            .nav-right .lang-toggle {
+                display: flex
+            }
+        }
+
+        @media(max-width:480px) {
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+                align-items: center
+            }
+
+            .hero-stat-divider {
+                display: none
+            }
+
+            .exp-card {
+                padding: 20px
+            }
+        }
+
+        @keyframes ambient-float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1)
+            }
+
+            33% {
+                transform: translate(30px, -20px) scale(1.05)
+            }
+
+            66% {
+                transform: translate(-20px, 30px) scale(.97)
+            }
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: ambient-float 12s ease-in-out infinite;
+            pointer-events: none
+        }
+
+        .blob1 {
+            width: 500px;
+            height: 500px;
+            background: rgba(124, 58, 237, .15);
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s
+        }
+
+        .blob2 {
+            width: 400px;
+            height: 400px;
+            background: rgba(6, 255, 165, .08);
+            top: 20%;
+            right: -80px;
+            animation-delay: -4s
+        }
+
+        .blob3 {
+            width: 350px;
+            height: 350px;
+            background: rgba(255, 107, 53, .07);
+            bottom: 10%;
+            left: 30%;
+            animation-delay: -8s
+        }
+
+        .mobile-lang-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px
+        }
+
+        @media(min-width:769px) {
+            .mobile-lang-row {
+                display: none
             }
         }
     </style>
@@ -914,422 +1546,538 @@
 
 <body>
 
-    <div class="scroll-bar" id="scrollBar"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+    <div class="progress-bar" id="progressBar"></div>
 
-    <nav>
+    <nav id="navbar">
         <div class="nav-inner">
-            <a href="#home" class="nav-logo">Niko</a>
+            <a href="#hero" class="nav-logo">
+                <span class="nav-logo-bracket">[</span>niko<span class="nav-logo-bracket">]</span>
+            </a>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#hero" data-i18n="nav_home">Home</a></li>
+                <li><a href="#about" data-i18n="nav_about">About</a></li>
+                <li><a href="#experience" data-i18n="nav_exp">Experience</a></li>
+                <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
+                <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+                <li><a href="#certifications" data-i18n="nav_certs">Certifications</a></li>
             </ul>
-            <a href="https://wa.me/6285777433886" class="nav-cta">Contact</a>
-            <button class="hamburger" id="hamburger" aria-label="Menu">
-                <span></span><span></span><span></span>
-            </button>
+            <div class="nav-right">
+                <div class="lang-toggle" id="langToggle">
+                    <button class="lang-btn active" id="btnID">ID</button>
+                    <button class="lang-btn" id="btnEN">EN</button>
+                </div>
+                <a href="https://wa.me/6285777433886" class="nav-hire" data-i18n="nav_hire">Hire Me</a>
+                <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+            </div>
         </div>
     </nav>
 
-    <div class="mobile-nav" id="mobileNav">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#certifications">Certifications</a>
-        <a href="https://wa.me/6285777433886" class="m-cta">Contact Me</a>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#hero" data-i18n="nav_home">Home</a>
+        <a href="#about" data-i18n="nav_about">About</a>
+        <a href="#experience" data-i18n="nav_exp">Experience</a>
+        <a href="#skills" data-i18n="nav_skills">Skills</a>
+        <a href="#projects" data-i18n="nav_projects">Projects</a>
+        <a href="#certifications" data-i18n="nav_certs">Certifications</a>
+        <div class="mobile-lang-row" style="display:flex;gap:8px;margin-top:8px">
+            <button class="lang-btn active" onclick="setLang('id')">ID</button>
+            <button class="lang-btn" onclick="setLang('en')">EN</button>
+        </div>
+        <a href="https://wa.me/6285777433886" class="m-hire" data-i18n="nav_hire">Hire Me</a>
     </div>
 
-    <header id="home">
-        <div class="hero-bg"></div>
+    <section id="hero">
+        <canvas class="hero-canvas" id="heroCanvas"></canvas>
+        <div class="blob blob1"></div>
+        <div class="blob blob2"></div>
+        <div class="blob blob3"></div>
         <div class="hero-inner">
             <div>
-                <p class="hero-tag">Hello, I'm</p>
-                <h1 class="hero-name">Niko Surya Adi Prananta</h1>
-                <h2 class="hero-title">Fullstack Developer & Junior Cyber Security</h2>
-                <p class="hero-desc">Passionate about creating secure, scalable fullstack solutions and uncovering vulnerabilities to protect digital ecosystems.</p>
-                <div class="hero-btns">
-                    <a href="#projects" class="btn-primary">View Projects</a>
-                    <a href="https://wa.me/6285777433886" class="btn-outline">Hire Me</a>
+                <div class="hero-eyebrow reveal">
+                    <span class="hero-eyebrow-dot"></span>
+                    <span data-i18n="hero_eyebrow">Available for work</span>
+                </div>
+                <h1 class="hero-name reveal" data-delay="1">
+                    <span class="line1">Niko Surya</span><br>
+                    <span class="line2">Adi Prananta</span>
+                </h1>
+                <div class="hero-role reveal" data-delay="2">
+                    <span data-i18n="hero_role1">Fullstack Developer</span>
+                    <span class="hero-role-sep">/</span>
+                    <span data-i18n="hero_role2">Junior Cyber Security</span>
+                </div>
+                <p class="hero-desc reveal" data-delay="3" data-i18n="hero_desc">Passionate about building secure, scalable fullstack solutions and uncovering vulnerabilities to protect digital ecosystems.</p>
+                <div class="hero-btns reveal" data-delay="4">
+                    <a href="#projects" class="btn-v" data-i18n="hero_btn1">View Projects</a>
+                    <a href="https://wa.me/6285777433886" class="btn-g" data-i18n="hero_btn2">Let's Connect</a>
+                </div>
+                <div class="hero-stats reveal" data-delay="5">
+                    <div>
+                        <div class="hero-stat-num">60<span>+</span></div>
+                        <div class="hero-stat-label" data-i18n="stat_projects">Projects</div>
+                    </div>
+                    <div class="hero-stat-divider"></div>
+                    <div>
+                        <div class="hero-stat-num">2<span>+</span></div>
+                        <div class="hero-stat-label" data-i18n="stat_exp">Years Exp.</div>
+                    </div>
+                    <div class="hero-stat-divider"></div>
+                    <div>
+                        <div class="hero-stat-num">10<span>+</span></div>
+                        <div class="hero-stat-label" data-i18n="stat_clients">Clients</div>
+                    </div>
                 </div>
             </div>
-            <div>
-                <img src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777439438/WhatsApp_Image_2025-11-22_at_23.06.37_96f5fbf7_f1jucw.jpg" alt="Niko Surya Adi Prananta" class="hero-img" loading="eager">
-            </div>
-        </div>
-    </header>
-
-    <section id="about" class="fade-in">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <p class="about-text">A dedicated fullstack developer with a laser focus on cybersecurity. With professional experience in building robust web applications and identifying security vulnerabilities, I transform complex challenges into elegant, secure solutions.</p>
-            <div class="about-cards">
-                <div class="about-card">
-                    <div class="about-icon">
-                        <svg viewBox="0 0 24 24">
+            <div class="hero-right reveal-right">
+                <div class="hero-photo-wrap">
+                    <div class="hero-photo-glow"></div>
+                    <div class="hero-photo-ring"></div>
+                    <img class="hero-photo" src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777439438/WhatsApp_Image_2025-11-22_at_23.06.37_96f5fbf7_f1jucw.jpg" alt="Niko Surya Adi Prananta" loading="eager">
+                </div>
+                <div class="hero-badges">
+                    <div class="hero-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="16 18 22 12 16 6" />
                             <polyline points="8 6 2 12 8 18" />
                         </svg>
+                        Laravel
                     </div>
-                    <h3>Backend Development</h3>
-                    <p>Expertise in creating scalable and efficient server-side applications using modern technologies.</p>
-                </div>
-                <div class="about-card">
-                    <div class="about-icon">
-                        <svg viewBox="0 0 24 24">
+                    <div class="hero-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                         </svg>
+                        Cybersecurity
                     </div>
-                    <h3>Cyber Security</h3>
-                    <p>Specialized in penetration testing, vulnerability assessment, and developing secure system architectures.</p>
-                </div>
-                <div class="about-card">
-                    <div class="about-icon">
-                        <svg viewBox="0 0 24 24">
+                    <div class="hero-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <ellipse cx="12" cy="5" rx="9" ry="3" />
                             <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
                             <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
                         </svg>
-                    </div>
-                    <h3>Database Management</h3>
-                    <p>Proficient in designing and optimizing database structures for performance and security.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="experience" class="fade-in">
-        <div class="container">
-            <h2 class="section-title">Work Experience</h2>
-            <div class="exp-list">
-                <div class="exp-card">
-                    <div class="exp-header">
-                        <div>
-                            <div class="exp-title">Fullstack Developer</div>
-                            <div class="exp-company">PT Inovasi Cipta Teknologi</div>
-                        </div>
-                        <span class="exp-badge">August 2025 – Juli 2026</span>
-                    </div>
-                    <ul class="exp-points">
-                        <li>Developed complete PMB (Student Admission) web application with comprehensive documentation and user-friendly interface</li>
-                        <li>Built integrated payment gateway system connected with bank financial systems for seamless transaction processing</li>
-                        <li>Created RESTful API web services for client integration needs with complete documentation and authentication</li>
-                        <li>Performed weekly data backup operations every Friday to ensure data integrity and disaster recovery preparedness</li>
-                        <li>Collaborated with cross-functional teams to deliver scalable and maintainable solutions</li>
-                    </ul>
-                    <div class="tags">
-                        <span class="tag">Laravel</span>
-                        <span class="tag">API Development</span>
-                        <span class="tag">Payment Gateway</span>
-                        <span class="tag">Documentation</span>
-                        <span class="tag">MySQL</span>
-                        <span class="tag">Data Backup</span>
-                    </div>
-                </div>
-                <div class="exp-card cyan">
-                    <div class="exp-header">
-                        <div>
-                            <div class="exp-title">Backend Developer Intern</div>
-                            <div class="exp-company">Global Intermedia Nusantara</div>
-                        </div>
-                        <span class="exp-badge cyan">5 Month Internship (Jan – May 2025)</span>
-                    </div>
-                    <ul class="exp-points">
-                        <li>Developed backend API for SIDes (Village Information System) using Laravel</li>
-                        <li>Created RESTful endpoints for digital village service management and document processing</li>
-                        <li>Built API for waste checking (cek limbah) to support environmental data workflows</li>
-                        <li>Developed additional internal service modules and multiple supporting projects</li>
-                        <li>Collaborated with frontend team to ensure smooth API integration and performance</li>
-                    </ul>
-                    <div class="tags">
-                        <span class="tag cyan">Laravel</span>
-                        <span class="tag cyan">REST API</span>
-                        <span class="tag cyan">Backend Development</span>
-                        <span class="tag cyan">e-Government</span>
-                        <span class="tag cyan">MySQL</span>
+                        MySQL
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="skills" class="fade-in">
+    <section id="about">
         <div class="container">
-            <div class="skills-title-wrap">
-                <h2>Teknologi yang Dikuasai</h2>
+            <div class="about-grid">
+                <div class="reveal-left">
+                    <div class="sec-label" data-i18n="about_label">About Me</div>
+                    <h2 class="sec-title" data-i18n="about_title">Who am I?</h2>
+                    <p class="sec-sub" data-i18n="about_desc">A dedicated fullstack developer with a laser focus on cybersecurity. With professional experience in building robust web applications and identifying security vulnerabilities, I transform complex challenges into elegant, secure solutions.</p>
+                    <div class="about-cards-row">
+                        <div class="about-card">
+                            <div class="about-icon-wrap"><svg viewBox="0 0 24 24">
+                                    <polyline points="16 18 22 12 16 6" />
+                                    <polyline points="8 6 2 12 8 18" />
+                                </svg></div>
+                            <h3 data-i18n="card1_title">Backend Dev</h3>
+                            <p data-i18n="card1_desc">Scalable server-side apps with modern frameworks and best practices.</p>
+                        </div>
+                        <div class="about-card">
+                            <div class="about-icon-wrap"><svg viewBox="0 0 24 24">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                </svg></div>
+                            <h3 data-i18n="card2_title">Cyber Security</h3>
+                            <p data-i18n="card2_desc">Penetration testing, IDOR, and secure architecture design.</p>
+                        </div>
+                        <div class="about-card">
+                            <div class="about-icon-wrap"><svg viewBox="0 0 24 24">
+                                    <ellipse cx="12" cy="5" rx="9" ry="3" />
+                                    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+                                    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+                                </svg></div>
+                            <h3 data-i18n="card3_title">Database</h3>
+                            <p data-i18n="card3_desc">Design and optimize MySQL & PostgreSQL for performance and security.</p>
+                        </div>
+                        <div class="about-card">
+                            <div class="about-icon-wrap"><svg viewBox="0 0 24 24">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" />
+                                    <line x1="8" y1="21" x2="16" y2="21" />
+                                    <line x1="12" y1="17" x2="12" y2="21" />
+                                </svg></div>
+                            <h3 data-i18n="card4_title">Frontend</h3>
+                            <p data-i18n="card4_desc">Responsive UI with Tailwind, Bootstrap, and vanilla JavaScript.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal-right">
+                    <div class="about-code-block">
+                        <div class="about-code-header">
+                            <div class="code-dot" style="background:#ff5f57"></div>
+                            <div class="code-dot" style="background:#ffbd2e"></div>
+                            <div class="code-dot" style="background:#28c840"></div>
+                            <span style="font-size:.72rem;color:var(--text3);margin-left:8px">niko.config.json</span>
+                        </div>
+                        <div class="code-line"><span class="code-punc">{</span></div>
+                        <div class="code-line"><span class="code-num">2</span><span class="code-key">"name"</span><span class="code-punc">: </span><span class="code-str">"Niko Surya Adi Prananta"</span><span class="code-punc">,</span></div>
+                        <div class="code-line"><span class="code-num">3</span><span class="code-key">"age"</span><span class="code-punc">: </span><span class="code-val">20</span><span class="code-punc">,</span></div>
+                        <div class="code-line"><span class="code-num">4</span><span class="code-key">"role"</span><span class="code-punc">: </span><span class="code-str">"Fullstack Dev"</span><span class="code-punc">,</span></div>
+                        <div class="code-line"><span class="code-num">5</span><span class="code-key">"location"</span><span class="code-punc">: </span><span class="code-str">"Indonesia 🇮🇩"</span><span class="code-punc">,</span></div>
+                        <div class="code-line"><span class="code-num">6</span><span class="code-key">"stack"</span><span class="code-punc">: [</span></div>
+                        <div class="code-line"><span class="code-num">7</span><span class="code-str">&nbsp;&nbsp;"Laravel"</span><span class="code-punc">, </span><span class="code-str">"PHP"</span><span class="code-punc">, </span><span class="code-str">"MySQL"</span></div>
+                        <div class="code-line"><span class="code-num">8</span><span class="code-punc">],</span></div>
+                        <div class="code-line"><span class="code-num">9</span><span class="code-key">"security"</span><span class="code-punc">: </span><span class="code-str">"Penetration Testing"</span><span class="code-punc">,</span></div>
+                        <div class="code-line"><span class="code-num">10</span><span class="code-key">"projects"</span><span class="code-punc">: </span><span class="code-val">60</span><span class="code-punc">,</span></div>
+                        <div class="code-line"><span class="code-num">11</span><span class="code-key">"available"</span><span class="code-punc">: </span><span class="code-val">true</span></div>
+                        <div class="code-line"><span class="code-punc">}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <div class="reveal">
+                <div class="sec-label" data-i18n="exp_label">Career</div>
+                <h2 class="sec-title" data-i18n="exp_title">Work Experience</h2>
+            </div>
+            <div class="exp-timeline">
+                <div class="exp-item reveal" data-delay="1">
+                    <div class="exp-dot-wrap">
+                        <div class="exp-dot"></div>
+                    </div>
+                    <div class="exp-card">
+                        <div class="exp-top">
+                            <div>
+                                <div class="exp-role" data-i18n="exp1_role">Fullstack Developer</div>
+                                <div class="exp-company">PT Inovasi Cipta Teknologi</div>
+                            </div>
+                            <span class="exp-period" data-i18n="exp1_period">Aug 2025 – Jul 2026</span>
+                        </div>
+                        <ul class="exp-points">
+                            <li data-i18n="exp1_p1">Developed complete PMB (Student Admission) web application with documentation and user-friendly interface</li>
+                            <li data-i18n="exp1_p2">Built integrated payment gateway connected with bank financial systems for seamless transactions</li>
+                            <li data-i18n="exp1_p3">Created RESTful API web services for client integrations with full documentation and auth</li>
+                            <li data-i18n="exp1_p4">Performed weekly data backup operations every Friday for data integrity and disaster recovery</li>
+                        </ul>
+                        <div class="tag-row">
+                            <span class="tag">Laravel</span><span class="tag">API</span><span class="tag">Payment Gateway</span><span class="tag">MySQL</span><span class="tag">Documentation</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="exp-item reveal" data-delay="2">
+                    <div class="exp-dot-wrap">
+                        <div class="exp-dot"></div>
+                    </div>
+                    <div class="exp-card">
+                        <div class="exp-top">
+                            <div>
+                                <div class="exp-role" data-i18n="exp2_role">Backend Developer Intern</div>
+                                <div class="exp-company">Global Intermedia Nusantara</div>
+                            </div>
+                            <span class="exp-period mint" data-i18n="exp2_period">Jan – May 2025 (5 mo.)</span>
+                        </div>
+                        <ul class="exp-points">
+                            <li data-i18n="exp2_p1">Developed backend API for SIDes (Village Information System) using Laravel</li>
+                            <li data-i18n="exp2_p2">Created RESTful endpoints for digital village service management and document processing</li>
+                            <li data-i18n="exp2_p3">Built API for waste checking (cek limbah) to support environmental data workflows</li>
+                            <li data-i18n="exp2_p4">Collaborated with frontend team for smooth API integration and performance</li>
+                        </ul>
+                        <div class="tag-row">
+                            <span class="tag mint">Laravel</span><span class="tag mint">REST API</span><span class="tag mint">e-Government</span><span class="tag mint">MySQL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <div class="skills-intro reveal">
+                <div class="sec-label" data-i18n="skills_label">Tech Stack</div>
+                <h2 class="sec-title" data-i18n="skills_title">Technologies I Use</h2>
+                <p class="sec-sub" data-i18n="skills_desc">A curated set of tools and technologies I work with professionally.</p>
             </div>
             <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="skill-icon" style="background:linear-gradient(135deg,#e34f26,#f06529)">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" loading="lazy">
-                    </div>
-                    <div class="skill-name">HTML</div>
+                <div class="skill-item reveal" data-delay="1">
+                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#e34f26,#f06529)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"></div>
+                    <div class="skill-label">HTML5</div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon" style="background:linear-gradient(135deg,#1572b6,#33a9dc)">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" loading="lazy">
-                    </div>
-                    <div class="skill-name">CSS</div>
+                <div class="skill-item reveal" data-delay="1">
+                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#1572b6,#33a9dc)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3"></div>
+                    <div class="skill-label">CSS3</div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon" style="background:linear-gradient(135deg,#f7df1e,#f5c400)">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" loading="lazy">
-                    </div>
-                    <div class="skill-name">JavaScript</div>
+                <div class="skill-item reveal" data-delay="2">
+                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#f7df1e,#c8a200)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"></div>
+                    <div class="skill-label">JavaScript</div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon" style="background:linear-gradient(135deg,#339933,#4caf50)">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" loading="lazy">
-                    </div>
-                    <div class="skill-name">Node.js</div>
+                <div class="skill-item reveal" data-delay="2">
+                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#339933,#4caf50)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js"></div>
+                    <div class="skill-label">Node.js</div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon" style="background:linear-gradient(135deg,#777bb4,#8892bf)">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" loading="lazy">
-                    </div>
-                    <div class="skill-name">PHP</div>
+                <div class="skill-item reveal" data-delay="3">
+                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#777bb4,#8892bf)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP"></div>
+                    <div class="skill-label">PHP</div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon" style="background:linear-gradient(135deg,#ff2d20,#e3170a);padding:4px">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="28" height="28">
+                <div class="skill-item reveal" data-delay="3">
+                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#ff2d20,#e3170a)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
                             <path fill="#fff" d="m3.634 13.642-.852.526-.26.17-.192.154-.011.011-.01.012-.524.91-.004.014-.004.011-.024.124-.004.076-.01.214-.013.739-.01 81.01.014.74.008.214.006.077.019.111.559.966v.002l.132.105.136.09 48.141 27.704.46.246.143.072.162.06 1.113-.033.156-.058.145-.074.464-.248 46.038-26.445 1.587-.943.446-.274.134-.09.136-.108.004-.006.006-.004.545-.953.018-.066.115-26.524 23.45-13.756.431-.696-.175-29.314-25.371-14.896H99.12L74.73 27.568l-.013.008-.885.924-.303.518v.134l-.099 26.454L54.616 66.39l-.182-50.808v-.134l-.394-.677L27.704.064 27.464 0z" />
-                        </svg>
-                    </div>
-                    <div class="skill-name">Laravel</div>
+                        </svg></div>
+                    <div class="skill-label">Laravel</div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon" style="background:linear-gradient(135deg,#7952b3,#9b74d8)">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" loading="lazy">
-                    </div>
-                    <div class="skill-name">Bootstrap</div>
+                <div class="skill-item reveal" data-delay="4">
+                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#7952b3,#9b74d8)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap"></div>
+                    <div class="skill-label">Bootstrap</div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon" style="background:linear-gradient(135deg,#0e7490,#0891b2)">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="28" height="28">
+                <div class="skill-item reveal" data-delay="4">
+                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#0e7490,#0891b2)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
                             <path d="M64.004 25.602c-17.067 0-27.73 8.53-32 25.597 6.398-8.531 13.867-11.73 22.398-9.597 4.871 1.214 8.352 4.746 12.207 8.66C72.883 56.629 80.145 64 96.004 64c17.066 0 27.73-8.531 32-25.602-6.399 8.536-13.867 11.735-22.399 9.602-4.87-1.215-8.347-4.746-12.207-8.66-6.27-6.367-13.53-13.738-29.394-13.738zM32.004 64c-17.066 0-27.73 8.531-32 25.602C6.402 81.066 13.87 77.867 22.402 80c4.871 1.215 8.352 4.746 12.207 8.66 6.274 6.367 13.536 13.738 29.395 13.738 17.066 0 27.73-8.53 32-25.597-6.399 8.531-13.867 11.73-22.399 9.597-4.87-1.214-8.347-4.746-12.207-8.66C55.128 71.371 47.868 64 32.004 64z" fill="#38bdf8" />
-                        </svg>
-                    </div>
-                    <div class="skill-name">Tailwind</div>
+                        </svg></div>
+                    <div class="skill-label">Tailwind</div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon" style="background:#111">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" loading="lazy" style="filter:invert(1)">
-                    </div>
-                    <div class="skill-name">Next.js</div>
+                <div class="skill-item reveal" data-delay="5">
+                    <div class="skill-icon-box" style="background:#111"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" style="filter:invert(1)"></div>
+                    <div class="skill-label">Next.js</div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon" style="background:linear-gradient(135deg,#ff6c37,#ff8a65)">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" alt="Postman" loading="lazy">
-                    </div>
-                    <div class="skill-name">Postman</div>
+                <div class="skill-item reveal" data-delay="5">
+                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#ff6c37,#ff8a65)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" alt="Postman"></div>
+                    <div class="skill-label">Postman</div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon" style="background:#222">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" loading="lazy" style="filter:invert(1)">
-                    </div>
-                    <div class="skill-name">GitHub</div>
+                <div class="skill-item reveal" data-delay="1">
+                    <div class="skill-icon-box" style="background:#1a1a1a"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="filter:invert(1)"></div>
+                    <div class="skill-label">GitHub</div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon" style="background:#111">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" loading="lazy">
-                    </div>
-                    <div class="skill-name">Linux</div>
+                <div class="skill-item reveal" data-delay="2">
+                    <div class="skill-icon-box" style="background:#1a1a1a"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux"></div>
+                    <div class="skill-label">Linux</div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon" style="background:linear-gradient(135deg,#336791,#4b7ba7)">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" loading="lazy">
-                    </div>
-                    <div class="skill-name">PostgreSQL</div>
+                <div class="skill-item reveal" data-delay="3">
+                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#336791,#4b7ba7)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL"></div>
+                    <div class="skill-label">PostgreSQL</div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon" style="background:#00618a">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" loading="lazy">
-                    </div>
-                    <div class="skill-name">MySQL</div>
+                <div class="skill-item reveal" data-delay="4">
+                    <div class="skill-icon-box" style="background:#00618a"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL"></div>
+                    <div class="skill-label">MySQL</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="projects" class="fade-in">
+    <section id="projects">
         <div class="container">
-            <div class="projects-header">
-                <div class="projects-badge">50+ Projects Completed</div>
-                <h2 class="section-title" style="margin-bottom:10px">Notable Projects</h2>
-                <p>Showcasing a diverse range of web applications, APIs, and security assessments across various industries</p>
+            <div class="projects-header reveal">
+                <div class="sec-label" data-i18n="proj_label">Portfolio</div>
+                <div class="projects-counter">60<span style="font-size:2rem;opacity:.5">+</span></div>
+                <h2 class="sec-title" style="margin-top:-8px" data-i18n="proj_title">Notable Projects</h2>
+                <p class="sec-sub" data-i18n="proj_desc">A diverse range of web applications, APIs, and security assessments across various industries.</p>
             </div>
             <div class="projects-grid">
 
-                <div class="project-card" onclick="window.open('https://unimus-wisuda.smartpayment.co.id','_blank')">
-                    <img class="project-img" src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777440848/WhatsApp_Image_2025-12-16_at_13.43.52_8287e70b_mhqsoa.jpg" alt="Unimus Graduation" loading="lazy">
-                    <div class="project-body">
-                        <div class="project-title">Unimus Graduation</div>
-                        <p class="project-desc">A graduation fee payment system for students, supporting both cash and cashless/online payments. Includes a back-office module for managing student data, billing, payment status, and transaction reports.</p>
-                        <div class="tags"><span class="tag">Laravel</span><span class="tag">MySQL</span><span class="tag">Payment System</span><span class="tag">Back Office</span></div>
+                <div class="proj-card reveal" data-delay="1" onclick="window.open('https://unimus-wisuda.smartpayment.co.id','_blank')">
+                    <div class="proj-thumb"><img src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777440848/WhatsApp_Image_2025-12-16_at_13.43.52_8287e70b_mhqsoa.jpg" alt="Unimus Graduation" loading="lazy">
+                        <div class="proj-overlay"><span class="proj-overlay-text">→ Visit Live</span></div>
+                    </div>
+                    <div class="proj-body">
+                        <div class="proj-title">Unimus Graduation</div>
+                        <p class="proj-desc" data-i18n="p1_desc">Graduation fee payment system supporting cash & cashless payments with back-office for billing and transaction reports.</p>
+                        <div class="proj-tags"><span class="tag">Laravel</span><span class="tag">MySQL</span><span class="tag">Payment</span><span class="tag">Back Office</span></div>
                     </div>
                 </div>
 
-                <div class="project-card" onclick="window.open('https://pos-demo.smartpayment.co.id','_blank')">
-                    <img class="project-img" src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777441352/IMG-20251120-WA0029_daqiev.jpg" alt="Point of Sales" loading="lazy">
-                    <div class="project-body">
-                        <div class="project-title">Point of Sales (POS)</div>
-                        <p class="project-desc">POS system with admin and cashier roles, supporting both cash and cashless/online payments using card-based transactions. Includes sales tracking, product management, and transaction reporting.</p>
-                        <div class="tags"><span class="tag">Laravel</span><span class="tag">MySQL</span><span class="tag">POS System</span></div>
+                <div class="proj-card reveal" data-delay="2" onclick="window.open('https://bintangjuara.smartpayment.co.id','_blank')">
+                    <div class="proj-thumb"><img src="https://h.top4top.io/p_3823g6t6n1.png" alt="Bintang Juara" loading="lazy">
+                        <div class="proj-overlay"><span class="proj-overlay-text">→ Visit Live</span></div>
+                    </div>
+                    <div class="proj-body">
+                        <div class="proj-title">Back Office Bintang Juara School</div>
+                        <p class="proj-desc" data-i18n="p2_desc">Complete back-office for student payment management, billing, and transaction tracking.</p>
+                        <div class="proj-tags"><span class="tag">Laravel</span><span class="tag">MySQL</span><span class="tag">Back Office</span></div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <img class="project-img" src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777440848/Screenshot_1715_rizyzb.png" alt="Presensi Al-Muqoddam" loading="lazy">
-                    <div class="project-body">
-                        <div class="project-title">Presensi Al-Muqoddam</div>
-                        <p class="project-desc">Digital attendance system for Al-Muqoddam Karawang integrating teacher, student, and class presence data with automated tracking and reporting.</p>
-                        <div class="tags"><span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">Education</span></div>
+                <div class="proj-card reveal" data-delay="3" onclick="window.open('https://muallimaat-keu.smartpayment.co.id','_blank')">
+                    <div class="proj-thumb"><img src="https://e.top4top.io/p_3823p23ee1.png" alt="Muallimaat Yogyakarta" loading="lazy">
+                        <div class="proj-overlay"><span class="proj-overlay-text">→ Visit Live</span></div>
+                    </div>
+                    <div class="proj-body">
+                        <div class="proj-title">Madrasah Muallimaat Yogyakarta</div>
+                        <p class="proj-desc" data-i18n="p3_desc">Full payment & back-office system for student fees with real-time tracking and reports.</p>
+                        <div class="proj-tags"><span class="tag">Laravel</span><span class="tag">MySQL</span><span class="tag">Payment</span></div>
                     </div>
                 </div>
 
-                <div class="project-card" onclick="window.open('https://pmb-demo.smartpayment.co.id','_blank')">
-                    <img class="project-img" src="https://j.top4top.io/p_3572xzq7m1.jpg" alt="PMB System" loading="lazy">
-                    <div class="project-body">
-                        <div class="project-title">PMB System (Student Admission)</div>
-                        <p class="project-desc">Complete student admission system with registration, document verification, payment integration, and real-time admission status tracking.</p>
-                        <div class="tags"><span class="tag">Laravel</span><span class="tag">MySQL</span><span class="tag">Education</span></div>
+                <div class="proj-card reveal" data-delay="1" onclick="window.open('https://cashless-muallimaat.smartpayment.co.id','_blank')">
+                    <div class="proj-thumb"><img src="https://i.top4top.io/p_3823gddhr1.png" alt="Cashless Muallimaat" loading="lazy">
+                        <div class="proj-overlay"><span class="proj-overlay-text">→ Visit Live</span></div>
+                    </div>
+                    <div class="proj-body">
+                        <div class="proj-title">Cashless — Madrasah Muallimaat</div>
+                        <p class="proj-desc" data-i18n="p4_desc">Student cashless financial system with spending limits, real-time balance, and daily transaction reports.</p>
+                        <div class="proj-tags"><span class="tag">Laravel</span><span class="tag">Cashless</span><span class="tag">MySQL</span></div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <img class="project-img" src="https://f.top4top.io/p_3662gar7m1.png" alt="Office Attendance System" loading="lazy">
-                    <div class="project-body">
-                        <div class="project-title">Office Attendance System</div>
-                        <p class="project-desc">Digital attendance management system with GPS-based location tracking using Leaflet.js for employee check-in/check-out monitoring and reporting.</p>
-                        <div class="tags"><span class="tag">Laravel</span><span class="tag">Leaflet.js</span><span class="tag">GPS Tracking</span><span class="tag">Attendance</span></div>
+                <div class="proj-card reveal" data-delay="2" onclick="window.open('https://pos-demo.smartpayment.co.id','_blank')">
+                    <div class="proj-thumb"><img src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777441352/IMG-20251120-WA0029_daqiev.jpg" alt="POS" loading="lazy">
+                        <div class="proj-overlay"><span class="proj-overlay-text">→ Visit Live</span></div>
+                    </div>
+                    <div class="proj-body">
+                        <div class="proj-title">Point of Sales (POS)</div>
+                        <p class="proj-desc" data-i18n="p5_desc">POS with admin & cashier roles, cash and card payments, product management, and reporting.</p>
+                        <div class="proj-tags"><span class="tag">Laravel</span><span class="tag">MySQL</span><span class="tag">POS</span></div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <img class="project-img" src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777440848/Screenshot_1213_wyvxph.png" alt="Web POS Temboro" loading="lazy">
-                    <div class="project-body">
-                        <div class="project-title">Web POS Temboro</div>
-                        <p class="project-desc">A cloned web-based POS application for managing transactions, products, inventory, and sales reports, designed for both cashier and admin workflows.</p>
-                        <div class="tags"><span class="tag">POS System</span><span class="tag">Web Application</span><span class="tag">Inventory</span></div>
+                <div class="proj-card reveal" data-delay="3">
+                    <div class="proj-thumb"><img src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777440848/Screenshot_1715_rizyzb.png" alt="Presensi" loading="lazy"></div>
+                    <div class="proj-body">
+                        <div class="proj-title">Presensi Al-Muqoddam</div>
+                        <p class="proj-desc" data-i18n="p6_desc">Digital attendance system integrating teacher, student, and class data with automated reporting.</p>
+                        <div class="proj-tags"><span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">Education</span></div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <img class="project-img" src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777440847/Screenshot_402_bwt4pn.png" alt="Live Chat App" loading="lazy">
-                    <div class="project-body">
-                        <div class="project-title">Live Chat App</div>
-                        <p class="project-desc">Real-time messaging application with instant message delivery, user presence indicators, and seamless chat experience for customer support and team communication.</p>
-                        <div class="tags"><span class="tag">Laravel</span><span class="tag">Real-time</span><span class="tag">WebSocket</span></div>
+                <div class="proj-card reveal" data-delay="1" onclick="window.open('https://pmb-demo.smartpayment.co.id','_blank')">
+                    <div class="proj-thumb"><img src="https://j.top4top.io/p_3572xzq7m1.jpg" alt="PMB" loading="lazy">
+                        <div class="proj-overlay"><span class="proj-overlay-text">→ Visit Live</span></div>
+                    </div>
+                    <div class="proj-body">
+                        <div class="proj-title">PMB System — Student Admission</div>
+                        <p class="proj-desc" data-i18n="p7_desc">Full student admission system with registration, document verification, payment integration, and status tracking.</p>
+                        <div class="proj-tags"><span class="tag">Laravel</span><span class="tag">MySQL</span><span class="tag">Education</span></div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <img class="project-img" src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777440847/Screenshot_1717_ryamwv.png" alt="Bank Payment Gateway" loading="lazy">
-                    <div class="project-body">
-                        <div class="project-title">Bank Payment Gateway System</div>
-                        <p class="project-desc">Integrated payment system connected directly with bank financial systems for seamless bill payment processing and transaction management.</p>
-                        <div class="tags"><span class="tag">Laravel</span><span class="tag">Banking API</span><span class="tag">Payment Gateway</span></div>
+                <div class="proj-card reveal" data-delay="2">
+                    <div class="proj-thumb"><img src="https://f.top4top.io/p_3662gar7m1.png" alt="Attendance" loading="lazy"></div>
+                    <div class="proj-body">
+                        <div class="proj-title">Office Attendance System</div>
+                        <p class="proj-desc" data-i18n="p8_desc">GPS-based employee attendance tracking with Leaflet.js for check-in/out monitoring.</p>
+                        <div class="proj-tags"><span class="tag">Laravel</span><span class="tag">Leaflet.js</span><span class="tag">GPS</span><span class="tag">Attendance</span></div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <div class="project-img-placeholder">
-                        <svg viewBox="0 0 24 24">
-                            <rect x="2" y="2" width="20" height="8" rx="2" ry="2" />
-                            <rect x="2" y="14" width="20" height="8" rx="2" ry="2" />
-                            <line x1="6" y1="6" x2="6.01" y2="6" />
-                            <line x1="6" y1="18" x2="6.01" y2="18" />
-                        </svg>
-                    </div>
-                    <div class="project-body">
-                        <div class="project-title">Custom API Web Service</div>
-                        <p class="project-desc">RESTful API development for client integration needs with comprehensive documentation, authentication, and scalable architecture.</p>
-                        <div class="tags"><span class="tag">REST API</span><span class="tag">Laravel</span><span class="tag">Documentation</span></div>
+                <div class="proj-card reveal" data-delay="3">
+                    <div class="proj-thumb"><img src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777440848/Screenshot_1213_wyvxph.png" alt="Web POS Temboro" loading="lazy"></div>
+                    <div class="proj-body">
+                        <div class="proj-title">Web POS Temboro</div>
+                        <p class="proj-desc" data-i18n="p16_desc">Web-based POS for managing transactions, products, inventory, and sales reports for cashier and admin workflows.</p>
+                        <div class="proj-tags"><span class="tag">POS</span><span class="tag">Web App</span><span class="tag">Inventory</span></div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <img class="project-img" src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777440848/WhatsApp_Image_2025-03-05_at_09.44.30_e4026ba3_1_ef83qr.jpg" alt="POS Cashier" loading="lazy">
-                    <div class="project-body">
-                        <div class="project-title">POS Cashier Web App</div>
-                        <p class="project-desc">Comprehensive web-based cashier application with CRUD features, salary management, sales reports, and attendance tracking.</p>
-                        <div class="tags"><span class="tag">Laravel</span><span class="tag">MySQL</span><span class="tag">API</span></div>
+                <div class="proj-card reveal" data-delay="1">
+                    <div class="proj-thumb"><img src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777440847/Screenshot_402_bwt4pn.png" alt="Live Chat" loading="lazy"></div>
+                    <div class="proj-body">
+                        <div class="proj-title">Live Chat App</div>
+                        <p class="proj-desc" data-i18n="p9_desc">Real-time messaging with WebSocket, user presence indicators, and seamless customer support chat.</p>
+                        <div class="proj-tags"><span class="tag">Laravel</span><span class="tag">WebSocket</span><span class="tag">Real-time</span></div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <img class="project-img" src="https://h.top4top.io/p_33527d3841.jpg" alt="Satrianovel" loading="lazy">
-                    <div class="project-body">
-                        <div class="project-title">Satrianovel.com</div>
-                        <p class="project-desc">Online platform for reading and writing novels with CRUD features, like system, writer community, and donation page.</p>
-                        <div class="tags"><span class="tag">Laravel</span><span class="tag">Web Dev</span><span class="tag">UI/UX</span></div>
+                <div class="proj-card reveal" data-delay="2">
+                    <div class="proj-thumb"><img src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777440847/Screenshot_1717_ryamwv.png" alt="Payment Gateway" loading="lazy"></div>
+                    <div class="proj-body">
+                        <div class="proj-title">Bank Payment Gateway</div>
+                        <p class="proj-desc" data-i18n="p10_desc">Integrated payment system directly connected to bank financials for seamless transaction management.</p>
+                        <div class="proj-tags"><span class="tag">Laravel</span><span class="tag">Banking API</span><span class="tag">Payment</span></div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <img class="project-img" src="https://j.top4top.io/p_3404he9701.jpg" alt="Fresh Fish Store" loading="lazy">
-                    <div class="project-body">
-                        <div class="project-title">Fresh Fish Store</div>
-                        <p class="project-desc">Complete online fish store with payment gateway integration, delivery system, and order tracking.</p>
-                        <div class="tags"><span class="tag">Laravel</span><span class="tag">Midtrans</span><span class="tag">E-commerce</span></div>
+                <div class="proj-card reveal" data-delay="3">
+                    <div class="proj-thumb">
+                        <div class="proj-thumb-placeholder"><svg viewBox="0 0 24 24">
+                                <rect x="2" y="2" width="20" height="8" rx="2" />
+                                <rect x="2" y="14" width="20" height="8" rx="2" />
+                                <line x1="6" y1="6" x2="6.01" y2="6" />
+                                <line x1="6" y1="18" x2="6.01" y2="18" />
+                            </svg></div>
+                    </div>
+                    <div class="proj-body">
+                        <div class="proj-title">Custom API Web Service</div>
+                        <p class="proj-desc" data-i18n="p17_desc">RESTful API for client integrations with comprehensive documentation, authentication, and scalable architecture.</p>
+                        <div class="proj-tags"><span class="tag">REST API</span><span class="tag">Laravel</span><span class="tag">Documentation</span></div>
                     </div>
                 </div>
 
-                <div class="project-card" onclick="window.open('https://stg-gisbolali.simda.net/','_blank')">
-                    <img class="project-img" src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777440846/WhatsApp_Image_2025-07-29_at_13.45.19_f4bc3941_vyufnm.jpg" alt="SIDes" loading="lazy">
-                    <div class="project-body">
-                        <div class="project-title">SIDes Application</div>
-                        <p class="project-desc">Digital village service platform for official document requests and reports with real-time status tracking.</p>
-                        <div class="tags"><span class="tag">Mobile & Web</span><span class="tag">e-Government</span></div>
+                <div class="proj-card reveal" data-delay="1">
+                    <div class="proj-thumb"><img src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777440848/WhatsApp_Image_2025-03-05_at_09.44.30_e4026ba3_1_ef83qr.jpg" alt="POS Cashier" loading="lazy"></div>
+                    <div class="proj-body">
+                        <div class="proj-title">POS Cashier Web App</div>
+                        <p class="proj-desc" data-i18n="p18_desc">Comprehensive cashier app with CRUD, salary management, sales reports, and attendance tracking.</p>
+                        <div class="proj-tags"><span class="tag">Laravel</span><span class="tag">MySQL</span><span class="tag">API</span></div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <img class="project-img" src="https://a.top4top.io/p_3351ivple1.jpg" alt="Security Assessment" loading="lazy">
-                    <div class="project-body">
-                        <div class="project-title">Sejahtera.co.id Security Assessment</div>
-                        <p class="project-desc">Security testing revealing IDOR vulnerability in transaction details endpoint.</p>
-                        <div class="tags"><span class="tag red">IDOR</span><span class="tag red">Penetration Testing</span><span class="tag red">Bug Bounty</span></div>
+                <div class="proj-card reveal" data-delay="2">
+                    <div class="proj-thumb"><img src="https://h.top4top.io/p_33527d3841.jpg" alt="Satrianovel" loading="lazy"></div>
+                    <div class="proj-body">
+                        <div class="proj-title">Satrianovel.com</div>
+                        <p class="proj-desc" data-i18n="p14_desc">Online novel platform with CRUD, like system, writer community, and donation page.</p>
+                        <div class="proj-tags"><span class="tag">Laravel</span><span class="tag">Web Dev</span><span class="tag">UI/UX</span></div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <img class="project-img" src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777440846/WhatsApp_Image_2025-03-05_at_10.01.55_d832ec5d_ustxpt.jpg" alt="Preloved Security" loading="lazy">
-                    <div class="project-body">
-                        <div class="project-title">Preloved.co.id Security Assessment</div>
-                        <p class="project-desc">Penetration testing discovering IDOR vulnerability and business logic flaws.</p>
-                        <div class="tags"><span class="tag red">IDOR</span><span class="tag red">Business Logic</span><span class="tag red">Bug Bounty</span></div>
+                <div class="proj-card reveal" data-delay="3">
+                    <div class="proj-thumb"><img src="https://j.top4top.io/p_3404he9701.jpg" alt="Fresh Fish Store" loading="lazy"></div>
+                    <div class="proj-body">
+                        <div class="proj-title">Fresh Fish Store</div>
+                        <p class="proj-desc" data-i18n="p19_desc">Complete online fish store with payment gateway, delivery system, and order tracking.</p>
+                        <div class="proj-tags"><span class="tag">Laravel</span><span class="tag">Midtrans</span><span class="tag">E-commerce</span></div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <img class="project-img" src="https://l.top4top.io/p_3770chgg41.png" alt="Yayasan Nur Hidayah" loading="lazy">
-                    <div class="project-body">
-                        <div class="project-title">Yayasan Nur Hidayah Surakarta</div>
-                        <p class="project-desc">Financial management system for Yayasan Nur Hidayah Surakarta, handling income, expenses, budget tracking, and financial reporting.</p>
-                        <div class="tags"><span class="tag">Laravel</span><span class="tag">MySQL</span><span class="tag">Finance</span></div>
+                <div class="proj-card reveal" data-delay="1" onclick="window.open('https://stg-gisbolali.simda.net/','_blank')">
+                    <div class="proj-thumb"><img src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777440846/WhatsApp_Image_2025-07-29_at_13.45.19_f4bc3941_vyufnm.jpg" alt="SIDes" loading="lazy">
+                        <div class="proj-overlay"><span class="proj-overlay-text">→ Visit Live</span></div>
+                    </div>
+                    <div class="proj-body">
+                        <div class="proj-title">SIDes — Digital Village Platform</div>
+                        <p class="proj-desc" data-i18n="p13_desc">e-Government platform for digital document requests and village services with real-time status.</p>
+                        <div class="proj-tags"><span class="tag mint">Mobile & Web</span><span class="tag mint">e-Gov</span></div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <img class="project-img" src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777440847/Screenshot_2267_tdyclz.png" alt=" Presensi Sholat Al-Izzah" loading="lazy">
-                    <div class="project-body">
-                        <div class="project-title">Presensi Sholat Al-Izzah</div>
-                        <p class="project-desc">Digital prayer attendance system for Al-Izzah, enabling tracking of students' prayer activities with automated recording, monitoring, and attendance reporting.</p>
-                        <div class="tags"><span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">Education</span></div>
+                <div class="proj-card reveal" data-delay="2">
+                    <div class="proj-thumb"><img src="https://a.top4top.io/p_3351ivple1.jpg" alt="Security Sejahtera" loading="lazy"></div>
+                    <div class="proj-body">
+                        <div class="proj-title">Sejahtera.co.id — Security Assessment</div>
+                        <p class="proj-desc" data-i18n="p11_desc">Penetration test revealing IDOR vulnerability in transaction details endpoint.</p>
+                        <div class="proj-tags"><span class="tag red">IDOR</span><span class="tag red">Pentest</span><span class="tag red">Bug Bounty</span></div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <img class="project-img" src="https://l.top4top.io/p_3770hcybt1.png" alt="Koperasi Sekolah" loading="lazy">
-                    <div class="project-body">
-                        <div class="project-title">Koperasi Sekolah</div>
-                        <p class="project-desc">School cooperative management system similar to a POS, supporting product sales, inventory management, transaction recording, and financial reporting.</p>
-                        <div class="tags"><span class="tag">Laravel</span><span class="tag">MySQL</span><span class="tag">POS System</span></div>
+                <div class="proj-card reveal" data-delay="3">
+                    <div class="proj-thumb"><img src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777440846/WhatsApp_Image_2025-03-05_at_10.01.55_d832ec5d_ustxpt.jpg" alt="Preloved" loading="lazy"></div>
+                    <div class="proj-body">
+                        <div class="proj-title">Preloved.co.id — Security Assessment</div>
+                        <p class="proj-desc" data-i18n="p12_desc">Pentest discovering IDOR vulnerability and business logic flaws in the platform.</p>
+                        <div class="proj-tags"><span class="tag red">IDOR</span><span class="tag red">Business Logic</span><span class="tag red">Bug Bounty</span></div>
+                    </div>
+                </div>
+
+                <div class="proj-card reveal" data-delay="1">
+                    <div class="proj-thumb"><img src="https://l.top4top.io/p_3770chgg41.png" alt="Nur Hidayah" loading="lazy"></div>
+                    <div class="proj-body">
+                        <div class="proj-title">Yayasan Nur Hidayah Surakarta</div>
+                        <p class="proj-desc" data-i18n="p15_desc">Financial management system for income, expenses, budgeting, and reporting.</p>
+                        <div class="proj-tags"><span class="tag">Laravel</span><span class="tag">MySQL</span><span class="tag">Finance</span></div>
+                    </div>
+                </div>
+
+                <div class="proj-card reveal" data-delay="2">
+                    <div class="proj-thumb"><img src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777440847/Screenshot_2267_tdyclz.png" alt="Presensi Sholat" loading="lazy"></div>
+                    <div class="proj-body">
+                        <div class="proj-title">Presensi Sholat Al-Izzah</div>
+                        <p class="proj-desc" data-i18n="p20_desc">Digital prayer attendance system for Al-Izzah with automated recording, monitoring, and attendance reporting.</p>
+                        <div class="proj-tags"><span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">Education</span></div>
+                    </div>
+                </div>
+
+                <div class="proj-card reveal" data-delay="3">
+                    <div class="proj-thumb"><img src="https://l.top4top.io/p_3770hcybt1.png" alt="Koperasi Sekolah" loading="lazy"></div>
+                    <div class="proj-body">
+                        <div class="proj-title">Koperasi Sekolah</div>
+                        <p class="proj-desc" data-i18n="p21_desc">School cooperative management system with product sales, inventory, transaction recording, and financial reporting.</p>
+                        <div class="proj-tags"><span class="tag">Laravel</span><span class="tag">MySQL</span><span class="tag">POS</span></div>
                     </div>
                 </div>
 
@@ -1337,40 +2085,43 @@
         </div>
     </section>
 
-    <section id="certifications" class="fade-in">
+    <section id="certifications">
         <div class="container">
-            <h2 class="section-title">My Certifications</h2>
+            <div class="reveal" style="text-align:center">
+                <div class="sec-label" style="justify-content:center" data-i18n="cert_label">Credentials</div>
+                <h2 class="sec-title" data-i18n="cert_title">My Certifications</h2>
+            </div>
             <div class="certs-grid">
-                <div class="cert-card">
-                    <img class="cert-img" src="https://f.top4top.io/p_33511ctg91.jpg" alt="LKS Certification" loading="lazy">
+                <div class="cert-card reveal" data-delay="1">
+                    <div class="cert-thumb"><img src="https://f.top4top.io/p_33511ctg91.jpg" alt="LKS" loading="lazy"></div>
                     <div class="cert-body">
-                        <div class="cert-title">LKS IT Software Certification</div>
-                        <p class="cert-desc">Developed innovative digital solutions including mobile Esports management app and desktop sales system with Laravel API backend.</p>
-                        <div class="tags"><span class="tag">Laravel</span><span class="tag">Kotlin</span><span class="tag">C#</span><span class="tag">API</span></div>
+                        <div class="cert-title" data-i18n="cert1_title">LKS IT Software Certification</div>
+                        <p class="cert-desc" data-i18n="cert1_desc">Developed digital solutions including mobile Esports management app and desktop sales system with Laravel API backend.</p>
+                        <div class="tag-row"><span class="tag">Laravel</span><span class="tag">Kotlin</span><span class="tag">C#</span><span class="tag">API</span></div>
                     </div>
                 </div>
-                <div class="cert-card">
-                    <img class="cert-img" src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777440846/WhatsApp_Image_2025-03-05_at_10.27.28_ba3e57ef_1_gkxnxu.jpg" alt="Web Security" loading="lazy">
+                <div class="cert-card reveal" data-delay="2">
+                    <div class="cert-thumb"><img src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777440846/WhatsApp_Image_2025-03-05_at_10.27.28_ba3e57ef_1_gkxnxu.jpg" alt="Web Security" loading="lazy"></div>
                     <div class="cert-body">
-                        <div class="cert-title">Web Security Professional</div>
-                        <p class="cert-desc">Certification from Build with Angga specializing in penetration testing techniques and vulnerability identification strategies.</p>
-                        <div class="tags"><span class="tag red">Penetration Testing</span><span class="tag red">Bug Bounty</span><span class="tag red">Web Security</span></div>
+                        <div class="cert-title" data-i18n="cert2_title">Web Security Professional</div>
+                        <p class="cert-desc" data-i18n="cert2_desc">Build with Angga certification specializing in penetration testing techniques and vulnerability identification.</p>
+                        <div class="tag-row"><span class="tag red">Pentest</span><span class="tag red">Bug Bounty</span><span class="tag red">Web Security</span></div>
                     </div>
                 </div>
-                <div class="cert-card">
-                    <img class="cert-img" src="https://l.top4top.io/p_36630h6e11.jpg" alt="Cyber Security" loading="lazy">
+                <div class="cert-card reveal" data-delay="3">
+                    <div class="cert-thumb"><img src="https://l.top4top.io/p_36630h6e11.jpg" alt="Cyber Security" loading="lazy"></div>
                     <div class="cert-body">
-                        <div class="cert-title">Fundamental Cyber Security</div>
-                        <p class="cert-desc">Certification from CodingStudio covering fundamental cybersecurity concepts, threat analysis, and security best practices.</p>
-                        <div class="tags"><span class="tag red">Cyber Security</span><span class="tag red">Threat Analysis</span><span class="tag red">Security Fundamentals</span></div>
+                        <div class="cert-title" data-i18n="cert3_title">Fundamental Cyber Security</div>
+                        <p class="cert-desc" data-i18n="cert3_desc">CodingStudio certification covering cybersecurity fundamentals, threat analysis, and security best practices.</p>
+                        <div class="tag-row"><span class="tag red">Cyber Security</span><span class="tag red">Threat Analysis</span></div>
                     </div>
                 </div>
-                <div class="cert-card">
-                    <img class="cert-img" src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777440846/WhatsApp_Image_2026-01-11_at_19.43.45_1_rz5ruf.jpg" alt="SOLID Principles" loading="lazy">
+                <div class="cert-card reveal" data-delay="4">
+                    <div class="cert-thumb"><img src="https://res.cloudinary.com/dxzgu46tz/image/upload/v1777440846/WhatsApp_Image_2026-01-11_at_19.43.45_1_rz5ruf.jpg" alt="SOLID" loading="lazy"></div>
                     <div class="cert-body">
-                        <div class="cert-title">SOLID Programming Principles</div>
-                        <p class="cert-desc">Certification from Dicoding on SOLID programming principles, focusing on writing clean, maintainable, and scalable code architecture.</p>
-                        <div class="tags"><span class="tag">SOLID</span><span class="tag">Clean Code</span><span class="tag">Architecture</span></div>
+                        <div class="cert-title" data-i18n="cert4_title">SOLID Programming Principles</div>
+                        <p class="cert-desc" data-i18n="cert4_desc">Dicoding certification on SOLID principles for writing clean, maintainable, and scalable code architecture.</p>
+                        <div class="tag-row"><span class="tag">SOLID</span><span class="tag">Clean Code</span><span class="tag">Architecture</span></div>
                     </div>
                 </div>
             </div>
@@ -1378,44 +2129,242 @@
     </section>
 
     <footer>
-        <div class="footer-socials">
-            <a href="https://github.com/infinity-dream-code" aria-label="GitHub">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                </svg>
-            </a>
-            <a href="https://linkedin.com/in/niko-surya-adi-prananta-b4a263251" aria-label="LinkedIn">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
-            </a>
-            <a href="https://t.me/KisanakOfficial" aria-label="Telegram">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
-                </svg>
-            </a>
+        <div class="footer-inner">
+            <div class="footer-top">
+                <div>
+                    <div class="footer-logo">[niko]</div>
+                    <div class="footer-tagline" data-i18n="footer_tag">Building the web, one commit at a time.</div>
+                </div>
+                <div class="footer-socials">
+                    <a href="https://github.com/infinity-dream-code" class="social-btn" aria-label="GitHub">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                        </svg>
+                    </a>
+                    <a href="https://linkedin.com/in/niko-surya-adi-prananta-b4a263251" class="social-btn" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                        </svg>
+                    </a>
+                    <a href="https://t.me/KisanakOfficial" class="social-btn" aria-label="Telegram">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+                        </svg>
+                    </a>
+                    <a href="https://wa.me/6285777433886" class="social-btn" aria-label="WhatsApp">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copy">© 2026 Niko Surya Adi Prananta. <span data-i18n="footer_rights">All Rights Reserved.</span></div>
+                <div class="footer-made">Made with <span>♥</span> in Indonesia 🇮🇩</div>
+            </div>
         </div>
-        <p>&copy; 2026 Niko Surya Adi Prananta. All Rights Reserved.</p>
     </footer>
 
     <script>
         (function() {
+
+            const LANG = {
+                id: {
+                    nav_home: "Beranda",
+                    nav_about: "Tentang",
+                    nav_exp: "Pengalaman",
+                    nav_skills: "Keahlian",
+                    nav_projects: "Proyek",
+                    nav_certs: "Sertifikasi",
+                    nav_hire: "Hire Me",
+                    hero_eyebrow: "Tersedia untuk pekerjaan",
+                    hero_role1: "Fullstack Developer",
+                    hero_role2: "Junior Cyber Security",
+                    hero_desc: "Bersemangat membangun solusi fullstack yang aman dan skalabel serta mengungkap kerentanan untuk melindungi ekosistem digital.",
+                    hero_btn1: "Lihat Proyek",
+                    hero_btn2: "Hubungi Saya",
+                    stat_projects: "Proyek",
+                    stat_exp: "Tahun Exp.",
+                    stat_clients: "Klien",
+                    about_label: "Tentang Saya",
+                    about_title: "Siapa aku?",
+                    about_desc: "Developer fullstack berdedikasi dengan fokus tajam pada cybersecurity. Dengan pengalaman profesional membangun aplikasi web yang robust dan mengidentifikasi kerentanan keamanan, saya mengubah tantangan kompleks menjadi solusi yang elegan dan aman.",
+                    card1_title: "Backend Dev",
+                    card1_desc: "Aplikasi server-side yang skalabel dengan framework modern dan best practice.",
+                    card2_title: "Cyber Security",
+                    card2_desc: "Penetration testing, IDOR, dan desain arsitektur yang aman.",
+                    card3_title: "Database",
+                    card3_desc: "Desain dan optimasi MySQL & PostgreSQL untuk performa dan keamanan.",
+                    card4_title: "Frontend",
+                    card4_desc: "UI responsif dengan Tailwind, Bootstrap, dan vanilla JavaScript.",
+                    exp_label: "Karir",
+                    exp_title: "Pengalaman Kerja",
+                    exp1_role: "Fullstack Developer",
+                    exp1_period: "Agu 2025 – Jul 2026",
+                    exp1_p1: "Mengembangkan aplikasi web PMB (Penerimaan Mahasiswa Baru) lengkap dengan dokumentasi dan antarmuka yang ramah pengguna",
+                    exp1_p2: "Membangun payment gateway terintegrasi yang terhubung dengan sistem keuangan bank untuk pemrosesan transaksi yang mulus",
+                    exp1_p3: "Membuat web service RESTful API untuk kebutuhan integrasi klien dengan dokumentasi lengkap dan autentikasi",
+                    exp1_p4: "Melakukan operasi backup data mingguan setiap Jumat untuk menjaga integritas data dan kesiapan disaster recovery",
+                    exp2_role: "Backend Developer Intern",
+                    exp2_period: "Jan – Mei 2025 (5 bln.)",
+                    exp2_p1: "Mengembangkan backend API untuk SIDes (Sistem Informasi Desa) menggunakan Laravel",
+                    exp2_p2: "Membuat endpoint RESTful untuk manajemen layanan desa digital dan pemrosesan dokumen",
+                    exp2_p3: "Membangun API untuk pengecekan limbah (cek limbah) untuk mendukung alur kerja data lingkungan",
+                    exp2_p4: "Berkolaborasi dengan tim frontend untuk memastikan integrasi dan performa API yang lancar",
+                    skills_label: "Tech Stack",
+                    skills_title: "Teknologi yang Dikuasai",
+                    skills_desc: "Serangkaian tools dan teknologi yang saya gunakan secara profesional.",
+                    proj_label: "Portofolio",
+                    proj_title: "Proyek Pilihan",
+                    proj_desc: "Beragam aplikasi web, API, dan security assessment di berbagai industri.",
+                    p1_desc: "Sistem pembayaran biaya wisuda mendukung pembayaran tunai & nontunai dengan back-office untuk tagihan dan laporan transaksi.",
+                    p2_desc: "Back-office lengkap untuk manajemen pembayaran siswa, tagihan, dan tracking transaksi.",
+                    p3_desc: "Sistem pembayaran & back-office lengkap untuk biaya siswa dengan tracking real-time dan laporan.",
+                    p4_desc: "Sistem keuangan cashless siswa dengan batas pengeluaran, saldo real-time, dan laporan transaksi harian.",
+                    p5_desc: "POS dengan peran admin & kasir, pembayaran tunai dan kartu, manajemen produk, dan pelaporan.",
+                    p6_desc: "Sistem absensi digital mengintegrasikan data guru, siswa, dan kelas dengan pelaporan otomatis.",
+                    p7_desc: "Sistem penerimaan siswa baru dengan registrasi, verifikasi dokumen, integrasi pembayaran, dan tracking status.",
+                    p8_desc: "Tracking absensi karyawan berbasis GPS dengan Leaflet.js untuk monitoring check-in/out.",
+                    p9_desc: "Pesan real-time dengan WebSocket, indikator kehadiran pengguna, dan chat support pelanggan yang mulus.",
+                    p10_desc: "Sistem pembayaran terintegrasi langsung dengan keuangan bank untuk manajemen transaksi yang mulus.",
+                    p11_desc: "Tes penetrasi mengungkap kerentanan IDOR pada endpoint detail transaksi.",
+                    p12_desc: "Pentest menemukan kerentanan IDOR dan celah logika bisnis pada platform.",
+                    p13_desc: "Platform e-Government untuk permohonan dokumen digital dan layanan desa dengan status real-time.",
+                    p14_desc: "Platform novel online dengan CRUD, sistem like, komunitas penulis, dan halaman donasi.",
+                    p15_desc: "Sistem manajemen keuangan untuk pemasukan, pengeluaran, budgeting, dan pelaporan.",
+                    cert_label: "Kredensial",
+                    cert_title: "Sertifikasi Saya",
+                    cert1_title: "LKS IT Software",
+                    cert1_desc: "Mengembangkan solusi digital termasuk aplikasi Esports mobile dan sistem penjualan desktop dengan backend Laravel API.",
+                    cert2_title: "Web Security Professional",
+                    cert2_desc: "Sertifikasi Build with Angga spesialisasi teknik penetration testing dan identifikasi kerentanan.",
+                    cert3_title: "Fundamental Cyber Security",
+                    cert3_desc: "Sertifikasi CodingStudio mencakup dasar-dasar cybersecurity, analisis ancaman, dan best practice keamanan.",
+                    cert4_title: "SOLID Programming Principles",
+                    cert4_desc: "Sertifikasi Dicoding tentang prinsip SOLID untuk menulis arsitektur kode yang bersih, mudah dirawat, dan skalabel.",
+                    footer_tag: "Membangun web, satu commit setiap saat.",
+                    footer_rights: "Hak Cipta Dilindungi."
+                },
+                en: {
+                    nav_home: "Home",
+                    nav_about: "About",
+                    nav_exp: "Experience",
+                    nav_skills: "Skills",
+                    nav_projects: "Projects",
+                    nav_certs: "Certifications",
+                    nav_hire: "Hire Me",
+                    hero_eyebrow: "Available for work",
+                    hero_role1: "Fullstack Developer",
+                    hero_role2: "Junior Cyber Security",
+                    hero_desc: "Passionate about building secure, scalable fullstack solutions and uncovering vulnerabilities to protect digital ecosystems.",
+                    hero_btn1: "View Projects",
+                    hero_btn2: "Let's Connect",
+                    stat_projects: "Projects",
+                    stat_exp: "Years Exp.",
+                    stat_clients: "Clients",
+                    about_label: "About Me",
+                    about_title: "Who am I?",
+                    about_desc: "A dedicated fullstack developer with a laser focus on cybersecurity. With professional experience in building robust web applications and identifying security vulnerabilities, I transform complex challenges into elegant, secure solutions.",
+                    card1_title: "Backend Dev",
+                    card1_desc: "Scalable server-side apps with modern frameworks and best practices.",
+                    card2_title: "Cyber Security",
+                    card2_desc: "Penetration testing, IDOR, and secure architecture design.",
+                    card3_title: "Database",
+                    card3_desc: "Design and optimize MySQL & PostgreSQL for performance and security.",
+                    card4_title: "Frontend",
+                    card4_desc: "Responsive UI with Tailwind, Bootstrap, and vanilla JavaScript.",
+                    exp_label: "Career",
+                    exp_title: "Work Experience",
+                    exp1_role: "Fullstack Developer",
+                    exp1_period: "Aug 2025 – Jul 2026",
+                    exp1_p1: "Developed complete PMB (Student Admission) web application with documentation and user-friendly interface",
+                    exp1_p2: "Built integrated payment gateway connected with bank financial systems for seamless transaction processing",
+                    exp1_p3: "Created RESTful API web services for client integrations with full documentation and authentication",
+                    exp1_p4: "Performed weekly data backup operations every Friday for data integrity and disaster recovery preparedness",
+                    exp2_role: "Backend Developer Intern",
+                    exp2_period: "Jan – May 2025 (5 mo.)",
+                    exp2_p1: "Developed backend API for SIDes (Village Information System) using Laravel",
+                    exp2_p2: "Created RESTful endpoints for digital village service management and document processing",
+                    exp2_p3: "Built API for waste checking (cek limbah) to support environmental data workflows",
+                    exp2_p4: "Collaborated with frontend team to ensure smooth API integration and performance",
+                    skills_label: "Tech Stack",
+                    skills_title: "Technologies I Use",
+                    skills_desc: "A curated set of tools and technologies I work with professionally.",
+                    proj_label: "Portfolio",
+                    proj_title: "Notable Projects",
+                    proj_desc: "A diverse range of web applications, APIs, and security assessments across various industries.",
+                    p1_desc: "Graduation fee payment system supporting cash & cashless payments with back-office for billing and transaction reports.",
+                    p2_desc: "Complete back-office for student payment management, billing, and transaction tracking.",
+                    p3_desc: "Full payment & back-office system for student fees with real-time tracking and reports.",
+                    p4_desc: "Student cashless financial system with spending limits, real-time balance, and daily transaction reports.",
+                    p5_desc: "POS with admin & cashier roles, cash and card payments, product management, and reporting.",
+                    p6_desc: "Digital attendance system integrating teacher, student, and class data with automated reporting.",
+                    p7_desc: "Full student admission system with registration, document verification, payment integration, and status tracking.",
+                    p8_desc: "GPS-based employee attendance tracking with Leaflet.js for check-in/out monitoring.",
+                    p9_desc: "Real-time messaging with WebSocket, user presence indicators, and seamless customer support chat.",
+                    p10_desc: "Integrated payment system directly connected to bank financials for seamless transaction management.",
+                    p11_desc: "Penetration test revealing IDOR vulnerability in transaction details endpoint.",
+                    p12_desc: "Pentest discovering IDOR vulnerability and business logic flaws in the platform.",
+                    p13_desc: "e-Government platform for digital document requests and village services with real-time status.",
+                    p14_desc: "Online novel platform with CRUD, like system, writer community, and donation page.",
+                    p15_desc: "Financial management system for income, expenses, budgeting, and reporting.",
+                    cert_label: "Credentials",
+                    cert_title: "My Certifications",
+                    cert1_title: "LKS IT Software Certification",
+                    cert1_desc: "Developed digital solutions including mobile Esports management app and desktop sales system with Laravel API backend.",
+                    cert2_title: "Web Security Professional",
+                    cert2_desc: "Build with Angga certification specializing in penetration testing techniques and vulnerability identification.",
+                    cert3_title: "Fundamental Cyber Security",
+                    cert3_desc: "CodingStudio certification covering cybersecurity fundamentals, threat analysis, and security best practices.",
+                    cert4_title: "SOLID Programming Principles",
+                    cert4_desc: "Dicoding certification on SOLID principles for writing clean, maintainable, and scalable code architecture.",
+                    footer_tag: "Building the web, one commit at a time.",
+                    footer_rights: "All Rights Reserved."
+                }
+            };
+
+            let currentLang = 'id';
+
+            function setLang(lang) {
+                currentLang = lang;
+                document.documentElement.lang = lang;
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (LANG[lang][key]) el.textContent = LANG[lang][key];
+                });
+                document.querySelectorAll('.lang-btn').forEach(b => {
+                    b.classList.toggle('active', b.textContent === lang.toUpperCase());
+                });
+                document.querySelectorAll('.mobile-lang-row .lang-btn').forEach(b => {
+                    b.classList.toggle('active', b.getAttribute('onclick').includes("'" + lang + "'"));
+                });
+                const title = lang === 'id' ? 'Niko — Fullstack Developer' : 'Niko — Fullstack Developer';
+                document.title = title;
+            }
+
+            window.setLang = setLang;
+
+            document.getElementById('btnID').addEventListener('click', () => setLang('id'));
+            document.getElementById('btnEN').addEventListener('click', () => setLang('en'));
+
+            setLang('id');
+
             const hamburger = document.getElementById('hamburger');
-            const mobileNav = document.getElementById('mobileNav');
-            let open = false;
+            const mobileMenu = document.getElementById('mobileMenu');
+            let menuOpen = false;
 
             function toggleMenu() {
-                open = !open;
-                hamburger.classList.toggle('open', open);
-                mobileNav.classList.toggle('open', open);
-                document.body.style.overflow = open ? 'hidden' : '';
+                menuOpen = !menuOpen;
+                hamburger.classList.toggle('open', menuOpen);
+                mobileMenu.classList.toggle('open', menuOpen);
+                document.body.style.overflow = menuOpen ? 'hidden' : '';
             }
             hamburger.addEventListener('click', toggleMenu);
-            mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-                if (open) toggleMenu()
+            mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+                if (menuOpen) toggleMenu()
             }));
             document.addEventListener('keydown', e => {
-                if (e.key === 'Escape' && open) toggleMenu()
+                if (e.key === 'Escape' && menuOpen) toggleMenu()
             });
 
             document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -1424,28 +2373,30 @@
                     if (t) {
                         e.preventDefault();
                         window.scrollTo({
-                            top: t.offsetTop - 64,
+                            top: t.offsetTop - 68,
                             behavior: 'smooth'
                         })
                     }
                 });
             });
 
-            const scrollBar = document.getElementById('scrollBar');
-            const sections = document.querySelectorAll('section,header');
+            const navbar = document.getElementById('navbar');
+            const progressBar = document.getElementById('progressBar');
+            const sections = document.querySelectorAll('section,#hero');
             const navLinks = document.querySelectorAll('.nav-links a');
 
             function onScroll() {
                 const st = window.pageYOffset;
                 const dh = document.documentElement.scrollHeight - window.innerHeight;
-                scrollBar.style.width = (st / dh * 100) + '%';
+                progressBar.style.width = (st / dh * 100) + '%';
+                navbar.classList.toggle('scrolled', st > 40);
                 let cur = '';
                 sections.forEach(s => {
-                    if (st >= s.offsetTop - 80) cur = s.id;
+                    if (st >= s.offsetTop - 100) cur = s.id
                 });
                 navLinks.forEach(a => {
-                    a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--accent)' : '';
-                    if (a.getAttribute('href') === '#' + cur) a.style.setProperty('--after-w', '100%');
+                    const href = a.getAttribute('href').replace('#', '');
+                    a.classList.toggle('active', href === cur);
                 });
             }
             window.addEventListener('scroll', onScroll, {
@@ -1460,7 +2411,108 @@
                 threshold: 0.08,
                 rootMargin: '0px 0px -40px 0px'
             });
-            document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+            document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => io.observe(el));
+
+            const dot = document.getElementById('cursorDot');
+            const ring = document.getElementById('cursorRing');
+            let mx = 0,
+                my = 0,
+                rx = 0,
+                ry = 0;
+            window.addEventListener('mousemove', e => {
+                mx = e.clientX;
+                my = e.clientY;
+                dot.style.left = mx + 'px';
+                dot.style.top = my + 'px'
+            });
+
+            function animRing() {
+                rx += (mx - rx) * .12;
+                ry += (my - ry) * .12;
+                ring.style.left = rx + 'px';
+                ring.style.top = ry + 'px';
+                requestAnimationFrame(animRing)
+            }
+            animRing();
+            document.querySelectorAll('a,button,.proj-card,.skill-item,.about-card,.cert-card,.exp-card').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    ring.style.width = '52px';
+                    ring.style.height = '52px';
+                    ring.style.borderColor = 'rgba(124,58,237,.8)'
+                });
+                el.addEventListener('mouseleave', () => {
+                    ring.style.width = '36px';
+                    ring.style.height = '36px';
+                    ring.style.borderColor = 'rgba(124,58,237,.6)'
+                });
+            });
+
+            const canvas = document.getElementById('heroCanvas');
+            const ctx = canvas.getContext('2d');
+            let w, h, particles = [];
+
+            function resize() {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight
+            }
+            resize();
+            window.addEventListener('resize', resize);
+            class Particle {
+                constructor() {
+                    this.reset()
+                }
+                reset() {
+                    this.x = Math.random() * w;
+                    this.y = Math.random() * h;
+                    this.vx = (Math.random() - .5) * .3;
+                    this.vy = (Math.random() - .5) * .3;
+                    this.r = Math.random() * 1.5 + .5;
+                    this.a = Math.random();
+                    this.col = Math.random() < .6 ? '124,58,237' : '6,255,165'
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    this.a -= .003;
+                    if (this.a <= 0 || this.x < 0 || this.x > w || this.y < 0 || this.y > h) this.reset();
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${this.col},${this.a})`;
+                    ctx.fill();
+                }
+            }
+            for (let i = 0; i < 80; i++) particles.push(new Particle());
+
+            function drawLines() {
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x,
+                            dy = particles[i].y - particles[j].y;
+                        const d = Math.sqrt(dx * dx + dy * dy);
+                        if (d < 120) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = `rgba(124,58,237,${(1-d/120)*.06})`;
+                            ctx.lineWidth = .5;
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function animCanvas() {
+                ctx.clearRect(0, 0, w, h);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw()
+                });
+                drawLines();
+                requestAnimationFrame(animCanvas);
+            }
+            animCanvas();
 
             onScroll();
         })();
