@@ -93,6 +93,26 @@
             opacity: 1
         }
 
+        @media (hover: none),
+        (pointer: coarse),
+        (max-width: 768px) {
+            .cursor-dot,
+            .cursor-ring {
+                display: none !important
+            }
+        }
+
+        @media (hover: hover) and (pointer: fine) and (min-width: 769px) {
+            body {
+                cursor: none
+            }
+
+            a,
+            button {
+                cursor: none
+            }
+        }
+
         .progress-bar {
             position: fixed;
             top: 0;
@@ -292,6 +312,7 @@
 
         #hero {
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             align-items: center;
             padding-top: 68px;
@@ -1418,14 +1439,98 @@
                 display: flex
             }
 
+            .nav-inner {
+                padding: 0 16px;
+                height: 60px
+            }
+
+            .hero-inner {
+                padding: 48px 16px 64px;
+                gap: 36px
+            }
+
             .hero-photo-wrap,
             .hero-photo {
-                width: 220px;
-                height: 220px
+                width: 200px;
+                height: 200px
+            }
+
+            .hero-role {
+                flex-wrap: wrap;
+                justify-content: center;
+                font-size: .82rem;
+                line-height: 1.6;
+                text-align: center
+            }
+
+            .hero-desc {
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+                font-size: .9rem
+            }
+
+            .hero-btns {
+                width: 100%
+            }
+
+            .hero-btns .btn-v,
+            .hero-btns .btn-g {
+                flex: 1;
+                min-width: 140px;
+                text-align: center;
+                justify-content: center
+            }
+
+            .hero-stats {
+                gap: 16px;
+                flex-wrap: wrap
+            }
+
+            .hero-stat-num {
+                font-size: 1.6rem
+            }
+
+            .hero-stat-label {
+                font-size: .7rem
+            }
+
+            .about-grid {
+                gap: 40px
             }
 
             .about-cards-row {
                 grid-template-columns: 1fr
+            }
+
+            .about-card {
+                padding: 22px
+            }
+
+            .about-code-block {
+                padding: 20px 16px;
+                font-size: .72rem;
+                line-height: 1.85;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch
+            }
+
+            .code-line {
+                gap: 10px;
+                flex-wrap: nowrap;
+                min-width: min-content
+            }
+
+            .code-str {
+                word-break: break-word
+            }
+
+            .projects-header {
+                margin-bottom: 40px
+            }
+
+            .projects-counter {
+                font-size: 3.2rem
             }
 
             .projects-grid {
@@ -1433,49 +1538,169 @@
             }
 
             .certs-grid {
-                grid-template-columns: 1fr
+                grid-template-columns: 1fr;
+                margin-top: 40px
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+                gap: 10px
+            }
+
+            .skill-item {
+                padding: 16px 8px
+            }
+
+            .exp-timeline {
+                margin-top: 40px
             }
 
             .exp-timeline::before {
-                left: 20px
+                left: 15px
+            }
+
+            .exp-item {
+                gap: 16px;
+                margin-bottom: 32px
             }
 
             .exp-dot-wrap {
-                width: 40px
+                width: 32px
+            }
+
+            .exp-card {
+                padding: 22px 18px;
+                min-width: 0
+            }
+
+            .exp-top {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px
+            }
+
+            .exp-period {
+                white-space: normal;
+                font-size: .68rem;
+                line-height: 1.4
+            }
+
+            .exp-role {
+                font-size: 1.05rem
             }
 
             .footer-top {
                 flex-direction: column;
-                text-align: center
+                text-align: center;
+                align-items: center
+            }
+
+            .footer-socials {
+                justify-content: center
             }
 
             .footer-bottom {
                 flex-direction: column;
-                text-align: center
+                text-align: center;
+                justify-content: center
             }
 
             section {
-                padding: 72px 0
+                padding: 64px 0
             }
 
-            .nav-right .lang-toggle {
-                display: flex
+            #hero {
+                padding-top: 60px
+            }
+
+            .container {
+                padding: 0 16px
+            }
+
+            .sec-title {
+                font-size: clamp(1.65rem, 7vw, 2.2rem)
+            }
+
+            .blob1 {
+                width: 280px;
+                height: 280px
+            }
+
+            .blob2 {
+                width: 220px;
+                height: 220px
+            }
+
+            .blob3 {
+                width: 200px;
+                height: 200px
             }
         }
 
         @media(max-width:480px) {
+            .hero-name {
+                font-size: clamp(2rem, 9vw, 2.6rem)
+            }
+
+            .hero-btns {
+                flex-direction: column
+            }
+
+            .hero-btns .btn-v,
+            .hero-btns .btn-g {
+                width: 100%;
+                flex: none
+            }
+
             .hero-stats {
-                flex-direction: column;
-                gap: 20px;
-                align-items: center
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 12px;
+                width: 100%;
+                max-width: 320px;
+                margin-left: auto;
+                margin-right: auto
             }
 
             .hero-stat-divider {
                 display: none
             }
 
+            .hero-stat-num {
+                font-size: 1.4rem
+            }
+
+            .hero-stat-label {
+                font-size: .62rem
+            }
+
+            .hero-badges {
+                gap: 6px
+            }
+
+            .hero-badge {
+                padding: 6px 10px;
+                font-size: .72rem
+            }
+
             .exp-card {
-                padding: 20px
+                padding: 18px 14px
+            }
+
+            .exp-points li {
+                font-size: .82rem
+            }
+
+            .proj-body {
+                padding: 16px
+            }
+
+            .proj-title {
+                font-size: .9rem
+            }
+
+            .mobile-menu a {
+                font-size: 1.6rem
             }
         }
 
@@ -1716,7 +1941,7 @@
                         </div>
                         <div class="code-line"><span class="code-punc">{</span></div>
                         <div class="code-line"><span class="code-num">2</span><span class="code-key">"name"</span><span class="code-punc">: </span><span class="code-str">"Niko Surya Adi Prananta"</span><span class="code-punc">,</span></div>
-                        <div class="code-line"><span class="code-num">3</span><span class="code-key">"age"</span><span class="code-punc">: </span><span class="code-val">20</span><span class="code-punc">,</span></div>
+                        <div class="code-line"><span class="code-num">3</span><span class="code-key">"age"</span><span class="code-punc">: </span><span class="code-val">18</span><span class="code-punc">,</span></div>
                         <div class="code-line"><span class="code-num">4</span><span class="code-key">"role"</span><span class="code-punc">: </span><span class="code-str">"Fullstack Dev"</span><span class="code-punc">,</span></div>
                         <div class="code-line"><span class="code-num">5</span><span class="code-key">"location"</span><span class="code-punc">: </span><span class="code-str">"Indonesia 🇮🇩"</span><span class="code-punc">,</span></div>
                         <div class="code-line"><span class="code-num">6</span><span class="code-key">"stack"</span><span class="code-punc">: [</span></div>
@@ -2243,7 +2468,13 @@
                     cert4_title: "SOLID Programming Principles",
                     cert4_desc: "Sertifikasi Dicoding tentang prinsip SOLID untuk menulis arsitektur kode yang bersih, mudah dirawat, dan skalabel.",
                     footer_tag: "Membangun web, satu commit setiap saat.",
-                    footer_rights: "Hak Cipta Dilindungi."
+                    footer_rights: "Hak Cipta Dilindungi.",
+                    p16_desc: "Aplikasi POS berbasis web untuk mengelola transaksi, produk, inventaris, dan laporan penjualan untuk kasir dan admin.",
+                    p17_desc: "Pengembangan RESTful API untuk kebutuhan integrasi klien dengan dokumentasi lengkap, autentikasi, dan arsitektur skalabel.",
+                    p18_desc: "Aplikasi kasir web lengkap dengan fitur CRUD, manajemen gaji, laporan penjualan, dan tracking kehadiran.",
+                    p19_desc: "Toko ikan online lengkap dengan payment gateway, sistem pengiriman, dan tracking pesanan.",
+                    p20_desc: "Sistem absensi sholat digital untuk Al-Izzah dengan pencatatan otomatis, monitoring, dan laporan kehadiran.",
+                    p21_desc: "Sistem manajemen koperasi sekolah mirip POS, mendukung penjualan produk, inventaris, transaksi, dan laporan keuangan."
                 },
                 en: {
                     nav_home: "Home",
@@ -2319,7 +2550,13 @@
                     cert4_title: "SOLID Programming Principles",
                     cert4_desc: "Dicoding certification on SOLID principles for writing clean, maintainable, and scalable code architecture.",
                     footer_tag: "Building the web, one commit at a time.",
-                    footer_rights: "All Rights Reserved."
+                    footer_rights: "All Rights Reserved.",
+                    p16_desc: "Web-based POS for managing transactions, products, inventory, and sales reports for cashier and admin workflows.",
+                    p17_desc: "RESTful API for client integrations with comprehensive documentation, authentication, and scalable architecture.",
+                    p18_desc: "Comprehensive cashier app with CRUD, salary management, sales reports, and attendance tracking.",
+                    p19_desc: "Complete online fish store with payment gateway, delivery system, and order tracking.",
+                    p20_desc: "Digital prayer attendance system for Al-Izzah with automated recording, monitoring, and attendance reporting.",
+                    p21_desc: "School cooperative management system with product sales, inventory, transaction recording, and financial reporting."
                 }
             };
 
@@ -2413,39 +2650,45 @@
             });
             document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => io.observe(el));
 
-            const dot = document.getElementById('cursorDot');
-            const ring = document.getElementById('cursorRing');
-            let mx = 0,
-                my = 0,
-                rx = 0,
-                ry = 0;
-            window.addEventListener('mousemove', e => {
-                mx = e.clientX;
-                my = e.clientY;
-                dot.style.left = mx + 'px';
-                dot.style.top = my + 'px'
-            });
+            const useCustomCursor = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 769px)').matches;
+            if (useCustomCursor) {
+                const dot = document.getElementById('cursorDot');
+                const ring = document.getElementById('cursorRing');
+                let mx = 0,
+                    my = 0,
+                    rx = 0,
+                    ry = 0;
+                window.addEventListener('mousemove', e => {
+                    mx = e.clientX;
+                    my = e.clientY;
+                    dot.style.left = mx + 'px';
+                    dot.style.top = my + 'px'
+                });
 
-            function animRing() {
-                rx += (mx - rx) * .12;
-                ry += (my - ry) * .12;
-                ring.style.left = rx + 'px';
-                ring.style.top = ry + 'px';
-                requestAnimationFrame(animRing)
+                function animRing() {
+                    rx += (mx - rx) * .12;
+                    ry += (my - ry) * .12;
+                    ring.style.left = rx + 'px';
+                    ring.style.top = ry + 'px';
+                    requestAnimationFrame(animRing)
+                }
+                animRing();
+                document.querySelectorAll('a,button,.proj-card,.skill-item,.about-card,.cert-card,.exp-card').forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        ring.style.width = '52px';
+                        ring.style.height = '52px';
+                        ring.style.borderColor = 'rgba(124,58,237,.8)'
+                    });
+                    el.addEventListener('mouseleave', () => {
+                        ring.style.width = '36px';
+                        ring.style.height = '36px';
+                        ring.style.borderColor = 'rgba(124,58,237,.6)'
+                    });
+                });
+            } else {
+                document.getElementById('cursorDot').style.display = 'none';
+                document.getElementById('cursorRing').style.display = 'none';
             }
-            animRing();
-            document.querySelectorAll('a,button,.proj-card,.skill-item,.about-card,.cert-card,.exp-card').forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    ring.style.width = '52px';
-                    ring.style.height = '52px';
-                    ring.style.borderColor = 'rgba(124,58,237,.8)'
-                });
-                el.addEventListener('mouseleave', () => {
-                    ring.style.width = '36px';
-                    ring.style.height = '36px';
-                    ring.style.borderColor = 'rgba(124,58,237,.6)'
-                });
-            });
 
             const canvas = document.getElementById('heroCanvas');
             const ctx = canvas.getContext('2d');
