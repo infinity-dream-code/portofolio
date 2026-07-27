@@ -168,24 +168,36 @@
 
         .nav-links {
             display: flex;
-            gap: 8px;
-            list-style: none
+            gap: 4px;
+            list-style: none;
+            background: rgba(255, 255, 255, .03);
+            border: 1px solid var(--border2);
+            padding: 6px;
+            border-radius: 30px;
+            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px)
         }
 
         .nav-links a {
+            position: relative;
             color: var(--text2);
-            font-size: .85rem;
+            font-size: .84rem;
             font-weight: 500;
-            padding: 6px 14px;
-            border-radius: 20px;
-            transition: all .2s;
+            padding: 8px 18px;
+            border-radius: 24px;
+            transition: color .25s ease, background .3s ease, box-shadow .3s ease;
             letter-spacing: .01em
         }
 
-        .nav-links a:hover,
-        .nav-links a.active {
+        .nav-links a:hover {
             color: var(--text);
-            background: rgba(124, 58, 237, .15)
+            background: rgba(255, 255, 255, .06)
+        }
+
+        .nav-links a.active {
+            color: #fff;
+            background: linear-gradient(135deg, var(--violet), #5B21B6);
+            box-shadow: 0 4px 18px rgba(124, 58, 237, .45)
         }
 
         .lang-toggle {
@@ -392,10 +404,24 @@
         }
 
         .hero-name .line2 {
-            background: linear-gradient(135deg, var(--violet2), var(--mint));
+            background: linear-gradient(120deg, var(--violet2), var(--mint), var(--violet2));
+            background-size: 200% auto;
             -webkit-background-clip: text;
             background-clip: text;
-            -webkit-text-fill-color: transparent
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 5s ease infinite
+        }
+
+        @keyframes gradientShift {
+
+            0%,
+            100% {
+                background-position: 0% center
+            }
+
+            50% {
+                background-position: 100% center
+            }
         }
 
         .hero-role {
@@ -636,35 +662,41 @@
 
         .reveal {
             opacity: 0;
-            transform: translateY(32px);
-            transition: opacity .7s cubic-bezier(.25, .1, .25, 1), transform .7s cubic-bezier(.25, .1, .25, 1)
+            transform: translateY(36px) scale(.97);
+            filter: blur(6px);
+            transition: opacity .8s cubic-bezier(.25, .1, .25, 1), transform .8s cubic-bezier(.25, .1, .25, 1), filter .8s ease
         }
 
         .reveal.visible {
             opacity: 1;
-            transform: none
+            transform: none;
+            filter: blur(0)
         }
 
         .reveal-left {
             opacity: 0;
-            transform: translateX(-32px);
-            transition: opacity .7s, transform .7s cubic-bezier(.25, .1, .25, 1)
+            transform: translateX(-40px) scale(.97);
+            filter: blur(6px);
+            transition: opacity .8s, transform .8s cubic-bezier(.25, .1, .25, 1), filter .8s ease
         }
 
         .reveal-left.visible {
             opacity: 1;
-            transform: none
+            transform: none;
+            filter: blur(0)
         }
 
         .reveal-right {
             opacity: 0;
-            transform: translateX(32px);
-            transition: opacity .7s, transform .7s cubic-bezier(.25, .1, .25, 1)
+            transform: translateX(40px) scale(.97);
+            filter: blur(6px);
+            transition: opacity .8s, transform .8s cubic-bezier(.25, .1, .25, 1), filter .8s ease
         }
 
         .reveal-right.visible {
             opacity: 1;
-            transform: none
+            transform: none;
+            filter: blur(0)
         }
 
         [data-delay="1"] {
@@ -1767,10 +1799,204 @@
                 display: none
             }
         }
+
+        #preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            background: var(--void);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 22px;
+            transition: opacity .8s cubic-bezier(.4, 0, .2, 1), visibility .8s;
+            overflow: hidden
+        }
+
+        #preloader::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(124, 58, 237, .14), transparent 60%);
+            pointer-events: none
+        }
+
+        #preloader.hide {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none
+        }
+
+        #preloaderCanvas {
+            width: 220px;
+            height: 220px;
+            position: relative;
+            z-index: 1
+        }
+
+        .pre-word {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: .04em;
+            color: var(--text);
+            position: relative;
+            z-index: 1;
+            display: flex;
+            gap: 2px
+        }
+
+        .pre-word span {
+            opacity: 0;
+            transform: translateY(14px);
+            display: inline-block;
+            animation: preLetterIn .6s cubic-bezier(.2, .9, .3, 1) forwards
+        }
+
+        .pre-word .accent {
+            background: linear-gradient(135deg, var(--violet2), var(--mint));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        @keyframes preLetterIn {
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .pre-sub {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .68rem;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: var(--text3);
+            position: relative;
+            z-index: 1
+        }
+
+        .pre-sub b {
+            color: var(--mint);
+            font-weight: 600
+        }
+
+        .pre-bar {
+            width: 220px;
+            height: 2px;
+            background: rgba(255, 255, 255, .08);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+            z-index: 1
+        }
+
+        .pre-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--violet), var(--mint));
+            box-shadow: 0 0 12px rgba(6, 255, 165, .5)
+        }
+
+        .blob-wrap {
+            position: absolute;
+            inset: 0;
+            transition: transform .4s cubic-bezier(.2, .7, .3, 1);
+            pointer-events: none
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            z-index: 2;
+            opacity: .7
+        }
+
+        .scroll-indicator span {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .62rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--text3)
+        }
+
+        .scroll-mouse {
+            width: 22px;
+            height: 36px;
+            border: 1.5px solid rgba(139, 139, 170, .4);
+            border-radius: 12px;
+            position: relative
+        }
+
+        .scroll-mouse::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            width: 3px;
+            height: 6px;
+            background: var(--mint);
+            border-radius: 2px;
+            transform: translateX(-50%);
+            animation: scrollWheel 1.8s ease infinite
+        }
+
+        @keyframes scrollWheel {
+
+            0% {
+                opacity: 1;
+                top: 6px
+            }
+
+            70% {
+                opacity: 0;
+                top: 18px
+            }
+
+            100% {
+                opacity: 0;
+                top: 6px
+            }
+        }
+
+        @media(max-width:768px) {
+            .scroll-indicator {
+                display: none
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .001ms !important;
+                scroll-behavior: auto !important
+            }
+        }
     </style>
 </head>
 
 <body>
+
+    <div id="preloader">
+        <canvas id="preloaderCanvas"></canvas>
+        <div class="pre-word"><span style="animation-delay:.05s">n</span><span style="animation-delay:.1s">i</span><span style="animation-delay:.15s">k</span><span style="animation-delay:.2s">o</span><span class="accent" style="animation-delay:.28s">.</span><span class="accent" style="animation-delay:.33s">d</span><span class="accent" style="animation-delay:.38s">e</span><span class="accent" style="animation-delay:.43s">v</span></div>
+        <div class="pre-sub">Initializing <b id="preLoadPct">0%</b></div>
+        <div class="pre-bar">
+            <div class="pre-bar-fill" id="preBarFill"></div>
+        </div>
+    </div>
 
     <div class="cursor-dot" id="cursorDot"></div>
     <div class="cursor-ring" id="cursorRing"></div>
@@ -1816,9 +2042,11 @@
 
     <section id="hero">
         <canvas class="hero-canvas" id="heroCanvas"></canvas>
-        <div class="blob blob1"></div>
-        <div class="blob blob2"></div>
-        <div class="blob blob3"></div>
+        <div class="blob-wrap" id="blobWrap">
+            <div class="blob blob1"></div>
+            <div class="blob blob2"></div>
+            <div class="blob blob3"></div>
+        </div>
         <div class="hero-inner">
             <div>
                 <div class="hero-eyebrow reveal">
@@ -1879,14 +2107,18 @@
                     </div>
                     <div class="hero-badge">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <ellipse cx="12" cy="5" rx="9" ry="3" />
-                            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
-                            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+                            <path d="M12 4a4 4 0 0 1 4 4c0 1.5-.8 2.8-2 3.5V14h-4v-2.5c-1.2-.7-2-2-2-3.5a4 4 0 0 1 4-4z" />
+                            <path d="M8 12c-1.5 0-3 1-3 3s1.5 3 3 3" />
+                            <path d="M16 12c1.5 0 3 1 3 3s-1.5 3-3 3" />
                         </svg>
-                        MySQL
+                        Problem Solving
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="scroll-indicator">
+            <span data-i18n="scroll_hint">Scroll</span>
+            <div class="scroll-mouse"></div>
         </div>
     </section>
 
@@ -2081,7 +2313,9 @@
                     <div class="skill-label">PostgreSQL</div>
                 </div>
                 <div class="skill-item reveal" data-delay="4">
-                    <div class="skill-icon-box" style="background:#00618a"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL"></div>
+                    <div class="skill-icon-box" style="background: linear-gradient(135deg, rgb(11, 11, 11), #005d7a); border: 1px solid rgba(0, 117, 143, 0.3); box-shadow: 0 0 20px rgba(0, 117, 143, 0.2); display: flex; align-items: center; justify-content: center;">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" style="width: 32px; height: 32px; filter: drop-shadow(0 2px 8px rgba(0,117,143,0.4));">
+                    </div>
                     <div class="skill-label">MySQL</div>
                 </div>
             </div>
@@ -2442,8 +2676,123 @@
         </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         (function() {
+
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const preloader = document.getElementById('preloader');
+            const preBarFill = document.getElementById('preBarFill');
+            const preLoadPct = document.getElementById('preLoadPct');
+            let stopPre3D = null;
+
+            function initPreloader3D() {
+                if (typeof THREE === 'undefined') return null;
+                const canvas = document.getElementById('preloaderCanvas');
+                const renderer = new THREE.WebGLRenderer({
+                    canvas,
+                    alpha: true,
+                    antialias: true
+                });
+                const size = 220;
+                renderer.setSize(size, size);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+                camera.position.z = 6.2;
+                const outerGeo = new THREE.IcosahedronGeometry(1.7, 1);
+                const outerEdges = new THREE.EdgesGeometry(outerGeo);
+                const outerMat = new THREE.LineBasicMaterial({
+                    color: 0x9D5CF6,
+                    transparent: true,
+                    opacity: .95
+                });
+                const outer = new THREE.LineSegments(outerEdges, outerMat);
+                scene.add(outer);
+                const innerGeo = new THREE.IcosahedronGeometry(1.05, 0);
+                const innerMat = new THREE.MeshBasicMaterial({
+                    color: 0x06FFA5,
+                    wireframe: true,
+                    transparent: true,
+                    opacity: .55
+                });
+                const inner = new THREE.Mesh(innerGeo, innerMat);
+                scene.add(inner);
+                const particleCount = 160;
+                const positions = new Float32Array(particleCount * 3);
+                for (let i = 0; i < particleCount; i++) {
+                    const r = 2.5 + Math.random() * .7;
+                    const theta = Math.random() * Math.PI * 2;
+                    const phi = Math.acos((Math.random() * 2) - 1);
+                    positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+                    positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+                    positions[i * 3 + 2] = r * Math.cos(phi);
+                }
+                const pGeo = new THREE.BufferGeometry();
+                pGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                const pMat = new THREE.PointsMaterial({
+                    color: 0xF0EEFF,
+                    size: .035,
+                    transparent: true,
+                    opacity: .75
+                });
+                const points = new THREE.Points(pGeo, pMat);
+                scene.add(points);
+                let raf;
+                let stopped = false;
+
+                function animate() {
+                    if (stopped) return;
+                    raf = requestAnimationFrame(animate);
+                    if (!reducedMotion) {
+                        outer.rotation.y += .009;
+                        outer.rotation.x += .0045;
+                        inner.rotation.y -= .013;
+                        inner.rotation.x += .007;
+                        points.rotation.y += .0017;
+                    }
+                    renderer.render(scene, camera);
+                }
+                animate();
+                return function() {
+                    stopped = true;
+                    cancelAnimationFrame(raf);
+                };
+            }
+
+            function runPreloader() {
+                stopPre3D = initPreloader3D();
+                let p = 0;
+                const step = () => {
+                    p += Math.random() * 16 + 8;
+                    if (p >= 100) p = 100;
+                    preBarFill.style.width = p + '%';
+                    preLoadPct.textContent = Math.floor(p) + '%';
+                    if (p >= 100) {
+                        setTimeout(() => {
+                            preloader.classList.add('hide');
+                            setTimeout(() => {
+                                if (stopPre3D) stopPre3D();
+                            }, 850);
+                        }, reducedMotion ? 0 : 300);
+                        return;
+                    }
+                    setTimeout(step, reducedMotion ? 0 : (Math.random() * 130 + 90));
+                };
+                step();
+            }
+
+            if (document.readyState === 'complete') {
+                runPreloader();
+            } else {
+                window.addEventListener('load', runPreloader);
+            }
+            setTimeout(() => {
+                if (!preloader.classList.contains('hide')) {
+                    preloader.classList.add('hide');
+                    if (stopPre3D) stopPre3D();
+                }
+            }, 4500);
 
             const LANG = {
                 id: {
@@ -2463,6 +2812,7 @@
                     stat_projects: "Proyek",
                     stat_exp: "Tahun Exp.",
                     stat_clients: "Klien",
+                    scroll_hint: "Gulir",
                     about_label: "Tentang Saya",
                     about_title: "Siapa aku?",
                     about_desc: "Developer fullstack berdedikasi dengan fokus tajam pada cybersecurity. Dengan pengalaman profesional membangun aplikasi web yang robust dan mengidentifikasi kerentanan keamanan, saya mengubah tantangan kompleks menjadi solusi yang elegan dan aman.",
@@ -2552,6 +2902,7 @@
                     stat_projects: "Projects",
                     stat_exp: "Years Exp.",
                     stat_clients: "Clients",
+                    scroll_hint: "Scroll",
                     about_label: "About Me",
                     about_title: "Who am I?",
                     about_desc: "A dedicated fullstack developer with a laser focus on cybersecurity. With professional experience in building robust web applications and identifying security vulnerabilities, I transform complex challenges into elegant, secure solutions.",
@@ -2824,6 +3175,52 @@
             animCanvas();
 
             onScroll();
+
+            const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+            if (finePointer && !reducedMotion) {
+                const blobWrap = document.getElementById('blobWrap');
+                document.addEventListener('mousemove', e => {
+                    const nx = (e.clientX / window.innerWidth) - .5;
+                    const ny = (e.clientY / window.innerHeight) - .5;
+                    if (blobWrap) blobWrap.style.transform = `translate(${nx * 34}px, ${ny * 34}px)`;
+                });
+
+                function addTilt(selector, intensity) {
+                    document.querySelectorAll(selector).forEach(card => {
+                        card.style.transformStyle = 'preserve-3d';
+                        card.addEventListener('mousemove', e => {
+                            const r = card.getBoundingClientRect();
+                            const x = (e.clientX - r.left) / r.width - .5;
+                            const y = (e.clientY - r.top) / r.height - .5;
+                            card.style.transform = `perspective(900px) rotateY(${x*intensity}deg) rotateX(${-y*intensity}deg) translateY(-6px)`;
+                        });
+                        card.addEventListener('mouseleave', () => {
+                            card.style.transform = '';
+                        });
+                    });
+                }
+                addTilt('.proj-card', 7);
+                addTilt('.about-card', 5);
+                addTilt('.cert-card', 5);
+                addTilt('.skill-item', 9);
+                addTilt('.hero-photo-wrap', 10);
+
+                function addMagnetic(selector, strength) {
+                    document.querySelectorAll(selector).forEach(btn => {
+                        btn.addEventListener('mousemove', e => {
+                            const r = btn.getBoundingClientRect();
+                            const x = e.clientX - r.left - r.width / 2;
+                            const y = e.clientY - r.top - r.height / 2;
+                            btn.style.transform = `translate(${x/r.width*strength}px, ${y/r.height*strength}px)`;
+                        });
+                        btn.addEventListener('mouseleave', () => {
+                            btn.style.transform = '';
+                        });
+                    });
+                }
+                addMagnetic('.btn-v,.btn-g,.nav-hire', 12);
+            }
         })();
     </script>
 </body>
