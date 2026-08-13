@@ -980,6 +980,58 @@
             line-height: 1.7
         }
 
+        .ai-highlight {
+            margin-top: 28px;
+            padding: 18px 20px;
+            background: linear-gradient(135deg, rgba(124, 58, 237, .14), rgba(6, 255, 165, .08));
+            border: 1px solid rgba(124, 58, 237, .3);
+            border-radius: 16px;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start
+        }
+
+        .ai-highlight-icon {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            background: rgba(6, 255, 165, .12);
+            border: 1px solid rgba(6, 255, 165, .28);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .ai-highlight-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--mint);
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round
+        }
+
+        .ai-highlight-kicker {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .68rem;
+            color: var(--mint);
+            letter-spacing: .04em;
+            margin-bottom: 4px
+        }
+
+        .ai-highlight p {
+            color: var(--text2);
+            font-size: .84rem;
+            line-height: 1.7
+        }
+
+        .ai-highlight strong {
+            color: var(--text);
+            font-weight: 600
+        }
+
         .about-img-wrap {
             position: relative
         }
@@ -1737,6 +1789,10 @@
                 padding: 22px
             }
 
+            .ai-highlight {
+                padding: 16px
+            }
+
             .about-code-block {
                 padding: 20px 16px;
                 font-size: .72rem;
@@ -2313,6 +2369,13 @@
                         </svg>
                         Problem Solving
                     </div>
+                    <div class="hero-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
+                            <circle cx="12" cy="12" r="4" />
+                        </svg>
+                        AI-Assisted
+                    </div>
                 </div>
             </div>
         </div>
@@ -2328,7 +2391,20 @@
                 <div class="reveal-left">
                     <div class="sec-label" data-i18n="about_label">About Me</div>
                     <h2 class="sec-title" data-i18n="about_title">Who am I?</h2>
-                    <p class="sec-sub" data-i18n="about_desc">A dedicated fullstack developer with a laser focus on cybersecurity. With professional experience in building robust web applications and identifying security vulnerabilities, I transform complex challenges into elegant, secure solutions.</p>
+                    <p class="sec-sub" data-i18n="about_desc">A dedicated fullstack developer with a laser focus on cybersecurity. I use AI as a coding partner, which makes me 3–5× faster than developers who don't. With professional experience in building robust web applications and identifying security vulnerabilities, I transform complex challenges into elegant, secure solutions.</p>
+                    <div class="ai-highlight">
+                        <div class="ai-highlight-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
+                                <circle cx="12" cy="12" r="4" />
+                                <path d="M8.5 8.5l-2-2M15.5 8.5l2-2M8.5 15.5l-2 2M15.5 15.5l2 2" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="ai-highlight-kicker" data-i18n="ai_kicker">AI-ASSISTED CODING</div>
+                            <p data-i18n="ai_desc">I use AI to write, debug, and ship code — making me 3–5× faster than programmers who don't use AI.</p>
+                        </div>
+                    </div>
                     <div class="about-cards-row">
                         <div class="about-card">
                             <div class="about-icon-wrap"><svg viewBox="0 0 24 24">
@@ -2382,8 +2458,9 @@
                         <div class="code-line"><span class="code-num">7</span><span class="code-str">&nbsp;&nbsp;"Laravel"</span><span class="code-punc">, </span><span class="code-str">"PHP"</span><span class="code-punc">, </span><span class="code-str">"MySQL"</span></div>
                         <div class="code-line"><span class="code-num">8</span><span class="code-punc">],</span></div>
                         <div class="code-line"><span class="code-num">9</span><span class="code-key">"security"</span><span class="code-punc">: </span><span class="code-str">"Penetration Testing"</span><span class="code-punc">,</span></div>
-                        <div class="code-line"><span class="code-num">10</span><span class="code-key">"projects"</span><span class="code-punc">: </span><span class="code-val">60</span><span class="code-punc">,</span></div>
-                        <div class="code-line"><span class="code-num">11</span><span class="code-key">"available"</span><span class="code-punc">: </span><span class="code-val">true</span></div>
+                        <div class="code-line"><span class="code-num">10</span><span class="code-key">"ai"</span><span class="code-punc">: </span><span class="code-str">"3-5x faster"</span><span class="code-punc">,</span></div>
+                        <div class="code-line"><span class="code-num">11</span><span class="code-key">"projects"</span><span class="code-punc">: </span><span class="code-val">60</span><span class="code-punc">,</span></div>
+                        <div class="code-line"><span class="code-num">12</span><span class="code-key">"available"</span><span class="code-punc">: </span><span class="code-val">true</span></div>
                         <div class="code-line"><span class="code-punc">}</span></div>
                     </div>
                 </div>
@@ -2531,6 +2608,36 @@
                 <p class="sec-sub" data-i18n="proj_desc">A diverse range of web applications, APIs, and security assessments across various industries.</p>
             </div>
             <div class="projects-grid">
+
+                <!-- AI Voice Assistant Agent -->
+                <div class="proj-card reveal" data-delay="1">
+                    <div class="proj-thumb"><img src="https://i.ibb.co.com/nN8CbvY4/Whats-App-Image-2026-08-13-at-15-39-54-1.jpg" alt="AI Voice Assistant Agent" loading="lazy"></div>
+                    <div class="proj-body">
+                        <div class="proj-title">AI Voice Assistant Agent</div>
+                        <p class="proj-desc" data-i18n="p25_desc">Voice AI assistant powered by Groq. Listens via Google Speech-to-Text, thinks with Groq, and replies with Text-to-Speech. Can take notes and open apps on the computer with simple voice commands.</p>
+                        <div class="proj-tags"><span class="tag">Groq</span><span class="tag">Google STT</span><span class="tag">TTS</span><span class="tag">Desktop Agent</span></div>
+                    </div>
+                </div>
+
+                <!-- WhatsApp Broadcast -->
+                <div class="proj-card reveal" data-delay="2">
+                    <div class="proj-thumb"><img src="https://i.ibb.co.com/F9zwxZn/Whats-App-Image-2026-08-13-at-15-39-54.jpg" alt="WhatsApp Broadcast" loading="lazy"></div>
+                    <div class="proj-body">
+                        <div class="proj-title">WhatsApp Broadcast — Ponpes Sulaiman Al Fauzan</div>
+                        <p class="proj-desc" data-i18n="p26_desc">School WhatsApp notification system to send targeted messages to students by class, batch, or individual — including billing and arrears alerts.</p>
+                        <div class="proj-tags"><span class="tag">Laravel</span><span class="tag">WhatsApp API</span><span class="tag">MySQL</span><span class="tag">Broadcast</span></div>
+                    </div>
+                </div>
+
+                <!-- Private Chat -->
+                <div class="proj-card reveal" data-delay="3">
+                    <div class="proj-thumb"><img src="https://i.ibb.co.com/8ngf62P7/Whats-App-Image-2026-08-13-at-15-39-53.jpg" alt="BhiChat Private Chat" loading="lazy"></div>
+                    <div class="proj-body">
+                        <div class="proj-title">BhiChat — Private Chat</div>
+                        <p class="proj-desc" data-i18n="p27_desc">Terminal-style private chat. Messages are stored in cookies, and image uploads are handled through Cloudinary.</p>
+                        <div class="proj-tags"><span class="tag">JavaScript</span><span class="tag">Cloudinary</span><span class="tag">Cookie Storage</span></div>
+                    </div>
+                </div>
 
                 <!-- Rayakan Momen - Digital Invitation Platform -->
                 <div class="proj-card reveal" data-delay="1" onclick="window.open('https://rayakanmomen.com','_blank')">
@@ -3015,7 +3122,9 @@
                     scroll_hint: "Gulir",
                     about_label: "Tentang Saya",
                     about_title: "Siapa aku?",
-                    about_desc: "Developer fullstack berdedikasi dengan fokus tajam pada cybersecurity. Dengan pengalaman profesional membangun aplikasi web yang robust dan mengidentifikasi kerentanan keamanan, saya mengubah tantangan kompleks menjadi solusi yang elegan dan aman.",
+                    about_desc: "Developer fullstack berdedikasi dengan fokus tajam pada cybersecurity. Saya menggunakan AI untuk coding, sehingga 3–5× lebih cepat dibanding programmer yang tidak menggunakannya. Dengan pengalaman profesional membangun aplikasi web yang robust dan mengidentifikasi kerentanan keamanan, saya mengubah tantangan kompleks menjadi solusi yang elegan dan aman.",
+                    ai_kicker: "CODING DENGAN AI",
+                    ai_desc: "Saya memakai AI untuk menulis, debug, dan merilis kode — membuat saya 3–5× lebih cepat dibanding programmer yang tidak menggunakan AI.",
                     card1_title: "Backend Dev",
                     card1_desc: "Aplikasi server-side yang skalabel dengan framework modern dan best practice.",
                     card2_title: "Cyber Security",
@@ -3084,6 +3193,9 @@
                     p22_desc: "Platform undangan digital dengan CMS untuk membuat undangan pernikahan, ulang tahun, dan ucapan spesial secara otomatis tanpa coding.",
                     p23_desc: "Sistem pengajuan prestasi siswa dengan alur persetujuan admin, tampilan galeri, dan pelacakan prestasi untuk Madrasah Muallimaat.",
                     p24_desc: "Dashboard monitoring real-time untuk kepala sekolah melacak status tagihan siswa, riwayat pembayaran, dan laporan keuangan.",
+                    p25_desc: "Asisten AI berbasis suara menggunakan Groq. Mendengar lewat Google Speech-to-Text, diproses Groq, lalu dibalas dengan Text-to-Speech. Bisa mencatat dan membuka aplikasi di komputer lewat perintah sederhana.",
+                    p26_desc: "Sistem notifikasi WhatsApp untuk sekolah, mengirim pesan ke siswa berdasarkan kelas, angkatan, atau individu — termasuk notifikasi tagihan dan tunggakan.",
+                    p27_desc: "Chat privat bergaya terminal. Pesan disimpan di cookie, dan upload gambar ditangani lewat Cloudinary.",
                 },
                 en: {
                     nav_home: "Home",
@@ -3105,7 +3217,9 @@
                     scroll_hint: "Scroll",
                     about_label: "About Me",
                     about_title: "Who am I?",
-                    about_desc: "A dedicated fullstack developer with a laser focus on cybersecurity. With professional experience in building robust web applications and identifying security vulnerabilities, I transform complex challenges into elegant, secure solutions.",
+                    about_desc: "A dedicated fullstack developer with a laser focus on cybersecurity. I use AI as a coding partner, which makes me 3–5× faster than developers who don't. With professional experience in building robust web applications and identifying security vulnerabilities, I transform complex challenges into elegant, secure solutions.",
+                    ai_kicker: "AI-ASSISTED CODING",
+                    ai_desc: "I use AI to write, debug, and ship code — making me 3–5× faster than programmers who don't use AI.",
                     card1_title: "Backend Dev",
                     card1_desc: "Scalable server-side apps with modern frameworks and best practices.",
                     card2_title: "Cyber Security",
@@ -3174,6 +3288,9 @@
                     p22_desc: "Digital invitation platform with CMS to automatically create wedding, birthday, and special occasion invitations without coding.",
                     p23_desc: "Student achievement submission system with admin approval workflow, gallery display, and achievement tracking for Madrasah Muallimaat.",
                     p24_desc: "Real-time monitoring dashboard for school principals to track student billing status, payment history, and financial reports.",
+                    p25_desc: "Voice AI assistant powered by Groq. Listens via Google Speech-to-Text, thinks with Groq, and replies with Text-to-Speech. Can take notes and open apps on the computer with simple voice commands.",
+                    p26_desc: "School WhatsApp notification system to send targeted messages to students by class, batch, or individual — including billing and arrears alerts.",
+                    p27_desc: "Terminal-style private chat. Messages are stored in cookies, and image uploads are handled through Cloudinary.",
                 }
             };
 
