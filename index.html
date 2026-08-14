@@ -980,58 +980,6 @@
             line-height: 1.7
         }
 
-        .ai-highlight {
-            margin-top: 28px;
-            padding: 18px 20px;
-            background: linear-gradient(135deg, rgba(124, 58, 237, .14), rgba(6, 255, 165, .08));
-            border: 1px solid rgba(124, 58, 237, .3);
-            border-radius: 16px;
-            display: flex;
-            gap: 14px;
-            align-items: flex-start
-        }
-
-        .ai-highlight-icon {
-            width: 40px;
-            height: 40px;
-            flex-shrink: 0;
-            background: rgba(6, 255, 165, .12);
-            border: 1px solid rgba(6, 255, 165, .28);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center
-        }
-
-        .ai-highlight-icon svg {
-            width: 20px;
-            height: 20px;
-            stroke: var(--mint);
-            fill: none;
-            stroke-width: 1.8;
-            stroke-linecap: round;
-            stroke-linejoin: round
-        }
-
-        .ai-highlight-kicker {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: .68rem;
-            color: var(--mint);
-            letter-spacing: .04em;
-            margin-bottom: 4px
-        }
-
-        .ai-highlight p {
-            color: var(--text2);
-            font-size: .84rem;
-            line-height: 1.7
-        }
-
-        .ai-highlight strong {
-            color: var(--text);
-            font-weight: 600
-        }
-
         .about-img-wrap {
             position: relative
         }
@@ -1789,10 +1737,6 @@
                 padding: 22px
             }
 
-            .ai-highlight {
-                padding: 16px
-            }
-
             .about-code-block {
                 padding: 20px 16px;
                 font-size: .72rem;
@@ -2315,14 +2259,14 @@
                     <span class="hero-role-sep">/</span>
                     <span data-i18n="hero_role2">Junior Cyber Security</span>
                 </div>
-                <p class="hero-desc reveal" data-delay="3" data-i18n="hero_desc">Passionate about building secure, scalable fullstack solutions and uncovering vulnerabilities to protect digital ecosystems.</p>
+                <p class="hero-desc reveal" data-delay="3" data-i18n="hero_desc">I build secure and scalable fullstack applications, and I identify vulnerabilities to keep systems protected.</p>
                 <div class="hero-btns reveal" data-delay="4">
                     <a href="#projects" class="btn-v" data-i18n="hero_btn1">View Projects</a>
                     <a href="https://wa.me/6285777433886" class="btn-g" data-i18n="hero_btn2">Let's Connect</a>
                 </div>
                 <div class="hero-stats reveal" data-delay="5">
                     <div>
-                        <div class="hero-stat-num">60<span>+</span></div>
+                        <div class="hero-stat-num">70<span>+</span></div>
                         <div class="hero-stat-label" data-i18n="stat_projects">Projects</div>
                     </div>
                     <div class="hero-stat-divider"></div>
@@ -2365,10 +2309,10 @@
                     </div>
                     <div class="hero-badge">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
-                            <circle cx="12" cy="12" r="4" />
+                            <polyline points="16 18 22 12 16 6" />
+                            <polyline points="8 6 2 12 8 18" />
                         </svg>
-                        AI-Assisted
+                        Programming
                     </div>
                 </div>
             </div>
@@ -2385,20 +2329,7 @@
                 <div class="reveal-left">
                     <div class="sec-label" data-i18n="about_label">About Me</div>
                     <h2 class="sec-title" data-i18n="about_title">Who am I?</h2>
-                    <p class="sec-sub" data-i18n="about_desc">A dedicated fullstack developer with a laser focus on cybersecurity. I use AI as a coding partner, which makes me 3–5× faster than developers who don't. With professional experience in building robust web applications and identifying security vulnerabilities, I transform complex challenges into elegant, secure solutions.</p>
-                    <div class="ai-highlight">
-                        <div class="ai-highlight-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
-                                <circle cx="12" cy="12" r="4" />
-                                <path d="M8.5 8.5l-2-2M15.5 8.5l2-2M8.5 15.5l-2 2M15.5 15.5l2 2" />
-                            </svg>
-                        </div>
-                        <div>
-                            <div class="ai-highlight-kicker" data-i18n="ai_kicker">AI-ASSISTED CODING</div>
-                            <p data-i18n="ai_desc">I use AI to write, debug, and ship code — making me 3–5× faster than programmers who don't use AI.</p>
-                        </div>
-                    </div>
+                    <p class="sec-sub" data-i18n="about_desc">I am a fullstack developer with a focus on cybersecurity. I have experience building solid web applications and identifying security vulnerabilities to keep systems secure. I can also use AI to speed up my work by 3-5x.</p>
                     <div class="about-cards-row">
                         <div class="about-card">
                             <div class="about-icon-wrap"><svg viewBox="0 0 24 24">
@@ -2452,9 +2383,8 @@
                         <div class="code-line"><span class="code-num">7</span><span class="code-str">&nbsp;&nbsp;"Laravel"</span><span class="code-punc">, </span><span class="code-str">"PHP"</span><span class="code-punc">, </span><span class="code-str">"MySQL"</span></div>
                         <div class="code-line"><span class="code-num">8</span><span class="code-punc">],</span></div>
                         <div class="code-line"><span class="code-num">9</span><span class="code-key">"security"</span><span class="code-punc">: </span><span class="code-str">"Penetration Testing"</span><span class="code-punc">,</span></div>
-                        <div class="code-line"><span class="code-num">10</span><span class="code-key">"ai"</span><span class="code-punc">: </span><span class="code-str">"3-5x faster"</span><span class="code-punc">,</span></div>
-                        <div class="code-line"><span class="code-num">11</span><span class="code-key">"projects"</span><span class="code-punc">: </span><span class="code-val">60</span><span class="code-punc">,</span></div>
-                        <div class="code-line"><span class="code-num">12</span><span class="code-key">"available"</span><span class="code-punc">: </span><span class="code-val">true</span></div>
+                        <div class="code-line"><span class="code-num">10</span><span class="code-key">"projects"</span><span class="code-punc">: </span><span class="code-val">70</span><span class="code-punc">,</span></div>
+                        <div class="code-line"><span class="code-num">11</span><span class="code-key">"available"</span><span class="code-punc">: </span><span class="code-val">true</span></div>
                         <div class="code-line"><span class="code-punc">}</span></div>
                     </div>
                 </div>
@@ -2479,7 +2409,7 @@
                                 <div class="exp-role" data-i18n="exp1_role">Fullstack Developer</div>
                                 <div class="exp-company">PT Inovasi Cipta Teknologi</div>
                             </div>
-                            <span class="exp-period" data-i18n="exp1_period">Aug 2025 – Jul 2026</span>
+                            <span class="exp-period" data-i18n="exp1_period">Aug 2025 – Dec 2026</span>
                         </div>
                         <ul class="exp-points">
                             <li data-i18n="exp1_p1">Developed complete PMB (Student Admission) web application with documentation and user-friendly interface</li>
@@ -3107,7 +3037,7 @@
                     hero_eyebrow: "Tersedia untuk pekerjaan",
                     hero_role1: "Fullstack Developer",
                     hero_role2: "Junior Cyber Security",
-                    hero_desc: "Bersemangat membangun solusi fullstack yang aman dan skalabel serta mengungkap kerentanan untuk melindungi ekosistem digital.",
+                    hero_desc: "Saya membangun aplikasi fullstack yang aman dan skalabel, serta mengidentifikasi kerentanan agar sistem tetap terlindungi.",
                     hero_btn1: "Lihat Proyek",
                     hero_btn2: "Hubungi Saya",
                     stat_projects: "Proyek",
@@ -3116,9 +3046,7 @@
                     scroll_hint: "Gulir",
                     about_label: "Tentang Saya",
                     about_title: "Siapa aku?",
-                    about_desc: "Developer fullstack berdedikasi dengan fokus tajam pada cybersecurity. Saya menggunakan AI untuk coding, sehingga 3–5× lebih cepat dibanding programmer yang tidak menggunakannya. Dengan pengalaman profesional membangun aplikasi web yang robust dan mengidentifikasi kerentanan keamanan, saya mengubah tantangan kompleks menjadi solusi yang elegan dan aman.",
-                    ai_kicker: "CODING DENGAN AI",
-                    ai_desc: "Saya memakai AI untuk menulis, debug, dan merilis kode — membuat saya 3–5× lebih cepat dibanding programmer yang tidak menggunakan AI.",
+                    about_desc: "Saya adalah fullstack developer dengan fokus pada cybersecurity. Saya berpengalaman membangun aplikasi web yang solid dan mengidentifikasi kerentanan keamanan agar sistem tetap aman. Saya juga bisa menggunakan AI untuk mempercepat pekerjaan hingga 3-5x lipat.",
                     card1_title: "Backend Dev",
                     card1_desc: "Aplikasi server-side yang skalabel dengan framework modern dan best practice.",
                     card2_title: "Cyber Security",
@@ -3202,7 +3130,7 @@
                     hero_eyebrow: "Available for work",
                     hero_role1: "Fullstack Developer",
                     hero_role2: "Junior Cyber Security",
-                    hero_desc: "Passionate about building secure, scalable fullstack solutions and uncovering vulnerabilities to protect digital ecosystems.",
+                    hero_desc: "I build secure and scalable fullstack applications, and I identify vulnerabilities to keep systems protected.",
                     hero_btn1: "View Projects",
                     hero_btn2: "Let's Connect",
                     stat_projects: "Projects",
@@ -3211,9 +3139,7 @@
                     scroll_hint: "Scroll",
                     about_label: "About Me",
                     about_title: "Who am I?",
-                    about_desc: "A dedicated fullstack developer with a laser focus on cybersecurity. I use AI as a coding partner, which makes me 3–5× faster than developers who don't. With professional experience in building robust web applications and identifying security vulnerabilities, I transform complex challenges into elegant, secure solutions.",
-                    ai_kicker: "AI-ASSISTED CODING",
-                    ai_desc: "I use AI to write, debug, and ship code — making me 3–5× faster than programmers who don't use AI.",
+                    about_desc: "I am a fullstack developer with a focus on cybersecurity. I have experience building solid web applications and identifying security vulnerabilities to keep systems secure. I can also use AI to speed up my work by 3-5x.",
                     card1_title: "Backend Dev",
                     card1_desc: "Scalable server-side apps with modern frameworks and best practices.",
                     card2_title: "Cyber Security",
