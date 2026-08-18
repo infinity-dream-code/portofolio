@@ -1042,7 +1042,7 @@
         }
 
         #experience {
-            background: var(--void)
+            background: var(--deep)
         }
 
         .exp-timeline {
@@ -1232,7 +1232,7 @@
         }
 
         #skills {
-            background: var(--deep)
+            background: var(--void)
         }
 
         .skills-intro {
@@ -1323,7 +1323,7 @@
         }
 
         #projects {
-            background: var(--void)
+            background: var(--deep)
         }
 
         .projects-header {
@@ -1452,7 +1452,7 @@
         }
 
         #certifications {
-            background: var(--deep)
+            background: var(--void)
         }
 
         .certs-grid {
@@ -2206,11 +2206,11 @@
             </a>
             <ul class="nav-links">
                 <li><a href="#hero" data-i18n="nav_home">Home</a></li>
-                <li><a href="#about" data-i18n="nav_about">About</a></li>
-                <li><a href="#experience" data-i18n="nav_exp">Experience</a></li>
-                <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
                 <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+                <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
+                <li><a href="#experience" data-i18n="nav_exp">Experience</a></li>
                 <li><a href="#certifications" data-i18n="nav_certs">Certifications</a></li>
+                <li><a href="#about" data-i18n="nav_about">About</a></li>
             </ul>
             <div class="nav-right">
                 <div class="lang-toggle" id="langToggle">
@@ -2225,11 +2225,11 @@
 
     <div class="mobile-menu" id="mobileMenu">
         <a href="#hero" data-i18n="nav_home">Home</a>
-        <a href="#about" data-i18n="nav_about">About</a>
-        <a href="#experience" data-i18n="nav_exp">Experience</a>
-        <a href="#skills" data-i18n="nav_skills">Skills</a>
         <a href="#projects" data-i18n="nav_projects">Projects</a>
+        <a href="#skills" data-i18n="nav_skills">Skills</a>
+        <a href="#experience" data-i18n="nav_exp">Experience</a>
         <a href="#certifications" data-i18n="nav_certs">Certifications</a>
+        <a href="#about" data-i18n="nav_about">About</a>
         <div class="mobile-lang-row" style="display:flex;gap:8px;margin-top:8px">
             <button class="lang-btn active" onclick="setLang('id')">ID</button>
             <button class="lang-btn" onclick="setLang('en')">EN</button>
@@ -2320,206 +2320,6 @@
         <div class="scroll-indicator">
             <span data-i18n="scroll_hint">Scroll</span>
             <div class="scroll-mouse"></div>
-        </div>
-    </section>
-
-    <section id="about">
-        <div class="container">
-            <div class="about-grid">
-                <div class="reveal-left">
-                    <div class="sec-label" data-i18n="about_label">About Me</div>
-                    <h2 class="sec-title" data-i18n="about_title">Who am I?</h2>
-                    <p class="sec-sub" data-i18n="about_desc">I am a fullstack developer with a focus on cybersecurity. I have experience building solid web applications and identifying security vulnerabilities to keep systems secure. I can also use AI to speed up my work by 3-5x.</p>
-                    <div class="about-cards-row">
-                        <div class="about-card">
-                            <div class="about-icon-wrap"><svg viewBox="0 0 24 24">
-                                    <polyline points="16 18 22 12 16 6" />
-                                    <polyline points="8 6 2 12 8 18" />
-                                </svg></div>
-                            <h3 data-i18n="card1_title">Backend Dev</h3>
-                            <p data-i18n="card1_desc">Scalable server-side apps with modern frameworks and best practices.</p>
-                        </div>
-                        <div class="about-card">
-                            <div class="about-icon-wrap"><svg viewBox="0 0 24 24">
-                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                                </svg></div>
-                            <h3 data-i18n="card2_title">Cyber Security</h3>
-                            <p data-i18n="card2_desc">Penetration testing, IDOR, and secure architecture design.</p>
-                        </div>
-                        <div class="about-card">
-                            <div class="about-icon-wrap"><svg viewBox="0 0 24 24">
-                                    <ellipse cx="12" cy="5" rx="9" ry="3" />
-                                    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
-                                    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
-                                </svg></div>
-                            <h3 data-i18n="card3_title">Database</h3>
-                            <p data-i18n="card3_desc">Design and optimize MySQL & PostgreSQL for performance and security.</p>
-                        </div>
-                        <div class="about-card">
-                            <div class="about-icon-wrap"><svg viewBox="0 0 24 24">
-                                    <rect x="2" y="3" width="20" height="14" rx="2" />
-                                    <line x1="8" y1="21" x2="16" y2="21" />
-                                    <line x1="12" y1="17" x2="12" y2="21" />
-                                </svg></div>
-                            <h3 data-i18n="card4_title">Frontend</h3>
-                            <p data-i18n="card4_desc">Responsive UI with Tailwind, Bootstrap, and vanilla JavaScript.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="reveal-right">
-                    <div class="about-code-block">
-                        <div class="about-code-header">
-                            <div class="code-dot" style="background:#ff5f57"></div>
-                            <div class="code-dot" style="background:#ffbd2e"></div>
-                            <div class="code-dot" style="background:#28c840"></div>
-                            <span style="font-size:.72rem;color:var(--text3);margin-left:8px">niko.config.json</span>
-                        </div>
-                        <div class="code-line"><span class="code-punc">{</span></div>
-                        <div class="code-line"><span class="code-num">2</span><span class="code-key">"name"</span><span class="code-punc">: </span><span class="code-str">"Niko Surya Adi Prananta"</span><span class="code-punc">,</span></div>
-                        <div class="code-line"><span class="code-num">3</span><span class="code-key">"age"</span><span class="code-punc">: </span><span class="code-val">18</span><span class="code-punc">,</span></div>
-                        <div class="code-line"><span class="code-num">4</span><span class="code-key">"role"</span><span class="code-punc">: </span><span class="code-str">"Fullstack Dev"</span><span class="code-punc">,</span></div>
-                        <div class="code-line"><span class="code-num">5</span><span class="code-key">"location"</span><span class="code-punc">: </span><span class="code-str">"Indonesia 🇮🇩"</span><span class="code-punc">,</span></div>
-                        <div class="code-line"><span class="code-num">6</span><span class="code-key">"stack"</span><span class="code-punc">: [</span></div>
-                        <div class="code-line"><span class="code-num">7</span><span class="code-str">&nbsp;&nbsp;"Laravel"</span><span class="code-punc">, </span><span class="code-str">"PHP"</span><span class="code-punc">, </span><span class="code-str">"MySQL"</span></div>
-                        <div class="code-line"><span class="code-num">8</span><span class="code-punc">],</span></div>
-                        <div class="code-line"><span class="code-num">9</span><span class="code-key">"security"</span><span class="code-punc">: </span><span class="code-str">"Penetration Testing"</span><span class="code-punc">,</span></div>
-                        <div class="code-line"><span class="code-num">10</span><span class="code-key">"projects"</span><span class="code-punc">: </span><span class="code-val">70</span><span class="code-punc">,</span></div>
-                        <div class="code-line"><span class="code-num">11</span><span class="code-key">"available"</span><span class="code-punc">: </span><span class="code-val">true</span></div>
-                        <div class="code-line"><span class="code-punc">}</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="experience">
-        <div class="container">
-            <div class="reveal">
-                <div class="sec-label" data-i18n="exp_label">Career</div>
-                <h2 class="sec-title" data-i18n="exp_title">Work Experience</h2>
-            </div>
-            <div class="exp-timeline">
-                <div class="exp-item reveal" data-delay="1">
-                    <div class="exp-dot-wrap">
-                        <div class="exp-dot"></div>
-                    </div>
-                    <div class="exp-card">
-                        <div class="exp-top">
-                            <div>
-                                <div class="exp-role" data-i18n="exp1_role">Fullstack Developer</div>
-                                <div class="exp-company">PT Inovasi Cipta Teknologi</div>
-                            </div>
-                            <span class="exp-period" data-i18n="exp1_period">Aug 2025 – Dec 2026</span>
-                        </div>
-                        <ul class="exp-points">
-                            <li data-i18n="exp1_p1">Developed complete PMB (Student Admission) web application with documentation and user-friendly interface</li>
-                            <li data-i18n="exp1_p2">Built integrated payment gateway connected with bank financial systems for seamless transactions</li>
-                            <li data-i18n="exp1_p3">Created RESTful API web services for client integrations with full documentation and auth</li>
-                            <li data-i18n="exp1_p4">Performed weekly data backup operations every Friday for data integrity and disaster recovery</li>
-                        </ul>
-                        <div class="tag-row">
-                            <span class="tag">Laravel</span><span class="tag">API</span><span class="tag">Payment Gateway</span><span class="tag">MySQL</span><span class="tag">Documentation</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="exp-item reveal" data-delay="2">
-                    <div class="exp-dot-wrap">
-                        <div class="exp-dot"></div>
-                    </div>
-                    <div class="exp-card">
-                        <div class="exp-top">
-                            <div>
-                                <div class="exp-role" data-i18n="exp2_role">Backend Developer Intern</div>
-                                <div class="exp-company">Global Intermedia Nusantara</div>
-                            </div>
-                            <span class="exp-period mint" data-i18n="exp2_period">Jan – May 2025 (5 mo.)</span>
-                        </div>
-                        <ul class="exp-points">
-                            <li data-i18n="exp2_p1">Developed backend API for SIDes (Village Information System) using Laravel</li>
-                            <li data-i18n="exp2_p2">Created RESTful endpoints for digital village service management and document processing</li>
-                            <li data-i18n="exp2_p3">Built API for waste checking (cek limbah) to support environmental data workflows</li>
-                            <li data-i18n="exp2_p4">Collaborated with frontend team for smooth API integration and performance</li>
-                        </ul>
-                        <div class="tag-row">
-                            <span class="tag mint">Laravel</span><span class="tag mint">REST API</span><span class="tag mint">e-Government</span><span class="tag mint">MySQL</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills">
-        <div class="container">
-            <div class="skills-intro reveal">
-                <div class="sec-label" data-i18n="skills_label">Tech Stack</div>
-                <h2 class="sec-title" data-i18n="skills_title">Technologies I Use</h2>
-                <p class="sec-sub" data-i18n="skills_desc">A curated set of tools and technologies I work with professionally.</p>
-            </div>
-            <div class="skills-grid">
-                <div class="skill-item reveal" data-delay="1">
-                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#e34f26,#f06529)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"></div>
-                    <div class="skill-label">HTML5</div>
-                </div>
-                <div class="skill-item reveal" data-delay="1">
-                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#1572b6,#33a9dc)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3"></div>
-                    <div class="skill-label">CSS3</div>
-                </div>
-                <div class="skill-item reveal" data-delay="2">
-                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#f7df1e,#c8a200)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"></div>
-                    <div class="skill-label">JavaScript</div>
-                </div>
-                <div class="skill-item reveal" data-delay="2">
-                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#339933,#4caf50)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js"></div>
-                    <div class="skill-label">Node.js</div>
-                </div>
-                <div class="skill-item reveal" data-delay="3">
-                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#777bb4,#8892bf)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP"></div>
-                    <div class="skill-label">PHP</div>
-                </div>
-                <div class="skill-item reveal" data-delay="3">
-                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#ff2d20,#e3170a)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-                            <path fill="#fff" d="m3.634 13.642-.852.526-.26.17-.192.154-.011.011-.01.012-.524.91-.004.014-.004.011-.024.124-.004.076-.01.214-.013.739-.01 81.01.014.74.008.214.006.077.019.111.559.966v.002l.132.105.136.09 48.141 27.704.46.246.143.072.162.06 1.113-.033.156-.058.145-.074.464-.248 46.038-26.445 1.587-.943.446-.274.134-.09.136-.108.004-.006.006-.004.545-.953.018-.066.115-26.524 23.45-13.756.431-.696-.175-29.314-25.371-14.896H99.12L74.73 27.568l-.013.008-.885.924-.303.518v.134l-.099 26.454L54.616 66.39l-.182-50.808v-.134l-.394-.677L27.704.064 27.464 0z" />
-                        </svg></div>
-                    <div class="skill-label">Laravel</div>
-                </div>
-                <div class="skill-item reveal" data-delay="4">
-                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#7952b3,#9b74d8)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap"></div>
-                    <div class="skill-label">Bootstrap</div>
-                </div>
-                <div class="skill-item reveal" data-delay="4">
-                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#0e7490,#0891b2)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-                            <path d="M64.004 25.602c-17.067 0-27.73 8.53-32 25.597 6.398-8.531 13.867-11.73 22.398-9.597 4.871 1.214 8.352 4.746 12.207 8.66C72.883 56.629 80.145 64 96.004 64c17.066 0 27.73-8.531 32-25.602-6.399 8.536-13.867 11.735-22.399 9.602-4.87-1.215-8.347-4.746-12.207-8.66-6.27-6.367-13.53-13.738-29.394-13.738zM32.004 64c-17.066 0-27.73 8.531-32 25.602C6.402 81.066 13.87 77.867 22.402 80c4.871 1.215 8.352 4.746 12.207 8.66 6.274 6.367 13.536 13.738 29.395 13.738 17.066 0 27.73-8.53 32-25.597-6.399 8.531-13.867 11.73-22.399 9.597-4.87-1.214-8.347-4.746-12.207-8.66C55.128 71.371 47.868 64 32.004 64z" fill="#38bdf8" />
-                        </svg></div>
-                    <div class="skill-label">Tailwind</div>
-                </div>
-                <div class="skill-item reveal" data-delay="5">
-                    <div class="skill-icon-box" style="background:#111"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" style="filter:invert(1)"></div>
-                    <div class="skill-label">Next.js</div>
-                </div>
-                <div class="skill-item reveal" data-delay="5">
-                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#ff6c37,#ff8a65)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" alt="Postman"></div>
-                    <div class="skill-label">Postman</div>
-                </div>
-                <div class="skill-item reveal" data-delay="1">
-                    <div class="skill-icon-box" style="background:#1a1a1a"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="filter:invert(1)"></div>
-                    <div class="skill-label">GitHub</div>
-                </div>
-                <div class="skill-item reveal" data-delaiy="2">
-                    <div class="skill-icon-box" style="background:#1a1a1a"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux"></div>
-                    <div class="skill-label">Linux</div>
-                </div>
-                <div class="skill-item reveal" data-delay="3">
-                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#336791,#4b7ba7)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL"></div>
-                    <div class="skill-label">PostgreSQL</div>
-                </div>
-                <div class="skill-item reveal" data-delay="4">
-                    <div class="skill-icon-box" style="background: linear-gradient(135deg, rgb(11, 11, 11), #005d7a); border: 1px solid rgba(0, 117, 143, 0.3); box-shadow: 0 0 20px rgba(0, 117, 143, 0.2); display: flex; align-items: center; justify-content: center;">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" style="width: 32px; height: 32px; filter: drop-shadow(0 2px 8px rgba(0,117,143,0.4));">
-                    </div>
-                    <div class="skill-label">MySQL</div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -2809,6 +2609,137 @@
         </div>
     </section>
 
+    <section id="skills">
+        <div class="container">
+            <div class="skills-intro reveal">
+                <div class="sec-label" data-i18n="skills_label">Tech Stack</div>
+                <h2 class="sec-title" data-i18n="skills_title">Technologies I Use</h2>
+                <p class="sec-sub" data-i18n="skills_desc">A curated set of tools and technologies I work with professionally.</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-item reveal" data-delay="1">
+                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#e34f26,#f06529)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"></div>
+                    <div class="skill-label">HTML5</div>
+                </div>
+                <div class="skill-item reveal" data-delay="1">
+                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#1572b6,#33a9dc)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3"></div>
+                    <div class="skill-label">CSS3</div>
+                </div>
+                <div class="skill-item reveal" data-delay="2">
+                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#f7df1e,#c8a200)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"></div>
+                    <div class="skill-label">JavaScript</div>
+                </div>
+                <div class="skill-item reveal" data-delay="2">
+                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#339933,#4caf50)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js"></div>
+                    <div class="skill-label">Node.js</div>
+                </div>
+                <div class="skill-item reveal" data-delay="3">
+                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#777bb4,#8892bf)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP"></div>
+                    <div class="skill-label">PHP</div>
+                </div>
+                <div class="skill-item reveal" data-delay="3">
+                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#ff2d20,#e3170a)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+                            <path fill="#fff" d="m3.634 13.642-.852.526-.26.17-.192.154-.011.011-.01.012-.524.91-.004.014-.004.011-.024.124-.004.076-.01.214-.013.739-.01 81.01.014.74.008.214.006.077.019.111.559.966v.002l.132.105.136.09 48.141 27.704.46.246.143.072.162.06 1.113-.033.156-.058.145-.074.464-.248 46.038-26.445 1.587-.943.446-.274.134-.09.136-.108.004-.006.006-.004.545-.953.018-.066.115-26.524 23.45-13.756.431-.696-.175-29.314-25.371-14.896H99.12L74.73 27.568l-.013.008-.885.924-.303.518v.134l-.099 26.454L54.616 66.39l-.182-50.808v-.134l-.394-.677L27.704.064 27.464 0z" />
+                        </svg></div>
+                    <div class="skill-label">Laravel</div>
+                </div>
+                <div class="skill-item reveal" data-delay="4">
+                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#7952b3,#9b74d8)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap"></div>
+                    <div class="skill-label">Bootstrap</div>
+                </div>
+                <div class="skill-item reveal" data-delay="4">
+                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#0e7490,#0891b2)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+                            <path d="M64.004 25.602c-17.067 0-27.73 8.53-32 25.597 6.398-8.531 13.867-11.73 22.398-9.597 4.871 1.214 8.352 4.746 12.207 8.66C72.883 56.629 80.145 64 96.004 64c17.066 0 27.73-8.531 32-25.602-6.399 8.536-13.867 11.735-22.399 9.602-4.87-1.215-8.347-4.746-12.207-8.66-6.27-6.367-13.53-13.738-29.394-13.738zM32.004 64c-17.066 0-27.73 8.531-32 25.602C6.402 81.066 13.87 77.867 22.402 80c4.871 1.215 8.352 4.746 12.207 8.66 6.274 6.367 13.536 13.738 29.395 13.738 17.066 0 27.73-8.53 32-25.597-6.399 8.531-13.867 11.73-22.399 9.597-4.87-1.214-8.347-4.746-12.207-8.66C55.128 71.371 47.868 64 32.004 64z" fill="#38bdf8" />
+                        </svg></div>
+                    <div class="skill-label">Tailwind</div>
+                </div>
+                <div class="skill-item reveal" data-delay="5">
+                    <div class="skill-icon-box" style="background:#111"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" style="filter:invert(1)"></div>
+                    <div class="skill-label">Next.js</div>
+                </div>
+                <div class="skill-item reveal" data-delay="5">
+                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#ff6c37,#ff8a65)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" alt="Postman"></div>
+                    <div class="skill-label">Postman</div>
+                </div>
+                <div class="skill-item reveal" data-delay="1">
+                    <div class="skill-icon-box" style="background:#1a1a1a"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="filter:invert(1)"></div>
+                    <div class="skill-label">GitHub</div>
+                </div>
+                <div class="skill-item reveal" data-delaiy="2">
+                    <div class="skill-icon-box" style="background:#1a1a1a"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux"></div>
+                    <div class="skill-label">Linux</div>
+                </div>
+                <div class="skill-item reveal" data-delay="3">
+                    <div class="skill-icon-box" style="background:linear-gradient(135deg,#336791,#4b7ba7)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL"></div>
+                    <div class="skill-label">PostgreSQL</div>
+                </div>
+                <div class="skill-item reveal" data-delay="4">
+                    <div class="skill-icon-box" style="background: linear-gradient(135deg, rgb(11, 11, 11), #005d7a); border: 1px solid rgba(0, 117, 143, 0.3); box-shadow: 0 0 20px rgba(0, 117, 143, 0.2); display: flex; align-items: center; justify-content: center;">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" style="width: 32px; height: 32px; filter: drop-shadow(0 2px 8px rgba(0,117,143,0.4));">
+                    </div>
+                    <div class="skill-label">MySQL</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <div class="reveal">
+                <div class="sec-label" data-i18n="exp_label">Career</div>
+                <h2 class="sec-title" data-i18n="exp_title">Work Experience</h2>
+            </div>
+            <div class="exp-timeline">
+                <div class="exp-item reveal" data-delay="1">
+                    <div class="exp-dot-wrap">
+                        <div class="exp-dot"></div>
+                    </div>
+                    <div class="exp-card">
+                        <div class="exp-top">
+                            <div>
+                                <div class="exp-role" data-i18n="exp1_role">Fullstack Developer</div>
+                                <div class="exp-company">PT Inovasi Cipta Teknologi</div>
+                            </div>
+                            <span class="exp-period" data-i18n="exp1_period">Aug 2025 – Dec 2026</span>
+                        </div>
+                        <ul class="exp-points">
+                            <li data-i18n="exp1_p1">Developed complete PMB (Student Admission) web application with documentation and user-friendly interface</li>
+                            <li data-i18n="exp1_p2">Built integrated payment gateway connected with bank financial systems for seamless transactions</li>
+                            <li data-i18n="exp1_p3">Created RESTful API web services for client integrations with full documentation and auth</li>
+                            <li data-i18n="exp1_p4">Performed weekly data backup operations every Friday for data integrity and disaster recovery</li>
+                        </ul>
+                        <div class="tag-row">
+                            <span class="tag">Laravel</span><span class="tag">API</span><span class="tag">Payment Gateway</span><span class="tag">MySQL</span><span class="tag">Documentation</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="exp-item reveal" data-delay="2">
+                    <div class="exp-dot-wrap">
+                        <div class="exp-dot"></div>
+                    </div>
+                    <div class="exp-card">
+                        <div class="exp-top">
+                            <div>
+                                <div class="exp-role" data-i18n="exp2_role">Backend Developer Intern</div>
+                                <div class="exp-company">Global Intermedia Nusantara</div>
+                            </div>
+                            <span class="exp-period mint" data-i18n="exp2_period">Jan – May 2025 (5 mo.)</span>
+                        </div>
+                        <ul class="exp-points">
+                            <li data-i18n="exp2_p1">Developed backend API for SIDes (Village Information System) using Laravel</li>
+                            <li data-i18n="exp2_p2">Created RESTful endpoints for digital village service management and document processing</li>
+                            <li data-i18n="exp2_p3">Built API for waste checking (cek limbah) to support environmental data workflows</li>
+                            <li data-i18n="exp2_p4">Collaborated with frontend team for smooth API integration and performance</li>
+                        </ul>
+                        <div class="tag-row">
+                            <span class="tag mint">Laravel</span><span class="tag mint">REST API</span><span class="tag mint">e-Government</span><span class="tag mint">MySQL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="certifications">
         <div class="container">
             <div class="reveal" style="text-align:center">
@@ -2816,6 +2747,22 @@
                 <h2 class="sec-title" data-i18n="cert_title">My Certifications</h2>
             </div>
             <div class="certs-grid">
+                <div class="cert-card reveal" data-delay="1">
+                    <div class="cert-thumb"><img src="https://i.ibb.co.com/W4fJj0jh/Whats-App-Image-2026-08-17-at-15-11-06.jpg" alt="CRTA Certified Red Team Analyst" loading="lazy"></div>
+                    <div class="cert-body">
+                        <div class="cert-title" data-i18n="cert7_title">CRTA (Certified Red Team Analyst)</div>
+                        <p class="cert-desc" data-i18n="cert7_desc">CyberWarfare Labs certification covering practical red teaming, Active Directory exploitation, Kerberos attacks, and network pivoting.</p>
+                        <div class="tag-row"><span class="tag red">Red Team</span><span class="tag red">Active Directory</span><span class="tag red">Pentest</span></div>
+                    </div>
+                </div>
+                <div class="cert-card reveal" data-delay="2">
+                    <div class="cert-thumb"><img src="https://i.ibb.co.com/zTsmm3f5/Whats-App-Image-2026-08-17-at-15-11-06-1.jpg" alt="C3SA Certified Cyber Security Analyst" loading="lazy"></div>
+                    <div class="cert-body">
+                        <div class="cert-title" data-i18n="cert8_title">C3SA (Certified Cyber Security Analyst)</div>
+                        <p class="cert-desc" data-i18n="cert8_desc">CyberWarfare Labs certification covering network and web security, vulnerability analysis, cloud fundamentals, and SOC operations.</p>
+                        <div class="tag-row"><span class="tag red">Cyber Security</span><span class="tag red">SOC</span><span class="tag red">Vulnerability Analysis</span></div>
+                    </div>
+                </div>
                 <div class="cert-card reveal" data-delay="1">
                     <div class="cert-thumb"><img src="https://f.top4top.io/p_33511ctg91.jpg" alt="LKS" loading="lazy"></div>
                     <div class="cert-body">
@@ -2865,6 +2812,75 @@
                         <div class="cert-title" data-i18n="cert6_title">Fundamental Computer Networking</div>
                         <p class="cert-desc" data-i18n="cert6_desc">Understanding the basics of computer networking, including the OSI model, TCP/IP, routing, switching, and basic network configuration.</p>
                         <div class="tag-row"><span class="tag">OSI Layer</span><span class="tag">TCP/IP</span><span class="tag">Routing</span><span class="tag">Switching</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="reveal-left">
+                    <div class="sec-label" data-i18n="about_label">About Me</div>
+                    <h2 class="sec-title" data-i18n="about_title">Who am I?</h2>
+                    <p class="sec-sub" data-i18n="about_desc">I am a fullstack developer with a focus on cybersecurity. I have experience building solid web applications and identifying security vulnerabilities to keep systems secure. I can also use AI to speed up my work by 3-5x.</p>
+                    <div class="about-cards-row">
+                        <div class="about-card">
+                            <div class="about-icon-wrap"><svg viewBox="0 0 24 24">
+                                    <polyline points="16 18 22 12 16 6" />
+                                    <polyline points="8 6 2 12 8 18" />
+                                </svg></div>
+                            <h3 data-i18n="card1_title">Backend Dev</h3>
+                            <p data-i18n="card1_desc">Scalable server-side apps with modern frameworks and best practices.</p>
+                        </div>
+                        <div class="about-card">
+                            <div class="about-icon-wrap"><svg viewBox="0 0 24 24">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                </svg></div>
+                            <h3 data-i18n="card2_title">Cyber Security</h3>
+                            <p data-i18n="card2_desc">Penetration testing, IDOR, and secure architecture design.</p>
+                        </div>
+                        <div class="about-card">
+                            <div class="about-icon-wrap"><svg viewBox="0 0 24 24">
+                                    <ellipse cx="12" cy="5" rx="9" ry="3" />
+                                    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+                                    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+                                </svg></div>
+                            <h3 data-i18n="card3_title">Database</h3>
+                            <p data-i18n="card3_desc">Design and optimize MySQL & PostgreSQL for performance and security.</p>
+                        </div>
+                        <div class="about-card">
+                            <div class="about-icon-wrap"><svg viewBox="0 0 24 24">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" />
+                                    <line x1="8" y1="21" x2="16" y2="21" />
+                                    <line x1="12" y1="17" x2="12" y2="21" />
+                                </svg></div>
+                            <h3 data-i18n="card4_title">Frontend</h3>
+                            <p data-i18n="card4_desc">Responsive UI with Tailwind, Bootstrap, and vanilla JavaScript.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal-right">
+                    <div class="about-code-block">
+                        <div class="about-code-header">
+                            <div class="code-dot" style="background:#ff5f57"></div>
+                            <div class="code-dot" style="background:#ffbd2e"></div>
+                            <div class="code-dot" style="background:#28c840"></div>
+                            <span style="font-size:.72rem;color:var(--text3);margin-left:8px">niko.config.json</span>
+                        </div>
+                        <div class="code-line"><span class="code-punc">{</span></div>
+                        <div class="code-line"><span class="code-num">2</span><span class="code-key">"name"</span><span class="code-punc">: </span><span class="code-str">"Niko Surya Adi Prananta"</span><span class="code-punc">,</span></div>
+                        <div class="code-line"><span class="code-num">3</span><span class="code-key">"age"</span><span class="code-punc">: </span><span class="code-val">18</span><span class="code-punc">,</span></div>
+                        <div class="code-line"><span class="code-num">4</span><span class="code-key">"role"</span><span class="code-punc">: </span><span class="code-str">"Fullstack Dev"</span><span class="code-punc">,</span></div>
+                        <div class="code-line"><span class="code-num">5</span><span class="code-key">"location"</span><span class="code-punc">: </span><span class="code-str">"Indonesia 🇮🇩"</span><span class="code-punc">,</span></div>
+                        <div class="code-line"><span class="code-num">6</span><span class="code-key">"stack"</span><span class="code-punc">: [</span></div>
+                        <div class="code-line"><span class="code-num">7</span><span class="code-str">&nbsp;&nbsp;"Laravel"</span><span class="code-punc">, </span><span class="code-str">"PHP"</span><span class="code-punc">, </span><span class="code-str">"MySQL"</span></div>
+                        <div class="code-line"><span class="code-num">8</span><span class="code-punc">],</span></div>
+                        <div class="code-line"><span class="code-num">9</span><span class="code-key">"security"</span><span class="code-punc">: </span><span class="code-str">"Penetration Testing"</span><span class="code-punc">,</span></div>
+                        <div class="code-line"><span class="code-num">10</span><span class="code-key">"projects"</span><span class="code-punc">: </span><span class="code-val">70</span><span class="code-punc">,</span></div>
+                        <div class="code-line"><span class="code-num">11</span><span class="code-key">"available"</span><span class="code-punc">: </span><span class="code-val">true</span></div>
+                        <div class="code-line"><span class="code-punc">}</span></div>
                     </div>
                 </div>
             </div>
@@ -3104,6 +3120,10 @@
                     cert5_desc: "Menguasai tata bahasa dasar, percakapan sehari-hari, serta keterampilan membaca dan menulis dalam bahasa Inggris.",
                     cert6_title: "Fundamental Jaringan Komputer",
                     cert6_desc: "Memahami dasar-dasar jaringan komputer, termasuk model OSI, TCP/IP, routing, switching, dan konfigurasi jaringan dasar.",
+                    cert7_title: "CRTA (Certified Red Team Analyst)",
+                    cert7_desc: "Sertifikasi CyberWarfare Labs yang mencakup red teaming praktis, eksploitasi Active Directory, serangan Kerberos, dan network pivoting.",
+                    cert8_title: "C3SA (Certified Cyber Security Analyst)",
+                    cert8_desc: "Sertifikasi CyberWarfare Labs yang mencakup keamanan jaringan dan web, analisis kerentanan, dasar cloud, dan operasi SOC.",
                     footer_tag: "Membangun web, satu commit setiap saat.",
                     footer_rights: "Hak Cipta Dilindungi.",
                     p16_desc: "Aplikasi POS berbasis web untuk mengelola transaksi, produk, inventaris, dan laporan penjualan untuk kasir dan admin.",
@@ -3197,6 +3217,10 @@
                     cert5_desc: "Passed the English proficiency quiz covering reading comprehension, vocabulary, and basic grammar.",
                     cert6_title: "Fundamental Computer Networking",
                     cert6_desc: "Understanding the basics of computer networking, including the OSI model, TCP/IP, routing, switching, and basic network configuration.",
+                    cert7_title: "CRTA (Certified Red Team Analyst)",
+                    cert7_desc: "CyberWarfare Labs certification covering practical red teaming, Active Directory exploitation, Kerberos attacks, and network pivoting.",
+                    cert8_title: "C3SA (Certified Cyber Security Analyst)",
+                    cert8_desc: "CyberWarfare Labs certification covering network and web security, vulnerability analysis, cloud fundamentals, and SOC operations.",
                     footer_tag: "Building the web, one commit at a time.",
                     footer_rights: "All Rights Reserved.",
                     p16_desc: "Web-based POS for managing transactions, products, inventory, and sales reports for cashier and admin workflows.",
