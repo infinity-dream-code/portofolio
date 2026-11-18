@@ -67,42 +67,57 @@
             position: fixed;
             width: 8px;
             height: 8px;
-            background: var(--mint);
+            background: #06FFA5;
             border-radius: 50%;
             pointer-events: none;
-            z-index: 10050;
+            z-index: 100010;
+            left: -100px;
+            top: -100px;
             transform: translate(-50%, -50%);
-            transition: transform .1s, background .2s, mix-blend-mode .2s;
-            mix-blend-mode: screen
+            transition: transform .1s, background .2s, width .2s, height .2s;
+            box-shadow: 0 0 10px rgba(6, 255, 165, .65);
+            opacity: 1
         }
 
         .cursor-ring {
             position: fixed;
             width: 36px;
             height: 36px;
-            border: 1.5px solid rgba(124, 58, 237, .6);
+            border: 1.5px solid rgba(124, 58, 237, .75);
             border-radius: 50%;
             pointer-events: none;
-            z-index: 10049;
+            z-index: 100009;
+            left: -100px;
+            top: -100px;
             transform: translate(-50%, -50%);
-            transition: transform .12s ease, width .2s, height .2s, opacity .2s, border-color .2s, mix-blend-mode .2s
+            transition: transform .12s ease, width .2s, height .2s, opacity .2s, border-color .2s;
+            box-shadow: 0 0 14px rgba(124, 58, 237, .2);
+            opacity: 1
         }
 
         body.lightbox-open .cursor-dot {
-            mix-blend-mode: normal;
             background: #06FFA5;
             box-shadow: 0 0 10px rgba(6, 255, 165, .7)
         }
 
         body.lightbox-open .cursor-ring {
-            mix-blend-mode: normal;
             border-color: rgba(6, 255, 165, .85);
             box-shadow: 0 0 16px rgba(6, 255, 165, .25)
         }
 
-        body:hover .cursor-dot,
-        body:hover .cursor-ring {
-            opacity: 1
+        /* no custom cursor during earth preloader */
+        body.preloading .cursor-dot,
+        body.preloading .cursor-ring {
+            opacity: 0 !important;
+            visibility: hidden !important
+        }
+
+        body.preloading {
+            cursor: none
+        }
+
+        body.preloading #preloaderCanvas {
+            cursor: none !important
         }
 
         @media (hover: none),
@@ -525,6 +540,31 @@
             z-index: 0
         }
 
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(124, 58, 237, .05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(124, 58, 237, .05) 1px, transparent 1px);
+            background-size: 56px 56px;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, #000 20%, transparent 75%);
+            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, #000 20%, transparent 75%);
+            opacity: .55
+        }
+
+        .hero-vignette {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 50% 45% at 70% 40%, rgba(124, 58, 237, .16), transparent 60%),
+                radial-gradient(ellipse 40% 40% at 20% 70%, rgba(6, 255, 165, .08), transparent 55%),
+                radial-gradient(ellipse 80% 70% at 50% 100%, rgba(5, 5, 8, .85), transparent 50%)
+        }
+
         .hero-inner {
             max-width: 1280px;
             margin: 0 auto;
@@ -538,6 +578,11 @@
             width: 100%
         }
 
+        .hero-copy {
+            transition: transform .45s cubic-bezier(.2, .7, .3, 1);
+            will-change: transform
+        }
+
         .hero-eyebrow {
             display: inline-flex;
             align-items: center;
@@ -546,7 +591,14 @@
             border: 1px solid rgba(6, 255, 165, .2);
             border-radius: 24px;
             padding: 6px 16px;
-            margin-bottom: 24px
+            margin-bottom: 24px;
+            transition: transform .35s cubic-bezier(.2, .7, .3, 1), border-color .3s, box-shadow .3s
+        }
+
+        .hero-eyebrow:hover {
+            transform: translateY(-2px);
+            border-color: rgba(6, 255, 165, .45);
+            box-shadow: 0 0 24px rgba(6, 255, 165, .12)
         }
 
         .hero-eyebrow-dot {
@@ -617,7 +669,8 @@
             margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 8px
+            gap: 10px;
+            min-height: 1.4em
         }
 
         .hero-role-sep {
@@ -640,6 +693,15 @@
             flex-wrap: wrap
         }
 
+        .btn-v,
+        .btn-g {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            will-change: transform
+        }
+
         .btn-v {
             padding: 13px 30px;
             background: linear-gradient(135deg, var(--violet), #5B21B6);
@@ -647,7 +709,7 @@
             border-radius: 10px;
             font-weight: 600;
             font-size: .875rem;
-            transition: all .25s;
+            transition: box-shadow .25s, border-color .25s;
             border: 1px solid rgba(157, 92, 246, .3);
             position: relative;
             overflow: hidden
@@ -667,7 +729,6 @@
         }
 
         .btn-v:hover {
-            transform: translateY(-3px);
             box-shadow: 0 12px 32px rgba(124, 58, 237, .4)
         }
 
@@ -678,14 +739,13 @@
             border-radius: 10px;
             font-weight: 600;
             font-size: .875rem;
-            transition: all .25s;
+            transition: background .25s, border-color .25s, box-shadow .25s;
             background: rgba(6, 255, 165, .05)
         }
 
         .btn-g:hover {
             background: rgba(6, 255, 165, .12);
             border-color: rgba(6, 255, 165, .6);
-            transform: translateY(-3px);
             box-shadow: 0 12px 32px rgba(6, 255, 165, .15)
         }
 
@@ -702,14 +762,15 @@
             background: rgba(17, 17, 40, .65);
             border: 1px solid var(--border2);
             backdrop-filter: blur(10px);
-            transition: transform .3s, border-color .3s, box-shadow .3s;
-            min-width: 108px
+            transition: transform .35s cubic-bezier(.2, .7, .3, 1), border-color .3s, box-shadow .3s;
+            min-width: 108px;
+            cursor: default
         }
 
         .hero-stat:hover {
-            transform: translateY(-4px);
-            border-color: rgba(124, 58, 237, .4);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, .4)
+            transform: translateY(-6px);
+            border-color: rgba(124, 58, 237, .45);
+            box-shadow: 0 16px 36px rgba(124, 58, 237, .18)
         }
 
         .hero-stat-num {
@@ -747,29 +808,58 @@
         .hero-photo-wrap {
             position: relative;
             width: 300px;
-            height: 300px
+            height: 300px;
+            transform-style: preserve-3d;
+            perspective: 900px;
+            --rx: 0deg;
+            --ry: 0deg;
+            --sx: 50%;
+            --sy: 28%;
+            transition: transform .45s cubic-bezier(.2, .7, .3, 1);
+            animation: photoFloat 5.5s ease-in-out infinite
         }
 
-        .hero-photo-ring {
+        @keyframes photoFloat {
+            0%, 100% { transform: translateY(0) }
+            50% { transform: translateY(-10px) }
+        }
+
+        .hero-photo-wrap:hover {
+            animation-play-state: paused
+        }
+
+        .hero-photo-stage {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transform: rotateX(var(--rx)) rotateY(var(--ry));
+            transition: transform .2s ease-out;
+            border-radius: 50%
+        }
+
+        .hero-photo-bezel {
             position: absolute;
-            inset: -12px;
+            inset: -5px;
             border-radius: 50%;
-            border: 2px solid transparent;
-            background: linear-gradient(135deg, var(--violet), var(--mint)) border-box;
-            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: destination-out;
-            mask-composite: exclude;
-            animation: spin-ring 8s linear infinite
+            background:
+                linear-gradient(145deg, rgba(255, 255, 255, .12), transparent 40%, transparent 60%, rgba(0, 0, 0, .3)),
+                linear-gradient(135deg, #1a1528, #0d0d1a 50%, #121820);
+            box-shadow:
+                inset 0 1px 1px rgba(255, 255, 255, .12),
+                inset 0 -1px 4px rgba(0, 0, 0, .4),
+                0 0 0 1px rgba(157, 92, 246, .12);
+            transform: translateZ(-6px);
+            pointer-events: none
         }
 
-        @keyframes spin-ring {
-            from {
-                transform: rotate(0deg)
-            }
-
-            to {
-                transform: rotate(360deg)
-            }
+        .hero-photo-bezel::after {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            border-radius: 50%;
+            background: var(--card);
+            box-shadow: inset 0 0 12px rgba(0, 0, 0, .4)
         }
 
         .hero-photo {
@@ -780,19 +870,86 @@
             border: 3px solid var(--card)
         }
 
+        .hero-photo-wrap .glitch-wrapper {
+            box-shadow:
+                inset 0 0 24px rgba(0, 0, 0, .22),
+                0 8px 18px rgba(0, 0, 0, .28);
+            transform: translateZ(14px);
+            border: 1px solid rgba(240, 238, 255, .06)
+        }
+
         .hero-photo-glow {
             position: absolute;
-            inset: -30px;
-            background: radial-gradient(circle, rgba(124, 58, 237, .2) 0%, transparent 70%);
+            inset: -24px;
+            background:
+                radial-gradient(circle at 40% 35%, rgba(157, 92, 246, .14), transparent 58%),
+                radial-gradient(circle at 65% 70%, rgba(6, 255, 165, .07), transparent 55%);
             border-radius: 50%;
-            z-index: -1
+            z-index: -2;
+            filter: blur(12px);
+            opacity: .7;
+            transition: transform .4s ease, opacity .4s;
+            transform: translateZ(-24px)
+        }
+
+        .hero-photo-wrap:hover .hero-photo-glow {
+            transform: translateZ(-24px) scale(1.04);
+            opacity: .85
+        }
+
+        .hero-photo-shadow {
+            position: absolute;
+            left: 18%;
+            right: 18%;
+            bottom: -18px;
+            height: 22px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, rgba(0, 0, 0, .32), transparent 72%);
+            filter: blur(8px);
+            z-index: -1;
+            transform: translateX(calc(var(--ry) * 0.25));
+            transition: transform .2s ease-out, opacity .3s;
+            pointer-events: none;
+            opacity: .75
+        }
+
+        .hero-photo-sheen {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 4;
+            background:
+                linear-gradient(125deg, rgba(255, 255, 255, .14) 0%, rgba(255, 255, 255, .03) 26%, transparent 46%),
+                radial-gradient(circle at var(--sx) var(--sy), rgba(255, 255, 255, .1), transparent 40%);
+            mix-blend-mode: soft-light;
+            transform: translateZ(18px);
+            opacity: .55
+        }
+
+        .hero-photo-spotlight {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 5;
+            background: radial-gradient(circle 90px at var(--sx) var(--sy), rgba(255, 255, 255, .12), transparent 55%);
+            mix-blend-mode: overlay;
+            opacity: .2;
+            transition: opacity .35s;
+            transform: translateZ(20px)
+        }
+
+        .hero-photo-wrap:hover .hero-photo-spotlight {
+            opacity: .4
         }
 
         .hero-badges {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             flex-wrap: wrap;
-            justify-content: center
+            justify-content: center;
+            margin-top: 8px
         }
 
         .hero-badge {
@@ -807,25 +964,38 @@
             color: var(--text2);
             font-weight: 500;
             backdrop-filter: blur(10px);
-            transition: transform .3s, border-color .3s, color .3s, box-shadow .3s
+            transition: border-color .3s, color .3s, box-shadow .3s, background .3s;
+            animation: badgeFloat 4.5s ease-in-out infinite;
+            animation-delay: var(--bd, 0s);
+            cursor: default
+        }
+
+        .hero-badge:nth-child(2) { --bd: .6s }
+        .hero-badge:nth-child(3) { --bd: 1.2s }
+
+        @keyframes badgeFloat {
+            0%, 100% { transform: translateY(0) }
+            50% { transform: translateY(-7px) }
         }
 
         .hero-badge:hover {
-            transform: translateY(-3px);
-            border-color: rgba(124, 58, 237, .45);
+            border-color: rgba(6, 255, 165, .4);
             color: var(--text);
-            box-shadow: 0 10px 28px rgba(0, 0, 0, .35)
+            background: rgba(17, 17, 40, .92);
+            box-shadow: 0 10px 28px rgba(6, 255, 165, .12);
+            animation-play-state: paused
         }
 
         .hero-badge svg {
             width: 14px;
             height: 14px;
             opacity: .6;
-            transition: opacity .3s
+            transition: opacity .3s, color .3s
         }
 
         .hero-badge:hover svg {
-            opacity: 1
+            opacity: 1;
+            color: var(--mint)
         }
 
         section {
@@ -2700,76 +2870,7 @@
             animation: preAuraDrift 8s ease-in-out infinite alternate
         }
 
-        .pre-spectacle {
-            position: absolute;
-            left: 50%;
-            top: 46%;
-            width: min(520px, 78vw);
-            aspect-ratio: 1;
-            transform: translate(-50%, -50%);
-            z-index: 2;
-            pointer-events: none
-        }
-
-        #preloader.has-webgl .pre-spectacle {
-            opacity: 0;
-            visibility: hidden
-        }
-
-        .pre-orb {
-            position: absolute;
-            inset: 18%;
-            border-radius: 42% 58% 55% 45% / 48% 42% 58% 52%;
-            background: linear-gradient(135deg, #14b8a6, #6366f1 45%, #c45c26);
-            filter: blur(0.5px);
-            box-shadow:
-                0 0 80px rgba(20, 184, 166, .45),
-                0 0 140px rgba(99, 102, 241, .3),
-                inset 0 0 60px rgba(255, 255, 255, .25);
-            animation: preOrbMorph 6s ease-in-out infinite
-        }
-
-        .pre-ring {
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            border: 1.5px solid rgba(244, 241, 234, .2);
-            animation: preSpin 18s linear infinite
-        }
-
-        .pre-ring.r2 {
-            inset: 8%;
-            border-color: rgba(20, 184, 166, .45);
-            animation-duration: 11s;
-            animation-direction: reverse
-        }
-
-        .pre-ring.r3 {
-            inset: -6%;
-            border-style: dashed;
-            border-color: rgba(196, 92, 38, .4);
-            animation-duration: 24s
-        }
-
-        .pre-ring.r1::before,
-        .pre-ring.r2::before {
-            content: '';
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            top: -6px;
-            left: calc(50% - 6px);
-            background: #14b8a6;
-            box-shadow: 0 0 24px #14b8a6, 0 0 48px rgba(20, 184, 166, .6)
-        }
-
-        .pre-ring.r2::before {
-            background: #c45c26;
-            box-shadow: 0 0 24px #c45c26
-        }
-
-            .pre-ui {
+        .pre-ui {
             position: absolute;
             inset: 0;
             z-index: 6;
@@ -2779,10 +2880,6 @@
             padding: clamp(22px, 4vw, 44px);
             pointer-events: none;
             transition: opacity .5s ease, filter .5s ease, transform .55s ease
-        }
-
-        .pre-hud {
-            pointer-events: none
         }
 
         .pre-top {
@@ -2819,20 +2916,23 @@
             transform: translateY(8px)
         }
 
+        /* keep HUD off the globe — bottom-left dock */
         .pre-hud {
-            align-self: center;
-            text-align: center;
-            margin-bottom: 2vh
+            pointer-events: none;
+            align-self: flex-start;
+            text-align: left;
+            margin: 0;
+            max-width: min(220px, 42vw)
         }
 
         .pre-count {
             font-family: 'Outfit', sans-serif;
             font-weight: 800;
-            font-size: clamp(3.2rem, 9vw, 5.5rem);
+            font-size: clamp(1.75rem, 4.5vw, 2.4rem);
             line-height: 1;
-            letter-spacing: -.05em;
+            letter-spacing: -.04em;
             color: #fff;
-            text-shadow: 0 10px 40px rgba(0, 0, 0, .45);
+            text-shadow: 0 8px 28px rgba(0, 0, 0, .5);
             font-variant-numeric: tabular-nums
         }
 
@@ -2842,16 +2942,16 @@
         }
 
         .pre-caption {
-            margin-top: 10px;
+            margin-top: 6px;
             font-family: 'Outfit', sans-serif;
-            font-size: .95rem;
-            color: rgba(244, 241, 234, .55)
+            font-size: .82rem;
+            color: rgba(244, 241, 234, .5)
         }
 
         .pre-line {
-            width: min(280px, 60vw);
+            width: min(160px, 38vw);
             height: 2px;
-            margin: 18px auto 0;
+            margin: 12px 0 0;
             border-radius: 999px;
             background: rgba(255, 255, 255, .1);
             overflow: hidden
@@ -2866,31 +2966,15 @@
             transition: width .12s linear
         }
 
-        .pre-hint {
-            position: absolute;
-            left: 50%;
-            bottom: clamp(22px, 4vw, 40px);
-            transform: translateX(-50%);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: .62rem;
-            letter-spacing: .22em;
-            text-transform: uppercase;
-            color: rgba(244, 241, 234, .35);
-            z-index: 7;
-            pointer-events: none
-        }
-
         /* exit: UI soft-out → camera dive → black hold → reveal site */
-        #preloader.exiting .pre-ui,
-        #preloader.exiting .pre-hint {
+        #preloader.exiting .pre-ui {
             opacity: 0;
             filter: blur(14px);
             transform: translateY(-10px) scale(0.98);
             transition: opacity .7s ease, filter .7s ease, transform .75s ease
         }
 
-        #preloader.exiting .pre-aura,
-        #preloader.exiting .pre-spectacle {
+        #preloader.exiting .pre-aura {
             opacity: 0;
             transition: opacity .6s ease
         }
@@ -2922,29 +3006,8 @@
             to { transform: translate(2%, 2%) scale(1.08) }
         }
 
-        @keyframes preOrbMorph {
-            0%, 100% {
-                border-radius: 42% 58% 55% 45% / 48% 42% 58% 52%;
-                transform: rotate(0deg) scale(1)
-            }
-            33% {
-                border-radius: 58% 42% 40% 60% / 55% 60% 40% 45%;
-                transform: rotate(25deg) scale(1.06)
-            }
-            66% {
-                border-radius: 40% 60% 58% 42% / 42% 48% 52% 58%;
-                transform: rotate(-18deg) scale(.96)
-            }
-        }
-
-        @keyframes preSpin {
-            to { transform: rotate(360deg) }
-        }
-
         @media (prefers-reduced-motion: reduce) {
-            .pre-aura,
-            .pre-orb,
-            .pre-ring {
+            .pre-aura {
                 animation: none !important
             }
 
@@ -3043,16 +3106,10 @@
     </style>
 </head>
 
-<body>
+<body class="preloading">
 
     <div id="preloader" aria-hidden="false" role="status" aria-live="polite" aria-label="Loading">
         <div class="pre-aura" aria-hidden="true"></div>
-        <div class="pre-spectacle" aria-hidden="true">
-            <div class="pre-ring r1"></div>
-            <div class="pre-ring r2"></div>
-            <div class="pre-ring r3"></div>
-            <div class="pre-orb"></div>
-        </div>
         <canvas id="preloaderCanvas"></canvas>
         <div class="pre-ui">
             <div class="pre-top">
@@ -3065,7 +3122,6 @@
                 <div class="pre-line"><div class="pre-line-fill" id="preBarFill"></div></div>
             </div>
         </div>
-        <div class="pre-hint" id="preHint">gerakkan mouse</div>
     </div>
 
     <div class="cursor-dot" id="cursorDot"></div>
@@ -3112,13 +3168,15 @@
 
     <section id="hero">
         <canvas class="hero-canvas" id="heroCanvas"></canvas>
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-vignette" aria-hidden="true"></div>
         <div class="blob-wrap" id="blobWrap">
             <div class="blob blob1"></div>
             <div class="blob blob2"></div>
             <div class="blob blob3"></div>
         </div>
         <div class="hero-inner">
-            <div>
+            <div class="hero-copy" id="heroCopy">
                 <div class="hero-eyebrow reveal">
                     <span class="hero-eyebrow-dot"></span>
                     <span data-i18n="hero_eyebrow">Available for work</span>
@@ -3134,36 +3192,39 @@
                 </div>
                 <p class="hero-desc reveal" data-delay="3" data-i18n="hero_desc">I build secure and scalable fullstack applications, and I identify vulnerabilities to keep systems protected.</p>
                 <div class="hero-btns reveal" data-delay="4">
-                    <a href="#projects" class="btn-v" data-i18n="hero_btn1">View Projects</a>
-                    <a href="https://wa.me/6285777433886" class="btn-g" data-i18n="hero_btn2">Let's Connect</a>
+                    <a href="#projects" class="btn-v mag-btn" data-i18n="hero_btn1">View Projects</a>
+                    <a href="https://wa.me/6285777433886" class="btn-g mag-btn" data-i18n="hero_btn2">Let's Connect</a>
                 </div>
-                <div class="hero-stats reveal" data-delay="5">
+                <div class="hero-stats reveal" data-delay="5" id="heroStats">
                     <div class="hero-stat">
-                        <div class="hero-stat-num">100<span>+</span></div>
+                        <div class="hero-stat-num"><span class="count-up" data-count="100">0</span><span>+</span></div>
                         <div class="hero-stat-label" data-i18n="stat_projects">Projects</div>
                     </div>
                     <div class="hero-stat">
-                        <div class="hero-stat-num">2<span>+</span></div>
+                        <div class="hero-stat-num"><span class="count-up" data-count="2">0</span><span>+</span></div>
                         <div class="hero-stat-label" data-i18n="stat_exp">Years Exp.</div>
                     </div>
                     <div class="hero-stat">
-                        <div class="hero-stat-num">10<span>+</span></div>
+                        <div class="hero-stat-num"><span class="count-up" data-count="10">0</span><span>+</span></div>
                         <div class="hero-stat-label" data-i18n="stat_clients">Clients</div>
                     </div>
                 </div>
             </div>
             <div class="hero-right reveal-right">
-                <div class="hero-photo-wrap">
-                    <div class="hero-photo-glow"></div>
-                    <div class="hero-photo-ring"></div>
-                    <div class="glitch-wrapper">
-                        <img class="glitch-img" src="https://i.pinimg.com/736x/e1/b7/9d/e1b79dd09b6ee428ea900ec8e43e98bc.jpg" alt="Niko Surya Adi Prananta" loading="eager">
-                        <div class="glitch-noise"></div>
+                <div class="hero-photo-wrap" id="heroPhoto">
+                    <div class="hero-photo-glow" aria-hidden="true"></div>
+                    <div class="hero-photo-shadow" aria-hidden="true"></div>
+                    <div class="hero-photo-stage">
+                        <div class="hero-photo-bezel" aria-hidden="true"></div>
+                        <div class="glitch-wrapper">
+                            <img class="glitch-img" src="https://i.pinimg.com/736x/e1/b7/9d/e1b79dd09b6ee428ea900ec8e43e98bc.jpg" alt="Niko Surya Adi Prananta" loading="eager">
+                            <div class="glitch-noise"></div>
+                        </div>
+                        <div class="hero-photo-sheen" aria-hidden="true"></div>
+                        <div class="hero-photo-spotlight" id="heroSpot" aria-hidden="true"></div>
                     </div>
                 </div>
-                <br>
                 <div class="hero-badges">
-                  
                     <div class="hero-badge">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -4058,7 +4119,6 @@
             const preBarFill = document.getElementById('preBarFill');
             const preCount = document.getElementById('preCount');
             const preStatus = document.getElementById('preStatus');
-            const preHint = document.getElementById('preHint');
             const preCaption = document.getElementById('preCaption');
             let stopPre3D = null;
 
@@ -4153,95 +4213,108 @@
                 const root = new THREE.Group();
                 scene.add(root);
 
-                // Realistic chrome-glass sphere (high poly, smooth)
-                const coreMat = new THREE.MeshPhysicalMaterial({
-                    color: 0x0f766e,
-                    metalness: 0.85,
-                    roughness: 0.12,
-                    clearcoat: 1,
-                    clearcoatRoughness: 0.08,
-                    reflectivity: 1,
-                    envMapIntensity: 1.35,
-                    emissive: 0x0f766e,
-                    emissiveIntensity: 0.18,
-                    flatShading: false
+                const TEX = 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/textures/planets/';
+                const loader = new THREE.TextureLoader();
+                function prepMap(tex) {
+                    if (!tex) return tex;
+                    if ('encoding' in tex && THREE.sRGBEncoding !== undefined) tex.encoding = THREE.sRGBEncoding;
+                    tex.anisotropy = Math.min(8, (renderer.capabilities.getMaxAnisotropy && renderer.capabilities.getMaxAnisotropy()) || 4);
+                    return tex;
+                }
+
+                const earthMap = prepMap(loader.load(TEX + 'earth_atmos_2048.jpg'));
+                const earthNormal = loader.load(TEX + 'earth_normal_2048.jpg');
+                const earthSpec = loader.load(TEX + 'earth_specular_2048.jpg');
+                const cloudsMap = prepMap(loader.load(TEX + 'earth_clouds_1024.png'));
+                const moonMap = prepMap(loader.load(TEX + 'moon_1024.jpg'));
+
+                // Earth
+                const coreMat = new THREE.MeshPhongMaterial({
+                    map: earthMap,
+                    normalMap: earthNormal,
+                    normalScale: new THREE.Vector2(0.85, 0.85),
+                    specularMap: earthSpec,
+                    specular: new THREE.Color(0x333333),
+                    shininess: 18,
+                    emissive: new THREE.Color(0x0a1f3a),
+                    emissiveIntensity: 0.12
                 });
-                const core = new THREE.Mesh(new THREE.SphereGeometry(1.35, 64, 64), coreMat);
+                const earthTilt = 0.41;
+                const EARTH_R = 1.35;
+                // Journey: India → Indonesia (eastward / ke kanan)
+                const IN_LAT = 21;
+                const IN_LON = 78;
+                const ID_LAT = -5;
+                const ID_LON = 112;
+
+                function latLonLocal(lat, lon, r) {
+                    const u = (lon + 180) / 360;
+                    const v = (90 - lat) / 180;
+                    const phi = u * Math.PI * 2;
+                    const theta = v * Math.PI;
+                    return new THREE.Vector3(
+                        -Math.cos(phi) * Math.sin(theta) * r,
+                        Math.cos(theta) * r,
+                        Math.sin(phi) * Math.sin(theta) * r
+                    );
+                }
+
+                // Y-spin that puts lon/lat toward the camera (+Z)
+                function yRotToFace(lat, lon) {
+                    const p = latLonLocal(lat, lon, 1);
+                    p.applyEuler(new THREE.Euler(0, 0, earthTilt, 'XYZ'));
+                    return Math.atan2(-p.x, p.z);
+                }
+
+                const startFaceY = yRotToFace(IN_LAT, IN_LON);
+                let endFaceY = yRotToFace(ID_LAT, ID_LON);
+                // Unwrap once — never jump ±360° mid-journey
+                while (endFaceY - startFaceY > Math.PI) endFaceY -= Math.PI * 2;
+                while (endFaceY - startFaceY < -Math.PI) endFaceY += Math.PI * 2;
+
+                const core = new THREE.Mesh(new THREE.SphereGeometry(EARTH_R, 64, 64), coreMat);
+                core.rotation.z = earthTilt;
+                core.rotation.y = startFaceY;
                 root.add(core);
 
-                // Inner dark sphere for depth
-                const inner = new THREE.Mesh(
-                    new THREE.SphereGeometry(0.95, 48, 48),
-                    new THREE.MeshPhysicalMaterial({
-                        color: 0x020617,
-                        metalness: 0.95,
-                        roughness: 0.2,
-                        envMapIntensity: 0.8
-                    })
-                );
-                root.add(inner);
-
-                // Soft glass shell
-                const shell = new THREE.Mesh(
-                    new THREE.SphereGeometry(1.62, 48, 48),
-                    new THREE.MeshPhysicalMaterial({
-                        color: 0xffffff,
-                        metalness: 0,
-                        roughness: 0,
-                        transmission: 0.85,
+                // Cloud layer
+                const clouds = new THREE.Mesh(
+                    new THREE.SphereGeometry(1.38, 64, 64),
+                    new THREE.MeshLambertMaterial({
+                        map: cloudsMap,
                         transparent: true,
-                        opacity: 0.35,
-                        thickness: 0.6,
-                        envMapIntensity: 1.1,
-                        clearcoat: 1,
-                        clearcoatRoughness: 0.05,
-                        side: THREE.FrontSide
+                        opacity: 0.45,
+                        depthWrite: false
                     })
                 );
-                // transmission may not work on all r128 builds — fallback opacity glass
-                if (shell.material.transmission === undefined) {
-                    shell.material.transmission = 0;
-                    shell.material.opacity = 0.18;
-                    shell.material.color = new THREE.Color(0x99f6e4);
-                }
+                clouds.rotation.z = earthTilt;
+                clouds.rotation.y = startFaceY + 0.03;
+                root.add(clouds);
+
+                // Soft atmosphere glow
+                const shell = new THREE.Mesh(
+                    new THREE.SphereGeometry(1.48, 48, 48),
+                    new THREE.MeshBasicMaterial({
+                        color: 0x4aa8ff,
+                        transparent: true,
+                        opacity: 0.12,
+                        side: THREE.BackSide,
+                        depthWrite: false
+                    })
+                );
                 root.add(shell);
 
-                // Polished metal rings
-                const ringMat = new THREE.MeshPhysicalMaterial({
-                    color: 0xccfbf1,
-                    metalness: 1,
-                    roughness: 0.18,
-                    clearcoat: 0.8,
-                    envMapIntensity: 1.2
+                // Moon stays in world space (right side) — not parented to spinning earth
+                const moonMat = new THREE.MeshPhongMaterial({
+                    map: moonMap,
+                    shininess: 4,
+                    specular: new THREE.Color(0x222222),
+                    transparent: true,
+                    opacity: 1
                 });
-                const ring = new THREE.Mesh(new THREE.TorusGeometry(2.15, 0.045, 32, 240), ringMat);
-                ring.rotation.x = Math.PI / 2.15;
-                root.add(ring);
-
-                // Small polished moons
-                const sats = new THREE.Group();
-                root.add(sats);
-                const satGeo = new THREE.SphereGeometry(0.09, 32, 32);
-                for (let i = 0; i < 10; i++) {
-                    const warm = i % 2 === 0;
-                    const sat = new THREE.Mesh(
-                        satGeo,
-                        new THREE.MeshPhysicalMaterial({
-                            color: warm ? 0x2dd4bf : 0xfb923c,
-                            metalness: 0.9,
-                            roughness: 0.15,
-                            clearcoat: 1,
-                            emissive: warm ? 0x0f766e : 0x9a3412,
-                            emissiveIntensity: 0.2,
-                            envMapIntensity: 1.1
-                        })
-                    );
-                    const a = (i / 10) * Math.PI * 2;
-                    const r = 2.15 + (i % 2) * 0.3;
-                    sat.userData = { a, r, speed: 0.4 + (i % 3) * 0.15 };
-                    sat.position.set(Math.cos(a) * r, Math.sin(a * 2) * 0.2, Math.sin(a) * r);
-                    sats.add(sat);
-                }
+                const moon = new THREE.Mesh(new THREE.SphereGeometry(0.36, 48, 48), moonMat);
+                moon.position.set(2.85, 0.35, 0.4);
+                scene.add(moon);
 
                 // Soft dust
                 const N = 700;
@@ -4281,10 +4354,10 @@
                 resize();
                 window.addEventListener('resize', resize);
 
-                // Smooth drag + inertia
+                // Light parallax only — journey spin is on the earth mesh, not the whole root
                 const orbit = {
-                    rotY: 0.4,
-                    rotX: 0.15,
+                    rotY: 0,
+                    rotX: -0.06,
                     velY: 0,
                     velX: 0,
                     dragging: false,
@@ -4295,6 +4368,8 @@
                     targetPX: 0,
                     targetPY: 0
                 };
+                let loadProgress = 0; // target 0..1 from preloader %
+                let smoothTravel = 0; // smoothed 0..1 for buttery spin
 
                 const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
@@ -4343,49 +4418,62 @@
                     window.addEventListener('pointermove', onPointerMove);
                     window.addEventListener('pointerup', onPointerUp);
                     window.addEventListener('pointercancel', onPointerUp);
-                    if (preHint) preHint.textContent = 'drag untuk memutar';
-                } else if (preHint) {
-                    preHint.style.display = 'none';
                 }
 
                 let raf = 0;
                 let stopped = false;
                 let t0 = 0;
+                let lastTs = 0;
                 let zooming = false;
                 let zoomT = 0;
                 let zoomDone = null;
                 const camZ0 = 5.4;
-                // Stay outside the glass shell (~1.62) — never clip into geometry
-                const camZ1 = 2.05;
-                const zoomDur = 1.55;
+                const camZ1 = 2.15;
+                const zoomDur = 1.15;
                 let startCam = { x: 0, y: 0.15, z: camZ0, fov: 42 };
+                let startCoreY = 0;
+                let startCloudY = 0;
+                let targetCoreY = endFaceY;
+                let moonStart = moon.position.clone();
 
-                function animate() {
+                function animate(ts) {
                     if (stopped) return;
                     raf = requestAnimationFrame(animate);
-                    t0 += 0.016;
+                    if (!lastTs) lastTs = ts || performance.now();
+                    const now = ts || performance.now();
+                    const dt = Math.min(0.05, (now - lastTs) / 1000);
+                    lastTs = now;
+                    t0 += dt;
 
                     if (zooming) {
-                        zoomT = Math.min(1, zoomT + 0.016 / zoomDur);
-                        // ease-in-out cubic — calm approach, then settle
+                        zoomT = Math.min(1, zoomT + dt / zoomDur);
                         const t = zoomT;
                         const e = t < 0.5
                             ? 4 * t * t * t
                             : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-                        camera.position.x = startCam.x * (1 - e);
-                        camera.position.y = startCam.y * (1 - e * 0.85);
-                        camera.position.z = startCam.z + (camZ1 - startCam.z) * e;
+                        // Hold earth on Indonesia — only camera dives (no root flip)
+                        core.rotation.y = startCoreY + (targetCoreY - startCoreY) * e;
+                        clouds.rotation.y = startCloudY + (targetCoreY + 0.03 - startCloudY) * e;
+
+                        camera.position.lerpVectors(
+                            new THREE.Vector3(startCam.x, startCam.y, startCam.z),
+                            new THREE.Vector3(0, 0.02, camZ1),
+                            e
+                        );
                         camera.fov = startCam.fov + e * 10;
                         camera.updateProjectionMatrix();
+                        camera.lookAt(0, 0, EARTH_R * 0.35 * e);
 
-                        root.scale.setScalar(1 + e * 0.55);
-                        root.rotation.y += 0.006 + e * 0.01;
-                        core.material.emissiveIntensity = 0.18 + e * 0.55;
-                        accent.intensity = 1.5 + e * 1.8;
-                        if (scene.fog) scene.fog.density = 0.038 + e * 0.12;
+                        root.scale.setScalar(1 + e * 0.22);
+                        // Moon drifts out & fades so it never jumps to center
+                        moon.position.x = moonStart.x + e * 1.8;
+                        moon.position.z = moonStart.z - e * 1.2;
+                        moonMat.opacity = 1 - e;
+                        core.material.emissiveIntensity = 0.12 + e * 0.3;
+                        accent.intensity = 1.5 + e * 1.4;
+                        if (scene.fog) scene.fog.density = 0.038 + e * 0.1;
 
-                        camera.lookAt(0, 0, 0);
                         renderer.render(scene, camera);
                         if (zoomT >= 1 && zoomDone) {
                             const cb = zoomDone;
@@ -4395,52 +4483,52 @@
                         return;
                     }
 
-                    // inertia when not dragging
+                    // Continuous travel 0→1; smooth toward progress so % ticks never hitch the globe
+                    const targetTravel = Math.min(1, loadProgress / 0.88);
+                    const follow = 1 - Math.exp(-dt * 5.5);
+                    smoothTravel += (targetTravel - smoothTravel) * follow;
+                    // Linear spin = constant angular speed (no smoothstep hitch)
+                    const journeyY = startFaceY + (endFaceY - startFaceY) * smoothTravel;
+                    const journeyLat = IN_LAT + (ID_LAT - IN_LAT) * smoothTravel;
+
                     if (!orbit.dragging) {
                         orbit.rotY += orbit.velY;
                         orbit.rotX += orbit.velX;
-                        orbit.velY *= 0.94;
-                        orbit.velX *= 0.94;
+                        orbit.velY *= Math.pow(0.92, dt * 60);
+                        orbit.velX *= Math.pow(0.92, dt * 60);
                         if (Math.abs(orbit.velY) < 0.00005) orbit.velY = 0;
                         if (Math.abs(orbit.velX) < 0.00005) orbit.velX = 0;
-                        // gentle auto spin
-                        orbit.rotY += 0.0035;
-                        orbit.parallaxX += (orbit.targetPX - orbit.parallaxX) * 0.12;
-                        orbit.parallaxY += (orbit.targetPY - orbit.parallaxY) * 0.12;
+                        const settleX = -journeyLat * Math.PI / 180 * 0.28;
+                        orbit.rotX += (settleX - orbit.rotX) * (1 - Math.exp(-dt * 3));
+                        orbit.rotY += (0 - orbit.rotY) * (1 - Math.exp(-dt * 3.5));
+                        orbit.parallaxX += (orbit.targetPX - orbit.parallaxX) * (1 - Math.exp(-dt * 8));
+                        orbit.parallaxY += (orbit.targetPY - orbit.parallaxY) * (1 - Math.exp(-dt * 8));
                     } else {
-                        orbit.parallaxX += (0 - orbit.parallaxX) * 0.1;
-                        orbit.parallaxY += (0 - orbit.parallaxY) * 0.1;
+                        orbit.parallaxX += (0 - orbit.parallaxX) * (1 - Math.exp(-dt * 8));
+                        orbit.parallaxY += (0 - orbit.parallaxY) * (1 - Math.exp(-dt * 8));
                     }
 
-                    orbit.rotX = Math.max(-1.15, Math.min(1.15, orbit.rotX));
+                    orbit.rotX = Math.max(-0.9, Math.min(0.9, orbit.rotX));
 
                     if (!reducedMotion) {
-                        root.rotation.y = orbit.rotY + orbit.parallaxX * 0.25;
-                        root.rotation.x = orbit.rotX + orbit.parallaxY * 0.18;
+                        root.rotation.y = orbit.rotY + orbit.parallaxX * 0.1;
+                        root.rotation.x = orbit.rotX + orbit.parallaxY * 0.08;
 
-                        core.rotation.y += 0.002;
-                        inner.rotation.y -= 0.003;
-                        shell.rotation.y += 0.0015;
-                        ring.rotation.z += 0.004;
-                        points.rotation.y += 0.0012;
+                        core.rotation.y = journeyY;
+                        clouds.rotation.y = journeyY + 0.03 + t0 * 0.06;
+                        points.rotation.y += 0.0015 * dt * 60;
 
-                        sats.children.forEach((sat) => {
-                            const d = sat.userData;
-                            d.a += 0.008 * d.speed;
-                            sat.position.set(
-                                Math.cos(d.a) * d.r,
-                                Math.sin(d.a * 2 + t0) * 0.22,
-                                Math.sin(d.a) * d.r
-                            );
-                        });
+                        moon.position.x = 2.85 + Math.sin(t0 * 0.35) * 0.06;
+                        moon.position.y = 0.35 + Math.cos(t0 * 0.28) * 0.05;
+                        moon.position.z = 0.4;
+                        moon.rotation.y += 0.004 * dt * 60;
 
-                        camera.position.x = orbit.parallaxX * 0.35;
-                        camera.position.y = 0.15 - orbit.parallaxY * 0.28;
+                        camera.position.x = orbit.parallaxX * 0.22;
+                        camera.position.y = 0.12 - orbit.parallaxY * 0.18;
                         camera.position.z = camZ0;
                         camera.lookAt(0, 0, 0);
 
-                        const pulse = 1 + Math.sin(t0 * 0.9) * 0.015;
-                        root.scale.setScalar(pulse);
+                        root.scale.setScalar(1);
                         accent.intensity = 1.5 + Math.sin(t0 * 1.2) * 0.35;
                     }
 
@@ -4467,6 +4555,10 @@
                     renderer.dispose();
                 }
 
+                function setProgress(pct) {
+                    loadProgress = Math.max(0, Math.min(1, pct / 100));
+                }
+
                 function zoomIn(onComplete) {
                     if (reducedMotion) {
                         if (onComplete) onComplete();
@@ -4474,19 +4566,30 @@
                     }
                     if (zooming) return;
                     orbit.dragging = false;
+                    canvas.style.pointerEvents = 'none';
+
                     startCam = {
                         x: camera.position.x,
                         y: camera.position.y,
                         z: camera.position.z,
                         fov: camera.fov
                     };
+                    startCoreY = core.rotation.y;
+                    startCloudY = clouds.rotation.y;
+                    targetCoreY = endFaceY;
+                    while (targetCoreY - startCoreY > Math.PI) targetCoreY -= Math.PI * 2;
+                    while (targetCoreY - startCoreY < -Math.PI) targetCoreY += Math.PI * 2;
+                    moonStart.copy(moon.position);
+
+                    // Level the framing gently without flipping the globe
+                    root.rotation.set(orbit.rotX * 0.3, 0, 0);
+
                     zooming = true;
                     zoomT = 0;
                     zoomDone = onComplete || null;
-                    canvas.style.pointerEvents = 'none';
                 }
 
-                return { dispose, zoomIn };
+                return { dispose, zoomIn, setProgress };
             }
 
             let exitStarted = false;
@@ -4495,6 +4598,7 @@
                 if (!preloader) return;
                 preloader.classList.add('hide');
                 preloader.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('preloading');
                 setTimeout(() => {
                     if (stopPre3D) {
                         if (typeof stopPre3D.dispose === 'function') stopPre3D.dispose();
@@ -4508,7 +4612,6 @@
                 if (!preloader || exitStarted) return;
                 exitStarted = true;
                 setStatus('Siap', 'Selamat datang');
-                if (preHint) preHint.textContent = '';
                 preloader.classList.add('exiting');
 
                 const goBlackThenReveal = () => {
@@ -4519,7 +4622,7 @@
 
                 if (stopPre3D && typeof stopPre3D.zoomIn === 'function' && !reducedMotion) {
                     // mid-zoom, fade canvas to black so we never flash clipped geometry
-                    setTimeout(() => preloader.classList.add('to-black'), 900);
+                    setTimeout(() => preloader.classList.add('to-black'), 650);
                     stopPre3D.zoomIn(() => setTimeout(revealSite, 280));
                 } else {
                     setTimeout(goBlackThenReveal, reducedMotion ? 0 : 500);
@@ -4532,47 +4635,60 @@
 
             function runPreloader() {
                 if (!preloader) return;
+                document.body.classList.add('preloading');
                 stopPre3D = initPreloader3D();
-                let p = 0;
                 let statusIdx = 0;
                 let exitKicked = false;
+                let lastShown = -1;
+                const tStart = performance.now();
+                // Continuous clock → no setTimeout jumps (that caused stutter)
+                const DUR = reducedMotion ? 400 : 3200;
                 setStatus(STATUS_WORDS[0], CAPTIONS[0]);
 
-                const tick = () => {
-                    if (exitStarted && p >= 100) return;
+                const frame = (now) => {
+                    if (exitStarted && lastShown >= 100) return;
 
-                    // Slow down near the end so zoom can start before 100%
-                    let jump;
-                    if (reducedMotion) jump = 100;
-                    else if (p >= 78) jump = Math.random() * 1.4 + 0.55;
-                    else jump = Math.random() * 6 + 2.5;
-
-                    p = Math.min(100, p + jump);
+                    const u = Math.min(1, (now - tStart) / DUR);
+                    // Ease-in-out for the counter only; globe uses its own smooth follow
+                    const eased = u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2;
+                    const p = reducedMotion ? 100 : eased * 88;
                     const shown = Math.floor(p);
-                    if (preCount) preCount.innerHTML = shown + '<span>%</span>';
-                    if (preBarFill) preBarFill.style.width = shown + '%';
 
-                    const nextAt = Math.floor(((statusIdx + 1) / STATUS_WORDS.length) * 100);
-                    if (statusIdx < STATUS_WORDS.length - 1 && shown >= nextAt) {
-                        statusIdx += 1;
-                        setStatus(STATUS_WORDS[statusIdx], CAPTIONS[statusIdx]);
+                    if (stopPre3D && typeof stopPre3D.setProgress === 'function') {
+                        stopPre3D.setProgress(p);
                     }
 
-                    // Begin dive ~82% so by 100% we're already inside the exit
-                    if (!exitKicked && shown >= 82) {
+                    if (shown !== lastShown) {
+                        lastShown = shown;
+                        if (preCount) preCount.innerHTML = shown + '<span>%</span>';
+                        if (preBarFill) preBarFill.style.width = shown + '%';
+
+                        const nextAt = Math.floor(((statusIdx + 1) / STATUS_WORDS.length) * 100);
+                        if (statusIdx < STATUS_WORDS.length - 1 && shown >= nextAt) {
+                            statusIdx += 1;
+                            setStatus(STATUS_WORDS[statusIdx], CAPTIONS[statusIdx]);
+                        }
+                    }
+
+                    if (!exitKicked && p >= 87.5) {
                         exitKicked = true;
+                        if (preCount) preCount.innerHTML = '100<span>%</span>';
+                        if (preBarFill) preBarFill.style.width = '100%';
+                        if (stopPre3D && typeof stopPre3D.setProgress === 'function') {
+                            stopPre3D.setProgress(100);
+                        }
                         startExitSequence();
+                        return;
                     }
 
-                    if (shown >= 100) return;
-                    setTimeout(tick, reducedMotion ? 0 : (p >= 78 ? 70 + Math.random() * 40 : 80 + Math.random() * 90));
+                    if (!exitKicked) requestAnimationFrame(frame);
                 };
-                tick();
+                requestAnimationFrame(frame);
             }
 
             if (document.readyState === 'complete') runPreloader();
             else window.addEventListener('load', runPreloader);
-            setTimeout(finishPreloader, reducedMotion ? 600 : 9000);
+            setTimeout(finishPreloader, reducedMotion ? 500 : 5500);
 
 
             const LANG = {
@@ -4943,27 +5059,31 @@
                     mx = e.clientX;
                     my = e.clientY;
                     dot.style.left = mx + 'px';
-                    dot.style.top = my + 'px'
+                    dot.style.top = my + 'px';
+                    dot.style.opacity = '1';
+                    ring.style.opacity = '1';
                 });
 
                 function animRing() {
-                    rx += (mx - rx) * .12;
-                    ry += (my - ry) * .12;
+                    rx += (mx - rx) * .18;
+                    ry += (my - ry) * .18;
                     ring.style.left = rx + 'px';
                     ring.style.top = ry + 'px';
                     requestAnimationFrame(animRing)
                 }
                 animRing();
-                document.querySelectorAll('a,button,.proj-card,.skill-item,.about-card,.cert-card,.exp-card').forEach(el => {
+                document.querySelectorAll('a,button,.proj-card,.skill-item,.about-card,.cert-card,.exp-card,.hero-photo-wrap,.mag-btn').forEach(el => {
                     el.addEventListener('mouseenter', () => {
                         ring.style.width = '52px';
                         ring.style.height = '52px';
-                        ring.style.borderColor = 'rgba(124,58,237,.8)'
+                        ring.style.borderColor = 'rgba(6,255,165,.75)';
+                        dot.style.transform = 'translate(-50%,-50%) scale(1.35)';
                     });
                     el.addEventListener('mouseleave', () => {
                         ring.style.width = '36px';
                         ring.style.height = '36px';
-                        ring.style.borderColor = 'rgba(124,58,237,.6)'
+                        ring.style.borderColor = 'rgba(124,58,237,.75)';
+                        dot.style.transform = 'translate(-50%,-50%) scale(1)';
                     });
                 });
             } else {
@@ -4974,6 +5094,7 @@
             const canvas = document.getElementById('heroCanvas');
             const ctx = canvas.getContext('2d');
             let w, h, particles = [];
+            const mouseP = { x: -9999, y: -9999, active: false };
 
             function resize() {
                 w = canvas.width = window.innerWidth;
@@ -4991,14 +5112,26 @@
                     this.vx = (Math.random() - .5) * .3;
                     this.vy = (Math.random() - .5) * .3;
                     this.r = Math.random() * 1.5 + .5;
-                    this.a = Math.random();
+                    this.a = Math.random() * .7 + .3;
                     this.col = Math.random() < .6 ? '124,58,237' : '6,255,165'
                 }
                 update() {
+                    if (mouseP.active) {
+                        const dx = mouseP.x - this.x;
+                        const dy = mouseP.y - this.y;
+                        const d2 = dx * dx + dy * dy;
+                        if (d2 < 16000) {
+                            const d = Math.sqrt(d2) || 1;
+                            this.vx += (dx / d) * 0.035;
+                            this.vy += (dy / d) * 0.035;
+                        }
+                    }
+                    this.vx *= 0.98;
+                    this.vy *= 0.98;
                     this.x += this.vx;
                     this.y += this.vy;
-                    this.a -= .003;
-                    if (this.a <= 0 || this.x < 0 || this.x > w || this.y < 0 || this.y > h) this.reset();
+                    this.a -= .0025;
+                    if (this.a <= 0 || this.x < -20 || this.x > w + 20 || this.y < -20 || this.y > h + 20) this.reset();
                 }
                 draw() {
                     ctx.beginPath();
@@ -5007,7 +5140,7 @@
                     ctx.fill();
                 }
             }
-            for (let i = 0; i < 80; i++) particles.push(new Particle());
+            for (let i = 0; i < 90; i++) particles.push(new Particle());
 
             function drawLines() {
                 for (let i = 0; i < particles.length; i++) {
@@ -5019,7 +5152,7 @@
                             ctx.beginPath();
                             ctx.moveTo(particles[i].x, particles[i].y);
                             ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.strokeStyle = `rgba(124,58,237,${(1-d/120)*.06})`;
+                            ctx.strokeStyle = `rgba(124,58,237,${(1-d/120)*.08})`;
                             ctx.lineWidth = .5;
                             ctx.stroke();
                         }
@@ -5040,14 +5173,105 @@
 
             onScroll();
 
+            // Hero stat count-up
+            (function initHeroStats() {
+                const nums = document.querySelectorAll('#heroStats .count-up');
+                if (!nums.length) return;
+                const run = () => {
+                    nums.forEach(el => {
+                        if (el.dataset.done) return;
+                        el.dataset.done = '1';
+                        const target = parseInt(el.dataset.count, 10) || 0;
+                        if (reducedMotion) {
+                            el.textContent = target;
+                            return;
+                        }
+                        const dur = 1100;
+                        const t0 = performance.now();
+                        const step = (now) => {
+                            const t = Math.min(1, (now - t0) / dur);
+                            const e = 1 - Math.pow(1 - t, 3);
+                            el.textContent = Math.round(target * e);
+                            if (t < 1) requestAnimationFrame(step);
+                            else el.textContent = target;
+                        };
+                        requestAnimationFrame(step);
+                    });
+                };
+                const stats = document.getElementById('heroStats');
+                if (!stats) return;
+                if ('IntersectionObserver' in window) {
+                    const io = new IntersectionObserver((entries) => {
+                        if (entries.some(e => e.isIntersecting)) {
+                            run();
+                            io.disconnect();
+                        }
+                    }, { threshold: 0.4 });
+                    io.observe(stats);
+                } else run();
+            })();
+
             const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
             if (finePointer && !reducedMotion) {
                 const blobWrap = document.getElementById('blobWrap');
+                const heroCopy = document.getElementById('heroCopy');
+                const heroPhoto = document.getElementById('heroPhoto');
+                const heroSection = document.getElementById('hero');
+
+                function setPhotoTilt(rx, ry, sx, sy) {
+                    if (!heroPhoto) return;
+                    heroPhoto.style.setProperty('--rx', rx + 'deg');
+                    heroPhoto.style.setProperty('--ry', ry + 'deg');
+                    if (sx != null) heroPhoto.style.setProperty('--sx', sx + '%');
+                    if (sy != null) heroPhoto.style.setProperty('--sy', sy + '%');
+                }
+
                 document.addEventListener('mousemove', e => {
+                    mouseP.x = e.clientX;
+                    mouseP.y = e.clientY;
+                    mouseP.active = true;
                     const nx = (e.clientX / window.innerWidth) - .5;
                     const ny = (e.clientY / window.innerHeight) - .5;
                     if (blobWrap) blobWrap.style.transform = `translate(${nx * 34}px, ${ny * 34}px)`;
+                    if (heroCopy) heroCopy.style.transform = `translate(${nx * -12}px, ${ny * -8}px)`;
+                    if (heroPhoto && !heroPhoto.matches(':hover')) {
+                        setPhotoTilt(-ny * 7, nx * 10, 50 + nx * 18, 28 + ny * 14);
+                    }
+                });
+                if (heroSection) {
+                    heroSection.addEventListener('mouseleave', () => {
+                        mouseP.active = false;
+                        setPhotoTilt(0, 0, 50, 28);
+                    });
+                }
+
+                if (heroPhoto) {
+                    heroPhoto.addEventListener('mousemove', e => {
+                        const r = heroPhoto.getBoundingClientRect();
+                        const px = ((e.clientX - r.left) / r.width) * 100;
+                        const py = ((e.clientY - r.top) / r.height) * 100;
+                        const x = (e.clientX - r.left) / r.width - .5;
+                        const y = (e.clientY - r.top) / r.height - .5;
+                        setPhotoTilt(-y * 18, x * 20, px, py);
+                    });
+                    heroPhoto.addEventListener('mouseleave', () => {
+                        setPhotoTilt(0, 0, 50, 28);
+                    });
+                }
+
+                document.querySelectorAll('.mag-btn').forEach(btn => {
+                    btn.addEventListener('mousemove', e => {
+                        const r = btn.getBoundingClientRect();
+                        const x = e.clientX - r.left - r.width / 2;
+                        const y = e.clientY - r.top - r.height / 2;
+                        btn.style.transform = `translate(${x * 0.22}px, ${y * 0.28}px)`;
+                    });
+                    btn.addEventListener('mouseleave', () => {
+                        btn.style.transform = '';
+                        btn.style.transition = 'transform .35s cubic-bezier(.2,.7,.3,1)';
+                        setTimeout(() => { btn.style.transition = ''; }, 360);
+                    });
                 });
 
                 function addTilt(selector, intensity) {
@@ -5067,7 +5291,6 @@
                 addTilt('.proj-card', 7);
                 addTilt('.about-card', 5);
                 addTilt('.skill-item', 9);
-                addTilt('.hero-photo-wrap', 10);
 
                 document.querySelectorAll('.cert-card').forEach(card => {
                     card.style.transformStyle = 'preserve-3d';
