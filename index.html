@@ -583,58 +583,14 @@
             will-change: transform
         }
 
-        .hero-eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(6, 255, 165, .08);
-            border: 1px solid rgba(6, 255, 165, .2);
-            border-radius: 24px;
-            padding: 6px 16px;
-            margin-bottom: 24px;
-            transition: transform .35s cubic-bezier(.2, .7, .3, 1), border-color .3s, box-shadow .3s
-        }
-
-        .hero-eyebrow:hover {
-            transform: translateY(-2px);
-            border-color: rgba(6, 255, 165, .45);
-            box-shadow: 0 0 24px rgba(6, 255, 165, .12)
-        }
-
-        .hero-eyebrow-dot {
-            width: 6px;
-            height: 6px;
-            background: var(--mint);
-            border-radius: 50%;
-            animation: pulse-dot 2s ease-in-out infinite
-        }
-
-        @keyframes pulse-dot {
-
-            0%,
-            100% {
-                box-shadow: 0 0 0 0 rgba(6, 255, 165, .4)
-            }
-
-            50% {
-                box-shadow: 0 0 0 6px rgba(6, 255, 165, 0)
-            }
-        }
-
-        .hero-eyebrow span {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: .75rem;
-            color: var(--mint);
-            font-weight: 500
-        }
-
         .hero-name {
             font-family: 'Outfit', sans-serif;
             font-size: clamp(2.8rem, 5.5vw, 4.5rem);
             font-weight: 900;
             line-height: 1.05;
             letter-spacing: -.03em;
-            margin-bottom: 12px
+            margin-bottom: 12px;
+            margin-top: 4px
         }
 
         .hero-name .line1 {
@@ -669,13 +625,40 @@
             margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            min-height: 1.4em
+            gap: 4px;
+            min-height: 1.5em
         }
 
-        .hero-role-sep {
-            color: var(--violet);
-            opacity: .5
+        .hero-type {
+            display: inline-flex;
+            align-items: center;
+            color: var(--mint);
+            cursor: pointer;
+            min-height: 1.5em
+        }
+
+        .hero-type-text {
+            white-space: pre
+        }
+
+        .hero-type-caret {
+            display: inline-block;
+            width: 2px;
+            height: 1.05em;
+            margin-left: 2px;
+            background: var(--mint);
+            border-radius: 1px;
+            animation: typeCaret 1s steps(1) infinite;
+            box-shadow: 0 0 10px rgba(6, 255, 165, .45)
+        }
+
+        .hero-type.is-paused .hero-type-caret {
+            animation: none;
+            opacity: 1
+        }
+
+        @keyframes typeCaret {
+            50% { opacity: 0 }
         }
 
         .hero-desc {
@@ -2428,8 +2411,9 @@
 
             .hero-name,
             .hero-desc,
-            .hero-eyebrow {
-                text-align: center
+            .hero-role {
+                text-align: center;
+                justify-content: center
             }
 
             .hero-btns {
@@ -3177,18 +3161,14 @@
         </div>
         <div class="hero-inner">
             <div class="hero-copy" id="heroCopy">
-                <div class="hero-eyebrow reveal">
-                    <span class="hero-eyebrow-dot"></span>
-                    <span data-i18n="hero_eyebrow">Available for work</span>
-                </div>
                 <h1 class="hero-name reveal" data-delay="1">
                     <span class="line1">Niko Surya</span><br>
                     <span class="line2">Adi Prananta</span>
                 </h1>
                 <div class="hero-role reveal" data-delay="2">
-                    <span data-i18n="hero_role1">Fullstack Developer</span>
-                    <span class="hero-role-sep">/</span>
-                    <span data-i18n="hero_role2">Junior Cyber Security</span>
+                    <span class="hero-type" id="heroType" title="Klik untuk skip">
+                        <span class="hero-type-text" id="heroTypeText"></span><span class="hero-type-caret" aria-hidden="true"></span>
+                    </span>
                 </div>
                 <p class="hero-desc reveal" data-delay="3" data-i18n="hero_desc">I build secure and scalable fullstack applications, and I identify vulnerabilities to keep systems protected.</p>
                 <div class="hero-btns reveal" data-delay="4">
@@ -4991,6 +4971,83 @@
 
             let currentLang = 'id';
 
+            // Hero role typewriter
+            const heroTypeEl = document.getElementById('heroType');
+            const heroTypeText = document.getElementById('heroTypeText');
+            let typeTimer = 0;
+            let typeIdx = 0;
+            let typePos = 0;
+            let typeMode = 'type'; // type | hold | delete
+            let typeSkip = false;
+
+            function heroRoles() {
+                const L = LANG[currentLang] || LANG.id;
+                return [
+                    L.hero_role1 || 'Fullstack Developer',
+                    L.hero_role2 || 'Junior Cyber Security'
+                ];
+            }
+
+            function runHeroType() {
+                if (!heroTypeText || reducedMotion) {
+                    if (heroTypeText) heroTypeText.textContent = heroRoles()[0];
+                    return;
+                }
+                clearTimeout(typeTimer);
+                const roles = heroRoles();
+                const word = roles[typeIdx % roles.length] || '';
+
+                if (typeMode === 'type') {
+                    typePos = Math.min(word.length, typePos + 1);
+                    heroTypeText.textContent = word.slice(0, typePos);
+                    if (typeSkip || typePos >= word.length) {
+                        typeSkip = false;
+                        typeMode = 'hold';
+                        typeTimer = setTimeout(runHeroType, 1600);
+                    } else {
+                        typeTimer = setTimeout(runHeroType, 55 + Math.random() * 45);
+                    }
+                } else if (typeMode === 'hold') {
+                    if (typeSkip) {
+                        typeSkip = false;
+                        typeMode = 'delete';
+                        runHeroType();
+                        return;
+                    }
+                    typeMode = 'delete';
+                    typeTimer = setTimeout(runHeroType, 40);
+                } else {
+                    typePos = Math.max(0, typePos - 1);
+                    heroTypeText.textContent = word.slice(0, typePos);
+                    if (typeSkip || typePos <= 0) {
+                        typeSkip = false;
+                        typeIdx = (typeIdx + 1) % roles.length;
+                        typeMode = 'type';
+                        typePos = 0;
+                        typeTimer = setTimeout(runHeroType, 280);
+                    } else {
+                        typeTimer = setTimeout(runHeroType, 28);
+                    }
+                }
+            }
+
+            function restartHeroType() {
+                typeIdx = 0;
+                typePos = 0;
+                typeMode = 'type';
+                typeSkip = false;
+                if (heroTypeText) heroTypeText.textContent = '';
+                runHeroType();
+            }
+
+            if (heroTypeEl) {
+                heroTypeEl.addEventListener('click', () => {
+                    typeSkip = true;
+                    clearTimeout(typeTimer);
+                    runHeroType();
+                });
+            }
+
             function setLang(lang) {
                 currentLang = lang;
                 document.documentElement.lang = lang;
@@ -5007,6 +5064,7 @@
                 const title = lang === 'id' ? 'Niko — Fullstack Developer' : 'Niko — Fullstack Developer';
                 document.title = title;
                 if (typeof initCertReadMore === 'function') setTimeout(initCertReadMore, 30);
+                restartHeroType();
             }
 
             window.setLang = setLang;
